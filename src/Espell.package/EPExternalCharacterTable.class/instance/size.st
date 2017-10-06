@@ -1,0 +1,4 @@
+public
+size
+
+	^ characters size

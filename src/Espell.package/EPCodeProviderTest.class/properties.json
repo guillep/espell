@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "EPBaseTest",
+	"category" : "Espell-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"environment"
+	],
+	"name" : "EPCodeProviderTest",
+	"type" : "normal"
+}

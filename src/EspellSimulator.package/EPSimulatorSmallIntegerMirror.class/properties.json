@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "EPMirror",
+	"category" : "EspellSimulator",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPSimulatorSmallIntegerMirror",
+	"type" : "normal"
+}

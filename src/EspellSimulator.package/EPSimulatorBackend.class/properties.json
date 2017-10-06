@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "EPBackend",
+	"category" : "EspellSimulator",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"simulator",
+		"extraRoots"
+	],
+	"name" : "EPSimulatorBackend",
+	"type" : "normal"
+}

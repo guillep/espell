@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "GuillermoPolito 6/22/2015 15:17",
+	"super" : "Object",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"systemDictionary",
+		"objectSpace",
+		"cache"
+	],
+	"name" : "EPSystemDictionary",
+	"type" : "normal"
+}

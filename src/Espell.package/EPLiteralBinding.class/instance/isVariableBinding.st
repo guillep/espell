@@ -1,0 +1,3 @@
+testing
+isVariableBinding
+	^true

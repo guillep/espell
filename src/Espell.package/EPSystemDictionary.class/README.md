@@ -1,0 +1,1 @@
+I am a system dictionary. I provide access to the system dictionary inside an object space.

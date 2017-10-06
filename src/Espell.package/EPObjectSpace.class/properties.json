@@ -1,0 +1,33 @@
+{
+	"commentStamp" : "GuillermoPolito 6/22/2015 15:17",
+	"super" : "Object",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"environment",
+		"symbolTransformationTable",
+		"evaluator",
+		"compiledMethodMapping",
+		"methodPropertiesMapping",
+		"byteStringMapping",
+		"byteSymbolMapping",
+		"largePositiveIntegerMapping",
+		"largeNegativeIntegerMapping",
+		"methodBuilder",
+		"contextBuilder",
+		"processBuilder",
+		"byteArrayMapping",
+		"wideStringMapping",
+		"smalltalkInstance",
+		"methodDictionaryBuilder",
+		"sourceCodeManager",
+		"imageFile",
+		"characterTable",
+		"backend",
+		"mustRebuildSpecialObjectsArray"
+	],
+	"name" : "EPObjectSpace",
+	"type" : "normal"
+}

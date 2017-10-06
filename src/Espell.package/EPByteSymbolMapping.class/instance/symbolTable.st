@@ -1,0 +1,4 @@
+accessing
+symbolTable
+	
+	^ objectSpace symbolTable

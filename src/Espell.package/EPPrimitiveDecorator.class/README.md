@@ -1,0 +1,1 @@
+I am an abstract primitive decorator provinding special pre and post execution transformations. Check my subclasses for specific transformations.

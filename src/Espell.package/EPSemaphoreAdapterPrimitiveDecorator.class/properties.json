@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "GuillermoPolito 6/23/2015 11:19",
+	"super" : "EPPrimitiveDecorator",
+	"category" : "Espell-LowLevel-Primitives",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPSemaphoreAdapterPrimitiveDecorator",
+	"type" : "normal"
+}

@@ -1,0 +1,4 @@
+special objects
+symbolTable
+	
+	^ symbolTable

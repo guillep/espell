@@ -1,0 +1,4 @@
+initialize-release
+target
+
+	^target

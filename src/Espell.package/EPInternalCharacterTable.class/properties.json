@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "EPCharacterTable",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPInternalCharacterTable",
+	"type" : "normal"
+}

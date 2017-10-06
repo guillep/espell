@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "TestResource",
+	"category" : "Espell-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"imagesDirectory",
+		"objectSpace"
+	],
+	"name" : "EPTestResource",
+	"type" : "normal"
+}

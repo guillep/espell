@@ -1,0 +1,4 @@
+*EspellSimulator
+isResumable
+
+	^ true

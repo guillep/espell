@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "GuillermoPolito 6/15/2015 15:21",
+	"super" : "Dictionary",
+	"category" : "Espell-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPDictionary",
+	"type" : "normal"
+}

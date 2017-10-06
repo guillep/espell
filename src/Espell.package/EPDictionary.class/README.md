@@ -1,0 +1,1 @@
+I am a Dictionary class that avoids printing my elements. This is because I can contain remote references that cannot be printed as others: they do not understand regular messages and crash the system if we send them one.

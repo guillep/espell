@@ -1,0 +1,4 @@
+accessing
+specialObjectsArray: aSpecialObjectsArray
+
+	backend specialObjectsArray: aSpecialObjectsArray

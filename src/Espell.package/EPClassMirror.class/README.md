@@ -1,0 +1,1 @@
+I am a class mirror object providing basic operations to work on class objects inside an object space.

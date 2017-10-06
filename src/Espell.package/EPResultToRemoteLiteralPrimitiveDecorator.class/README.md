@@ -1,0 +1,1 @@
+I am a primitive decorator that transforms the result of the execution from literals of the local object space to its representation in the object space. I am needed for those primitives where the VM  creates a new instance using the classes of the environment instead of the ones in the object space.

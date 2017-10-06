@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "OptimizedASTInterpreter",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"evaluator",
+		"astCache"
+	],
+	"name" : "EPASTInterpreter",
+	"type" : "normal"
+}

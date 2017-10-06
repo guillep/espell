@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Espell-Debug",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"interruptedContext"
+	],
+	"name" : "EPDebugSession",
+	"type" : "normal"
+}

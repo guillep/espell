@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"objectSpace",
+		"codeProvider",
+		"interpreterClass",
+		"environment",
+		"astCache"
+	],
+	"name" : "EPASTEvaluator",
+	"type" : "normal"
+}

@@ -1,0 +1,4 @@
+transformations
+createMethodDictionary
+
+	^self createMethodDictionaryInEnvironment: self environment

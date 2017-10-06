@@ -1,0 +1,3 @@
+*EspellSimulator
+stackPointer
+	^stackPointer

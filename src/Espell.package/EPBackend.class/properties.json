@@ -1,0 +1,20 @@
+{
+	"commentStamp" : "GuillermoPolito 2/29/2016 15:04",
+	"super" : "Object",
+	"category" : "Espell-LowLevel-Mirrors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"interpreter",
+		"specialObjectsArray",
+		"byteSymbolClass",
+		"associationClass",
+		"symbolTableClass",
+		"byteSymbolMapping",
+		"largePositiveIntegerMapping",
+		"largeNegativeIntegerMapping"
+	],
+	"name" : "EPBackend",
+	"type" : "normal"
+}

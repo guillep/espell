@@ -1,0 +1,3 @@
+mappings
+byteArrayMapping
+	^byteArrayMapping

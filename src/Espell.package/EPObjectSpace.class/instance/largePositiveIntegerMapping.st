@@ -1,0 +1,4 @@
+mappings
+largePositiveIntegerMapping
+	
+	^ largePositiveIntegerMapping

@@ -1,0 +1,4 @@
+interfaces
+hasInterpreter
+
+	^ evaluator notNil

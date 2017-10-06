@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "EPRemoteClass",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"instanceSide"
+	],
+	"name" : "EPRemoteMetaClass",
+	"type" : "normal"
+}

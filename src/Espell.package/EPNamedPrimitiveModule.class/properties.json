@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "GuillermoPolito 6/23/2015 11:21",
+	"super" : "Object",
+	"category" : "Espell-LowLevel-Primitives",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"primitives",
+		"name"
+	],
+	"name" : "EPNamedPrimitiveModule",
+	"type" : "normal"
+}

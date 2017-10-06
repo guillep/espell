@@ -1,0 +1,4 @@
+accessing
+objectSpace
+
+	^resolver objectSpace

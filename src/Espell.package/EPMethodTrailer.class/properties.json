@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CompiledMethodTrailer",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPMethodTrailer",
+	"type" : "normal"
+}

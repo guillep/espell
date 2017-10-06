@@ -1,0 +1,4 @@
+*EspellSimulator
+newParser
+	
+	^ RBParser

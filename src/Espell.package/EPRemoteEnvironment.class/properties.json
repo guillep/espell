@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "EPRemoteObject",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"sourceFiles",
+		"imageFileName"
+	],
+	"name" : "EPRemoteEnvironment",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "EPRemoteObject",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPRemoteTrait",
+	"type" : "normal"
+}

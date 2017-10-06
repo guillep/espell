@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Espell-LowLevel-Mappings",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"objectSpace"
+	],
+	"name" : "EPByteObjectMapping",
+	"type" : "normal"
+}

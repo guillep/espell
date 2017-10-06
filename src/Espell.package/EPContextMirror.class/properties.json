@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "ChristopheDemarey 11/20/2015 15:28",
+	"super" : "EPMirror",
+	"category" : "Espell-LowLevel-Mirrors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPContextMirror",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+compact classes
+compactClasses
+	^ compactClasses

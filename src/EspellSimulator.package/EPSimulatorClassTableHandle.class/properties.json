@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "EPSimulatorInternalObjectHandle",
+	"category" : "EspellSimulator",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"classHash"
+	],
+	"name" : "EPSimulatorClassTableHandle",
+	"type" : "normal"
+}

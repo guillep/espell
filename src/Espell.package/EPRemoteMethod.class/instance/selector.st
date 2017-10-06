@@ -1,0 +1,4 @@
+accessing
+selector
+	
+	^ mirror selector

@@ -1,0 +1,1 @@
+I represent the entry point for primitive execution. I keep record of all primitives and their specific transformations. Then, people can just ask me to execute a primitive by number (or name and module).

@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "EPLiteralBinding",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"ownerName",
+		"binding"
+	],
+	"name" : "EPClassVariableBinding",
+	"type" : "normal"
+}

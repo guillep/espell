@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "EPLiteralBinding",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"value"
+	],
+	"name" : "EPRealLiteralBinding",
+	"type" : "normal"
+}

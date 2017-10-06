@@ -1,0 +1,4 @@
+converting
+fromRemoteCompiledMethod: aRemoteCompiledMethod
+	
+	^compiledMethodMapping fromRemote: aRemoteCompiledMethod

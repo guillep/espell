@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "EPSimulatorHandle",
+	"category" : "EspellSimulator",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPSimulatorInternalObjectHandle",
+	"type" : "normal"
+}

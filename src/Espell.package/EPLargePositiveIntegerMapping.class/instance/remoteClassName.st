@@ -1,0 +1,4 @@
+accessing
+remoteClassName
+
+	^objectSpace worldConfiguration largePositiveIntegerClassName

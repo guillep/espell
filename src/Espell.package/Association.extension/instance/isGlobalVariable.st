@@ -1,0 +1,3 @@
+*Espell
+isGlobalVariable
+	^ true

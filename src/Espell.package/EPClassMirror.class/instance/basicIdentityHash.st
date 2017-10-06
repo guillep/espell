@@ -1,0 +1,4 @@
+accessing
+basicIdentityHash
+
+	^ target basicIdentityHashOnClass

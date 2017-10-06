@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "EPPrimitiveResult",
+	"category" : "Espell",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"code"
+	],
+	"name" : "EPPrimitiveFailed",
+	"type" : "normal"
+}

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "EPSymbolTable",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"cache"
+	],
+	"name" : "EPInternalSymbolTable",
+	"type" : "normal"
+}

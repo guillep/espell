@@ -1,0 +1,4 @@
+accessing
+remoteClass
+
+	^objectSpace byteArrayClass
