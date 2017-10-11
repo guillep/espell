@@ -1,0 +1,4 @@
+special objects
+fullBlockClass: aClass
+
+	
