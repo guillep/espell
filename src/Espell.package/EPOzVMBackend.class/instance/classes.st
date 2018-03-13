@@ -3,7 +3,7 @@ classes
 
 	| dictionary internalArray classes |
 	dictionary := self systemDictionary.
-	internalArray := dictionary instanceVariableAtIndex: 2.
+	internalArray := dictionary instanceVariableAtIndex: (self instanceVariableMapping dictionaryArrayIndex).
 	classes := OrderedCollection new.
 	
 	1 to: internalArray size do: [ :i | | association |

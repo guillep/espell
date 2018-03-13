@@ -1,7 +1,10 @@
 instance variables
 instanceVariableNames
-	
-	| remoteInstVars |
-	remoteInstVars := mirror instanceVariableAtIndex: 5.
-	remoteInstVars isNilObject ifTrue: [ ^ #() ].
+	| remoteInstVars index |
+
+	index := self mirror backend instanceVariableMapping classInstanceVariableNamesIndex.
+	index ifNil: [ ^ #() ].
+	remoteInstVars := mirror instanceVariableAtIndex: index.
+	remoteInstVars isNilObject
+		ifTrue: [ ^ #() ].
 	^ remoteInstVars asLocalLiteral

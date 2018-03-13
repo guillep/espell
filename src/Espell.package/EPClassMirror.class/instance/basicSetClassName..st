@@ -1,4 +1,4 @@
 accessing
 basicSetClassName: aClassNameMirror 
 	
-	^ self instanceVariableAtIndex: 8 put: aClassNameMirror
+	^ self instanceVariableAtIndex: (self backend instanceVariableMapping classNameIndex) put: aClassNameMirror

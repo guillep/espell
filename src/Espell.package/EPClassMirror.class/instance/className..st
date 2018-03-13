@@ -1,4 +1,4 @@
 accessing
 className: aString 
 	
-	^ self instanceVariableAtIndex: 8 put: (aString asLiteralInObjectSpace: self backend)
+	^ self instanceVariableAtIndex: (self backend instanceVariableMapping classNameIndex) put: (aString asLiteralInObjectSpace: self backend)

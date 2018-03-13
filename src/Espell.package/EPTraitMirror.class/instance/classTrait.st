@@ -1,4 +1,4 @@
 accessing
 classTrait
 	
-	^ (self instanceVariableAtIndex: 8) asClassMirror
+	^ (self instanceVariableAtIndex: (self backend instanceVariableMapping traitClassTraitIndex)) asClassMirror

@@ -1,3 +1,3 @@
 accessing
 sender: aMirror
-	self instanceVariableAtIndex: 1 put: aMirror
+	self instanceVariableAtIndex: (self backend instanceVariableMapping contextSenderIndex) put: aMirror

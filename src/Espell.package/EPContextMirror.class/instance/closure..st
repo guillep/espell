@@ -1,3 +1,3 @@
 accessing
 closure: aClosureMirror
-	self instanceVariableAtIndex: 5 put: aClosureMirror
+	self instanceVariableAtIndex: (self backend instanceVariableMapping contextClosureOrNilIndex) put: aClosureMirror

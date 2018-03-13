@@ -4,7 +4,7 @@ symbolsDo: aBlock
 	| symbolClass symbolClassPools arrayClass |
 	arrayClass := objectSpace backend arrayClass.
 	symbolClass := objectSpace backend symbolTableClass asClassMirror.
-	symbolClassPools := symbolClass classPool instanceVariableAtIndex: 2.
+	symbolClassPools := symbolClass classPool instanceVariableAtIndex: (self instanceVariableMapping dictionaryArrayIndex).
 	1 to: symbolClassPools size do: [ :i | | associationOrNil |
 		associationOrNil := symbolClassPools at: i.
 		associationOrNil isNilObject ifFalse: [ | symbolSet |

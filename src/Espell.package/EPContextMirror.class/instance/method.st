@@ -1,3 +1,3 @@
 accessing
 method
-	^(self instanceVariableAtIndex: 4) asMethodMirror
+	^(self instanceVariableAtIndex: (self backend instanceVariableMapping contextMethodIndex)) asMethodMirror

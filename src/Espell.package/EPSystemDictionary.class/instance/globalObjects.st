@@ -6,7 +6,7 @@ globalObjects
 	systemDictionary := self internalSystemDictionary.
 	
 	"We get the internal array"
-	globalsArray := systemDictionary instanceVariableAtIndex: 2.
+	globalsArray := systemDictionary instanceVariableAtIndex: (self instanceVariableMapping dictionaryArrayIndex).
 	
 	"We collect the values"
 	^ (1 to: globalsArray size) collect: [ :i | globalsArray at: i ]
