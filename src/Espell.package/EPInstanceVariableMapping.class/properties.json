@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "PabloTesone 3/13/2018 17:42",
+	"super" : "Object",
+	"category" : "Espell-LowLevel-Mirrors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPInstanceVariableMapping",
+	"type" : "normal"
+}

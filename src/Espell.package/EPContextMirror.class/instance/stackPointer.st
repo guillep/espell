@@ -1,3 +1,3 @@
 accessing
 stackPointer
-	^(self instanceVariableAtIndex: 3) target
+	^(self instanceVariableAtIndex: (self backend instanceVariableMapping contextStackpIndex)) target

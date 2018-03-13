@@ -1,3 +1,3 @@
 accessing
 stackPointer: anInteger
-	self instanceVariableAtIndex: 3 put: (backend smallIntegerMirrorOn: anInteger)
+	self instanceVariableAtIndex: (self backend instanceVariableMapping contextStackpIndex) put: (backend smallIntegerMirrorOn: anInteger)
