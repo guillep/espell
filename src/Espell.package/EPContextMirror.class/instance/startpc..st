@@ -1,3 +1,3 @@
 accessing
 startpc: anInteger
-	self instanceVariableAtIndex: 2 put: (backend smallIntegerMirrorOn: anInteger)
+	self instanceVariableAtIndex: (self backend instanceVariableMapping contextPcIndex) put: (backend smallIntegerMirrorOn: anInteger)

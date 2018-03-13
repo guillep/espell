@@ -1,4 +1,4 @@
 accessing
 priorityList: aList
 
-	self instanceVariableAtIndex: 4 put: aList
+	self instanceVariableAtIndex: (self backend instanceVariableMapping processPriorityListIndex) put: aList

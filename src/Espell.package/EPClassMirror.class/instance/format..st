@@ -1,3 +1,3 @@
 accessing
 format: aFormat
-	^ self instanceVariableAtIndex: 3 put: (backend smallIntegerMirrorOn: aFormat)
+	^ self instanceVariableAtIndex: (self backend instanceVariableMapping classFormatIndex) put: (backend smallIntegerMirrorOn: aFormat)

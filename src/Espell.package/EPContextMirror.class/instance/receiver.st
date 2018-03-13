@@ -1,3 +1,3 @@
 accessing
 receiver
-	^self instanceVariableAtIndex: 6
+	^self instanceVariableAtIndex: (self backend instanceVariableMapping contextReceiverIndex)

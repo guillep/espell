@@ -1,3 +1,3 @@
 accessing
 format
-	^(self instanceVariableAtIndex: 3) asSmallInteger
+	^(self instanceVariableAtIndex: (self backend instanceVariableMapping classFormatIndex)) asSmallInteger

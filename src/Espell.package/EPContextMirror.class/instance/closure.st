@@ -1,3 +1,3 @@
 accessing
 closure
-	^self instanceVariableAtIndex: 5
+	^self instanceVariableAtIndex: (self backend instanceVariableMapping contextClosureOrNilIndex)

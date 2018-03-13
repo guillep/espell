@@ -13,7 +13,8 @@
 		"symbolTableClass",
 		"byteSymbolMapping",
 		"largePositiveIntegerMapping",
-		"largeNegativeIntegerMapping"
+		"largeNegativeIntegerMapping",
+		"instanceVariableMapping"
 	],
 	"name" : "EPBackend",
 	"type" : "normal"

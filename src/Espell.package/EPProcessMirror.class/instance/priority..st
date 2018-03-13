@@ -2,5 +2,5 @@ accessing
 priority: aPriorityInteger
 
 	self 
-		instanceVariableAtIndex: 3
+		instanceVariableAtIndex: (self backend instanceVariableMapping processPriorityIndex)
 		put: (aPriorityInteger asLiteralInObjectSpace: self backend)

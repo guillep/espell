@@ -1,3 +1,3 @@
 accessing
 context
-	^ (self instanceVariableAtIndex: 2) asContextMirror
+	^ (self instanceVariableAtIndex: (self backend instanceVariableMapping processContextIndex)) asContextMirror
