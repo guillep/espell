@@ -1,15 +1,27 @@
 private
 privateRemoveFromList: theList
-
-	(self pointsToSameObject: (theList instanceVariableAtIndex: 1))
-		ifTrue: [theList instanceVariableAtIndex: 1 put: (self instanceVariableAtIndex: 1).
-				(self pointsToSameObject: (theList instanceVariableAtIndex: 2))
-					ifTrue: [theList instanceVariableAtIndex: 1 put: self objectSpace nilObject]]
-		ifFalse: [| tempLink |
-				tempLink := theList instanceVariableAtIndex: 1.
-				[tempLink isNilObject ifTrue: [^ self ].
-				 (tempLink instanceVariableAtIndex: 1) pointsToSameObject: self]
-					whileFalse: [tempLink := tempLink instanceVariableAtIndex: 1].
-				tempLink nextLink: (self instanceVariableAtIndex: 1).
-				(self pointsToSameObject: (theList instanceVariableAtIndex: 2))
-					ifTrue: [theList instanceVariableAtIndex: 2 put: tempLink]].
+	(self
+		pointsToSameObject: (theList instanceVariableAtIndex: self backend instanceVariableMapping processNextLinkIndex))
+		ifTrue: [ theList
+				instanceVariableAtIndex: self backend instanceVariableMapping processNextLinkIndex
+				put: (self instanceVariableAtIndex: self backend instanceVariableMapping processNextLinkIndex).
+			(self
+				pointsToSameObject: (theList instanceVariableAtIndex: self backend instanceVariableMapping processContextIndex))
+				ifTrue: [ theList
+						instanceVariableAtIndex: self backend instanceVariableMapping processNextLinkIndex
+						put: self objectSpace nilObject
+					]
+			]
+		ifFalse: [ | tempLink |
+			tempLink := theList instanceVariableAtIndex: self backend instanceVariableMapping processNextLinkIndex.
+			[ tempLink isNilObject
+				ifTrue: [ ^ self ].
+			(tempLink instanceVariableAtIndex: self backend instanceVariableMapping processNextLinkIndex)
+				pointsToSameObject: self
+			]
+				whileFalse: [ tempLink := tempLink instanceVariableAtIndex: self backend instanceVariableMapping processNextLinkIndex ].
+			tempLink nextLink: (self instanceVariableAtIndex: self backend instanceVariableMapping processNextLinkIndex).
+			(self
+				pointsToSameObject: (theList instanceVariableAtIndex: self backend instanceVariableMapping processContextIndex))
+				ifTrue: [ theList instanceVariableAtIndex: self backend instanceVariableMapping processContextIndex put: tempLink ]
+			]

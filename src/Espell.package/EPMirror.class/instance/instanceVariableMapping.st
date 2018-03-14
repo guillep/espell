@@ -1,0 +1,3 @@
+accessing
+instanceVariableMapping
+	^ self backend instanceVariableMapping

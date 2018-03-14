@@ -2,7 +2,7 @@ private
 looksLikeClass: anObject
 	| methodDictionary mirror |
 	anObject fixedSize < 3 ifTrue: [ ^false ].
-	methodDictionary := anObject instanceVariableAtIndex: 2.
+	methodDictionary := anObject instanceVariableAtIndex: ((self instanceVariableMapping classMethodDictionaryIndex)).
 	mirror := methodDictionary basicClass.
 	
 	mirror fixedSize < self classNameIndex ifTrue: [ ^false ].

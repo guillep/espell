@@ -1,4 +1,4 @@
 accessing
 methodDictionary
 
-	^ self instanceVariableAtIndex: 1
+	^ self instanceVariableAtIndex: (self backend instanceVariableMapping traitMethodDictionaryIndex)

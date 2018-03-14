@@ -1,4 +1,4 @@
 accessing
 activeProcess: anEPProcessMirror 
 	
-	self instanceVariableAtIndex: 2 put: anEPProcessMirror
+	self instanceVariableAtIndex: (self backend instanceVariableMapping processSchedulerActiveProcessIndex) put: anEPProcessMirror

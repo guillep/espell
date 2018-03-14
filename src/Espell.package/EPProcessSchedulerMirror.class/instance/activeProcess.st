@@ -1,4 +1,4 @@
 accessing
 activeProcess
 	
-	^ self instanceVariableAtIndex: 2
+	^ self instanceVariableAtIndex: (self backend instanceVariableMapping processSchedulerActiveProcessIndex)

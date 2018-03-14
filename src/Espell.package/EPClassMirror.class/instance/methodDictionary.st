@@ -1,3 +1,3 @@
 accessing
 methodDictionary
-	^ self instanceVariableAtIndex: 2
+	^ self instanceVariableAtIndex: (self backend instanceVariableMapping classMethodDictionaryIndex)

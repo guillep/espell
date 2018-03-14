@@ -1,4 +1,4 @@
 accessing
 traitName
 	
-	^ backend fromRemoteByteSymbol: (self instanceVariableAtIndex: 6)
+	^ backend fromRemoteByteSymbol: (self instanceVariableAtIndex: (self backend instanceVariableMapping traitNameIndex))

@@ -1,5 +1,5 @@
 accessing
 context: aContextMirror
 	self 
-		instanceVariableAtIndex: 2
+		instanceVariableAtIndex: (self backend instanceVariableMapping processContextIndex)
 		put: aContextMirror
