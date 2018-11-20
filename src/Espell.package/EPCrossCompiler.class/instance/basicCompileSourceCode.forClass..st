@@ -7,7 +7,9 @@ basicCompileSourceCode: sourceCode forClass: aClass
 	
 	^ (OpalCompiler new
 		options: options;
-		compile: sourceCode
-		in: aClass
-		notifying: nil
-		ifFail: [ self error ]) generate
+		source: sourceCode;
+		class: aClass;
+		environment: aClass environment;
+		requestor: nil;
+		failBlock: [ self error ];
+		parse) generate

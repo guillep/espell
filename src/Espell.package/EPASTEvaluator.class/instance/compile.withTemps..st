@@ -5,5 +5,8 @@ compile: aString withTemps: someTemps
 	compilationContext := self class compiler compilationContext.
 	compilationContext class: (codeProvider classNamed: #ProtoObject).
 	compilationContext requestor: (EPCompilationRequestor withTemps: someTemps).
-	ast methodNode doSemanticAnalysisInContext: compilationContext.
+	compilationContext environment: self environment.
+	ast methodNode
+		compilationContext: compilationContext;
+		doSemanticAnalysis.
 	^ ast
