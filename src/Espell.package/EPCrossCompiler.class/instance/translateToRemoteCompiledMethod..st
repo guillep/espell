@@ -7,7 +7,7 @@ translateToRemoteCompiledMethod: localCompiledMethod
 						createCompiledMethodWithSize: methodSize
 						andHeader: localCompiledMethod header.
 	methodMirror bytecodes: localCompiledMethod bytecode.
-	localCompiledMethod literals withIndexDo: [ :literal :index |
+	localCompiledMethod allLiterals withIndexDo: [ :literal :index |
 		methodMirror literalAt: index put: (self transformLiteral: literal asLiteralInObjectSpace: objectSpace).
 	].
 	^methodMirror
