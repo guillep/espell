@@ -9,8 +9,9 @@ innerBindingOf: aString
 				yourself ].
 	self sharedPools
 		do:
-			[ :pool | (pool bindingOf: aString) ifNotNilDo: [ :binding | ^ binding ] ].
-	(self superclass bindingOf: aString)
-		ifNotNil: [ :binding | ^ binding ].
-	"If it is a temp or an instance variable"
+			[ :pool | (pool innerBindingOf: aString) ifNotNil: [ :binding | ^ binding ] ].
+	self superclass ifNotNil:[	
+		(self superclass innerBindingOf: aString)
+			ifNotNil: [ :binding | ^ binding ]].
+
 	^ nil
