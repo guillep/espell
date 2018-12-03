@@ -8,12 +8,12 @@ innerBindingOf: aString
 					ownerName: class theNonMetaClass name
 					objectSpace: environment;
 				yourself ].
-	class sharedPools
+	class instanceSide sharedPools
 		do: [ :pool | 
-			((self newBindingFor: pool) bindingOf: aString)
+			((self newBindingFor: pool) innerBindingOf: aString)
 				ifNotNil: [ :binding | ^ binding ] ].
 	class superclass
-		ifNotNil: [ (self superclassBinding bindingOf: aString)
+		ifNotNil: [ (self superclassBinding innerBindingOf: aString)
 				ifNotNil: [ :binding | ^ binding ] ].
 
 	"If it is a temp or an instance variable"
