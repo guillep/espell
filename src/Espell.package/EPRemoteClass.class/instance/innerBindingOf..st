@@ -7,9 +7,12 @@ innerBindingOf: aString
 					ownerName: self name
 					objectSpace: environment;
 				yourself ].
-	self sharedPools
+
+	
+"	self sharedPools
 		do:
-			[ :pool | (pool innerBindingOf: aString) ifNotNil: [ :binding | ^ binding ] ].
+			[ :pool | (pool innerBindingOf: aString) ifNotNil: [ :binding | ^ binding ] ]."
+
 	self superclass ifNotNil:[	
 		(self superclass innerBindingOf: aString)
 			ifNotNil: [ :binding | ^ binding ]].
