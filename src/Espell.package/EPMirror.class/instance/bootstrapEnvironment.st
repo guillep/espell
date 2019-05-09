@@ -1,0 +1,3 @@
+accessing
+bootstrapEnvironment
+	^ self backend interpreter environment bootstrapEnvironment

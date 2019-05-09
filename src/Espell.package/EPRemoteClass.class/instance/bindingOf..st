@@ -19,4 +19,4 @@ bindingOf: aString
 				yourself ].
 
 	"If it is a temp or an instance variable"
-	^ nil
+	^ nil "environment nilObject"

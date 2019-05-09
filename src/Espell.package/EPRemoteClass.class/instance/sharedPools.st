@@ -2,6 +2,7 @@ shared pools
 sharedPools
 	
 	| sharedPools maybeSharedPool |
+	(mirror instanceVariableMapping classSharedPoolsIndex) ifNil: [ ^ #() ].
 	maybeSharedPool := mirror instanceVariableAtIndex: (mirror instanceVariableMapping classSharedPoolsIndex).
 	maybeSharedPool isNilObject ifTrue: [ ^ #() ].
 	sharedPools := EPRemoteOrderedCollection on: maybeSharedPool.

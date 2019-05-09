@@ -6,8 +6,9 @@ testSemanticAnalysisWithClassVariable
 	compilationContext := self class compiler compilationContext.
 	compilationContext class: (environment classNamed: #Collection).
 	"compilationContext requestor: (OzCompilationRequestor withTemps: someTemps)."
-	ast methodNode doSemanticAnalysisInContext: compilationContext.
-	
+	ast methodNode compilationContext: compilationContext.
+	ast methodNode doSemanticAnalysis.
+
 	self assert: ast isVariable.
 	self assert: ast name equals: #DependentsFields.
 	
