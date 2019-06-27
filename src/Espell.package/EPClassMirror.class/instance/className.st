@@ -1,4 +1,4 @@
 accessing
 className
 	
-	^ backend fromRemoteByteSymbol: (self instanceVariableAtIndex: (self backend instanceVariableMapping classNameIndex))
+	^ backend fromRemoteByteSymbol: (self instanceVariableAtIndex:  (self backend instanceVariableMapping classNameIndex))
