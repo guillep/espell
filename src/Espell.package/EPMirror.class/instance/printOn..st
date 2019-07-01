@@ -1,9 +1,3 @@
-printing
+gt-inspector-extension
 printOn: aStream
-	
-	aStream
-		nextPutAll: self class name;
-		nextPutAll: '(';
-		nextPutAll: ([ self identityHash asString ] on: Exception do: [ '(no hash)' ]);
-		nextPutAll: ')'
-	
+	aStream nextPutAll: 'EPMirror (a ', self basicClass classNameFromAnyOrigin asString, ')'

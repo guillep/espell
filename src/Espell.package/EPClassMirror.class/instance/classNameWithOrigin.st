@@ -1,4 +1,4 @@
-gt-inspector-extension
+accessing
 classNameWithOrigin
 	| nameInstalled nameFromEnv showWarningEquals showWarningEmpty nameToShow |
 	nameInstalled := self className.

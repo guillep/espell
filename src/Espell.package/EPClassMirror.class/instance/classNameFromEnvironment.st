@@ -1,4 +1,4 @@
-gt-inspector-extension
+accessing
 classNameFromEnvironment
 	
 	^ self bootstrapEnvironment keyAtValue: self ifAbsent: [ #'' ]

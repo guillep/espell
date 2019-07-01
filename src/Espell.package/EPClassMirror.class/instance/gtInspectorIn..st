@@ -3,12 +3,13 @@ gtInspectorIn: composite
 	<gtInspectorPresentationOrder: 5>
 
 	^composite text
-		title: 'Mirror(Class)';
+		title: 'EPClassMirror';
 		display: [ 
 			| cr |
 			cr := Character cr.
 			
-			self classNameWithOrigin, cr,
+			self classNameWithOrigin, cr, cr,
+			'hash: ',self identityHash, cr,
 			"'Superclass: ', self superclass className, cr,"
 			'TypeSpec: ', self instSpec , ' = ', self instSpecDescription ];
 		when: [ true ] 
