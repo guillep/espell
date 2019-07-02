@@ -9,7 +9,7 @@ bindingOf: aString
 				yourself ].
 	self sharedPools
 		do:
-			[ :pool | (pool bindingOf: aString) ifNotNilDo: [ :binding | ^ binding ] ].
+			[ :pool | self halt: 'implement' . (pool bindingOf: aString) ifNotNilDo: [ :binding | ^ binding ] ].
 	(self superclass bindingOf: aString)
 		ifNotNil: [ :binding | ^ binding ].
 	(environment includesClassNamed: aString)

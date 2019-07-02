@@ -1,3 +1,3 @@
 gt-inspector-extension
 printOn: aStream
-	aStream nextPutAll: 'EPMirror (a ', self basicClass classNameFromAnyOrigin asString, ')'
+	aStream nextPutAll: self class name asString, ' (a ', self basicClass classNameFromAnyOrigin asString, ')'
