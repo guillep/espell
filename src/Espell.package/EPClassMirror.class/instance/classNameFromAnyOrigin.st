@@ -1,3 +1,3 @@
 accessing
 classNameFromAnyOrigin
-	^ self className ifEmpty: [ self classNameFromEnvironment ]
+	^ [self classNameFromEnvironment ifEmpty: [ self className ]] on:Exception do: [ 'Error getting class name' ]

@@ -1,6 +1,6 @@
 gt-inspector-extension
 gtInspectorIn: composite
-	<gtInspectorPresentationOrder: 5>
+	<gtInspectorPresentationOrder: 0>
 
 	^composite text
 		title: 'EPClassMirror';

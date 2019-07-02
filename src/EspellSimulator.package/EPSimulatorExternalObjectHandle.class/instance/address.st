@@ -5,5 +5,5 @@ address
 		ifTrue: [ backend objectMemory integerObjectOf: object ]
 		ifFalse: [
 			"somebody is asking the address of a non immediate object!" 
-			self halt ].
+			self haltOnce ].
 "	^ backend nilObject target address"

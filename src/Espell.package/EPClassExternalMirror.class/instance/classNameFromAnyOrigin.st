@@ -1,0 +1,3 @@
+accessing
+classNameFromAnyOrigin
+	^ self className
