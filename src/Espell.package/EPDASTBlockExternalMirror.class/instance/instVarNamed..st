@@ -1,3 +1,3 @@
 accessing
 instVarNamed: aName
-	self haltOnce
+	^ self target object basicClass instVarNamed: aName
