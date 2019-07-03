@@ -1,3 +1,3 @@
 converting
-asHighLevelClassOnEnvironment: anEPRemoteEnvironment
+asRemoteClassOnEnvironment: anEPRemoteEnvironment
 	^ EPRemoteClass on: self environment: anEPRemoteEnvironment 

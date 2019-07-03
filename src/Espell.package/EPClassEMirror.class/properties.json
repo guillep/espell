@@ -1,11 +1,11 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "CaroHernandez 7/3/2019 11:58",
 	"super" : "EPClassMirror",
 	"category" : "Espell-LowLevel-Mirrors",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "EPClassExternalMirror",
+	"name" : "EPClassEMirror",
 	"type" : "normal"
 }

@@ -1,3 +1,0 @@
-mirrors
-classExternalMirrorOn: anEPSimulatorExternalObjectHandle 
-	^ EPClassExternalMirror on: anEPSimulatorExternalObjectHandle from: self

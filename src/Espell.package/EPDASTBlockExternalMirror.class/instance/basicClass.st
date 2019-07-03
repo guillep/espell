@@ -1,3 +1,3 @@
 accessing
 basicClass
-	^ backend classExternalMirrorOn: self target basicClass
+	^ backend classEMirrorOn: self target basicClass

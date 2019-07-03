@@ -1,4 +1,4 @@
 mirrors
-dastBlockMirrorOn: aDASTBlock 
+dastBlockEMirrorOn: aDASTBlock 
 	
 	^ EPDASTBlockExternalMirror on: aDASTBlock from: self

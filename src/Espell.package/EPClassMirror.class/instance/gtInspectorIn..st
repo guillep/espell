@@ -8,7 +8,7 @@ gtInspectorIn: composite
 			| cr |
 			cr := Character cr.
 			
-			self classNameWithOrigin, cr, cr,
+			self classNameWithOrigin, cr,
 			'hash: ',self identityHash, cr,
 			"'Superclass: ', self superclass className, cr,"
 			'TypeSpec: ', self instSpec , ' = ', self instSpecDescription ];
