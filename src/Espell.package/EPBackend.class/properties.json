@@ -14,7 +14,8 @@
 		"byteSymbolMapping",
 		"largePositiveIntegerMapping",
 		"largeNegativeIntegerMapping",
-		"instanceVariableMapping"
+		"instanceVariableMapping",
+		"systemDictionary"
 	],
 	"name" : "EPBackend",
 	"type" : "normal"

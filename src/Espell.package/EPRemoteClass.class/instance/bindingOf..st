@@ -12,7 +12,8 @@ bindingOf: aString
 			[ :pool | self halt: 'implement' . (pool bindingOf: aString) ifNotNilDo: [ :binding | ^ binding ] ].
 	(self superclass bindingOf: aString)
 		ifNotNil: [ :binding | ^ binding ].
-	(environment includesClassNamed: aString)
+	
+	(self definesClassVariable: aString asSymbol)
 		ifTrue: [ self haltIf: [ environment isNil ].
 			^ EPGlobalBinding new
 				name: aString objectSpace: environment;
