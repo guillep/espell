@@ -1,3 +1,3 @@
 testing
 isClassMirror
-	^ false
+	^ ({'PCMetaclass'. 'PCMetaclass class'} indexOf: self asClassMirror basicClass basicClass classNameFromAnyOrigin) > 0

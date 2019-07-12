@@ -7,5 +7,5 @@ classPool
 	rgClass ifNil: [ ^self backend nilObject  ].
 	instSide := rgClass isInstanceSide 
 						ifTrue: [ self ] ifFalse: [ (self instanceVariableAtIndex: 4) asClassMirror]. "soleInstance of Metaclass"
-	self halt.
-	^ instSide instanceVariableAtIndex: 4"(self backend instanceVariableMapping classPoolIndex)"
+	
+	^ [instSide instanceVariableAtIndex: self backend instanceVariableMapping classPoolIndex] on: AssertionFailure do: [ backend nilObject ]
