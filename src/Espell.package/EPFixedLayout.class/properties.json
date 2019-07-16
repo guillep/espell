@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "EPLayout",
+	"category" : "Espell-layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPFixedLayout",
+	"type" : "normal"
+}

@@ -26,4 +26,7 @@ asLocalLiteral
 		ifTrue: [ ^self backend fromRemoteLargePositiveInteger: self ].
 	(self basicClass pointsToSameObject: self backend largeNegativeIntegerClass)
 		ifTrue: [ ^self backend fromRemoteLargeNegativeInteger: self ].
+	(self isClassMirror)
+		ifTrue: [ ^ self asClassFromEnvironment ].
+	
 	^'not a translateable literal'
