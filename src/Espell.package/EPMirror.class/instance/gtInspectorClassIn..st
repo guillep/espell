@@ -1,4 +1,7 @@
 gt-inspector-extension
 gtInspectorClassIn: composite
 	<gtInspectorPresentationOrder: 5>
-	^ self basicClass gtInspectorIn: composite
+	|a|
+	a := self basicClass gtInspectorIn: composite.
+	a title: 'class'.
+	^a
