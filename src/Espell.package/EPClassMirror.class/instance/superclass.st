@@ -1,7 +1,15 @@
 accessing
 superclass
-	| mirror |
-	mirror := self instanceVariableAtIndex: (self backend instanceVariableMapping classSuperclassIndex). 
-	^ mirror isNilObject 
-		ifTrue: [ mirror ]
-		ifFalse: [ mirror asClassMirror ]
+	| superclmirror |
+	superclmirror := self instanceVariableAtIndex: (self backend instanceVariableMapping classSuperclassIndex). 
+	
+	superclmirror isNilObject 
+		ifTrue: [ 
+			| rgsupercl |
+			rgsupercl := self asRGClass superclass.
+			rgsupercl ifNil: [ ^ superclmirror ].
+			
+			superclmirror := (self builder classLoader classNamed: rgsupercl name) 
+			].
+	
+	^ superclmirror asClassMirror

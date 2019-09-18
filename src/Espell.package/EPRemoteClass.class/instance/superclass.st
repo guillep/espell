@@ -1,5 +1,8 @@
 accessing
 superclass
+	| superclmirror |
 	
-	mirror superclass isNilObject ifTrue: [ ^ nil ].
-	^ EPRemoteClass on: mirror superclass environment: environment
+	superclmirror := mirror superclass.
+	superclmirror isNilObject ifTrue: [ ^ nil ].
+	
+	^ EPRemoteClass on: superclmirror environment: environment 
