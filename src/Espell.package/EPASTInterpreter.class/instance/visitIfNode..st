@@ -2,7 +2,7 @@ visiting
 visitIfNode: anIfNode
 	| theReceiver block |
 	theReceiver := self interpret: anIfNode receiver.
-	(self classOf: theReceiver) name = 'PCTrue'
+	(self classOf: theReceiver) name = (evaluator classNamed: 'True') name
 		ifTrue: [ block := anIfNode trueCondition ]
 		ifFalse: [ block := anIfNode falseCondition ].
 	

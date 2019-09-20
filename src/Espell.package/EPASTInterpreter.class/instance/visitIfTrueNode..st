@@ -2,7 +2,7 @@ visiting
 visitIfTrueNode: anIfTrueNode
 	| theReceiver block |
 	theReceiver := self interpret: anIfTrueNode receiver.
-	(self classOf: theReceiver) name = 'PCTrue'
+	(self classOf: theReceiver) name = (evaluator classNamed: 'True') name
 		ifTrue: [ block := anIfTrueNode trueCondition body ]
 		ifFalse: [ block := RBLiteralNode value: nil ].
 	"It is for sure a block"
