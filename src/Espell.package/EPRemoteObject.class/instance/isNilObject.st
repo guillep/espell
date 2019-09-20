@@ -1,0 +1,3 @@
+testing
+isNilObject
+	^ mirror isNilObject

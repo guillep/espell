@@ -1,6 +1,6 @@
 accessing
 innerBindingOf: aString
-	
+	| supclass |
 	(self definesClassVariable: aString asSymbol)
 		ifTrue: [ self haltIf: [ environment isNil ].
 			^ EPClassVariableBinding new
@@ -8,6 +8,8 @@ innerBindingOf: aString
 					ownerName: self name
 					objectSpace: environment;
 				yourself ].
-	self sharedPools do: [ :pool | self halt. (pool bindingOf: aString) ifNotNilDo: [ :binding | ^ binding ] ].
-	self superclass ifNotNil: [  :supercl | ^ supercl innerBindingOf: aString ].
+	self flag: 'temporally commented'.
+	"self sharedPools do: [ :pool | self halt. (pool bindingOf: aString) ifNotNilDo: [ :binding | ^ binding ] ]."
+	supclass := self superclass.
+	supclass isNilObject ifFalse: [  ^ supclass innerBindingOf: aString ].
 	^ nil
