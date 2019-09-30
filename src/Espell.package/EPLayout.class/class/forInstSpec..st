@@ -4,4 +4,5 @@ forInstSpec: instSpec
 	(instSpec = 7) ifTrue: [ ^ EPImmediateLayout ].
 	(instSpec = 3) ifTrue: [ ^ EPVariableSizedWithInstVarLayout ].	
 	(instSpec = 2) ifTrue: [ ^ EPVariableSizedWithoutInstVarLayout ].
+	(instSpec = 16) ifTrue: [ ^ EPByteIndexableLayout ].
 	^ EPLayout
