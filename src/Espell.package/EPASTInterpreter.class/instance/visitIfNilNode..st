@@ -12,7 +12,7 @@ visitIfNilNode: anIfNilNode
 			at: each name 
 			put: theReceiver ].
 
-	^ ((self classOf: theReceiver) name = 'PCUndefinedObject') = anIfNilNode checkForNil
+	^ ((self classOf: theReceiver) name = (evaluator classNamed: 'UndefinedObject') name) = anIfNilNode checkForNil
 		ifTrue: [ self interpret: anIfNilNode trueCondition body. ]
 		ifFalse: [
 			anIfNilNode falseCondition isLiteralNode ifTrue: [ ^ theReceiver ].
