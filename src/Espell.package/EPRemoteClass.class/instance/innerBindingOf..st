@@ -8,7 +8,6 @@ innerBindingOf: aString
 					ownerName: self name
 					objectSpace: environment;
 				yourself ].
-	self flag: 'temporally commented'.
 	self sharedPools do: [ :pool | (pool innerBindingOf: aString) ifNotNil: [ :binding | ^ binding ] ].
 	supclass := self superclass.
 	supclass isNilObject ifFalse: [  ^ supclass innerBindingOf: aString ].
