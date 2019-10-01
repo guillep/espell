@@ -1,7 +1,8 @@
 execution
 installAsActiveProcess: aProcessMirror
 	| activeProcess theProcessor |
-	theProcessor := (self environment at: #Processor) asSchedulerMirror.
+	
+	theProcessor := self environment at: #Processor "(self interpreter evaluateCode: 'Smalltalk at: #Processor')" asSchedulerMirror.
 	activeProcess := theProcessor activeProcess.
 	"If this is already the active process we have nothing to do"
 	(activeProcess pointsToSameObject: aProcessMirror)
