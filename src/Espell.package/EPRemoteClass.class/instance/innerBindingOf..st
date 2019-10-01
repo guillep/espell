@@ -9,7 +9,7 @@ innerBindingOf: aString
 					objectSpace: environment;
 				yourself ].
 	self flag: 'temporally commented'.
-	"self sharedPools do: [ :pool | self halt. (pool bindingOf: aString) ifNotNilDo: [ :binding | ^ binding ] ]."
+	self sharedPools do: [ :pool | (pool innerBindingOf: aString) ifNotNil: [ :binding | ^ binding ] ].
 	supclass := self superclass.
 	supclass isNilObject ifFalse: [  ^ supclass innerBindingOf: aString ].
 	^ nil

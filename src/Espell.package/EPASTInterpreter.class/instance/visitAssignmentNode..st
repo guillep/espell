@@ -7,6 +7,5 @@ visitAssignmentNode: anAssignmentNode
 	theBinding := variable binding isLiteralVariable
 		ifTrue: [ variable binding assoc ]
 		ifFalse: [ variable binding ].
-	
 	theBinding accept: self assign: value inNode: variable.
 	^ value
