@@ -14,10 +14,10 @@ baseline: spec
 
 			"Needs VM simulator"
 			spec
-				baseline: 'Spur'
+				baseline: 'VMMaker'
 				with: [ 
 					spec
-						repository: 'github://demarey/pharo-vm:spur64/mc' "waiting PR to be integrated: 'github://pharo-project/pharo-vm:spur64/mc'" ].
+						repository: 'github://pharo-project/opensmalltalk-vm:headless' ].
 
-			spec package: 'EspellSimulator' with: [ spec requires: #( 'Espell' 'Spur' ) ].
+			spec package: 'EspellSimulator' with: [ spec requires: #( 'Espell' 'VMMaker' ) ].
 			spec package: 'Espell' with: [ spec requires: #( 'ASTInterpreter' ) ]. ]
