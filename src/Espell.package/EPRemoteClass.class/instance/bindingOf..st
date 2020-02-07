@@ -9,15 +9,14 @@ bindingOf: aString
 				yourself ].
 	self sharedPools
 		do:
-			[ :pool | self halt: 'implement' . (pool bindingOf: aString) ifNotNilDo: [ :binding | ^ binding ] ].
+			[ :pool | (pool bindingOf: aString) ifNotNilDo: [ :binding | ^ binding ] ].
 	(self superclass bindingOf: aString)
 		ifNotNil: [ :binding | ^ binding ].
-	
-	(self definesClassVariable: aString asSymbol)
+	(environment includesClassNamed: aString)
 		ifTrue: [ self haltIf: [ environment isNil ].
 			^ EPGlobalBinding new
 				name: aString objectSpace: environment;
 				yourself ].
 
 	"If it is a temp or an instance variable"
-	^ nil "environment nilObject"
+	^ nil

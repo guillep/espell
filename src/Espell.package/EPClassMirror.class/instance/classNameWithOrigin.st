@@ -1,8 +1,8 @@
 accessing
 classNameWithOrigin
 	| nameInstalled nameFromEnv showWarningEquals showWarningEmpty nameToShow |
-	nameInstalled := self className.
 	nameFromEnv := self classNameFromEnvironment.
+	nameInstalled := [self className] on: Exception do: [ '' ].
 
 	showWarningEmpty := nameInstalled isEmpty and: [ nameFromEnv isEmpty ].
 	showWarningEquals := nameInstalled isNotEmpty and: [ nameInstalled ~= nameFromEnv ].

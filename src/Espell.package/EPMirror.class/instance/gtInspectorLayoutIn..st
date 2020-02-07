@@ -1,5 +1,5 @@
 gt-inspector-extension
 gtInspectorLayoutIn: composite
-	<gtInspectorPresentationOrder: 0>
+	<gtInspectorPresentationOrder: 3>
 	
 	^self basicClass layout gtInspectorLayoutIn: composite with: self

@@ -1,5 +1,16 @@
 accessing
 superclass
+	| superclmirror |
 	
-	mirror superclass isNilObject ifTrue: [ ^ nil ].
-	^ EPRemoteClass on: mirror superclass environment: environment
+	superclmirror := mirror superclass.
+	
+	superclmirror isNilObject 
+		ifTrue: [ | sclassname |
+			sclassname := mirror asRGClass superclass 
+				ifNil: [ ^ mirror backend nilObject ]
+				ifNotNil: [ :rgsclass | rgsclass name ].
+			 
+			superclmirror := mirror builder classLoader classNamed: sclassname ]
+		ifFalse: [ mirror superclass ].
+	superclmirror isNilObject ifTrue: [ ^ mirror backend nilObject ].
+	^ (EPRemoteClass on: superclmirror environment: environment) 

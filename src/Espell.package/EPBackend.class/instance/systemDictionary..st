@@ -5,5 +5,5 @@ systemDictionary: anEPSystemDictionary
 	Smalltalk specialObjectsArray indexOf: Smalltalk"
 	self flag: 'commented PharoCandle'.
 	
-	^ systemDictionary := anEPSystemDictionary "(self  specialObjectsArray at: 8) asClassMirror basicNew: 1." 
-	 "self smalltalkInstance instanceVariableAtIndex: (self instanceVariableMapping smalltalkImageGlobalsIndex)".
+	^ "systemDictionary := anEPSystemDictionary" "(self  specialObjectsArray at: 8) asClassMirror basicNew: 1." 
+	 [self smalltalkInstance instanceVariableAtIndex: (self instanceVariableMapping smalltalkImageGlobalsIndex)] on: Exception do: [ systemDictionary := anEPSystemDictionary ].

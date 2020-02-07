@@ -26,7 +26,8 @@
 		"imageFile",
 		"characterTable",
 		"backend",
-		"mustRebuildSpecialObjectsArray"
+		"mustRebuildSpecialObjectsArray",
+		"debuggerInterpreter"
 	],
 	"name" : "EPObjectSpace",
 	"type" : "normal"

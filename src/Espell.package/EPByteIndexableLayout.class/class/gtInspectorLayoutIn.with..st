@@ -1,7 +1,7 @@
-gt-inspector-extension
+printing
 gtInspectorLayoutIn: composite with: aMirror
 	
 	^composite text
-		title: 'ImmediateLayout view';
+		title: 'ByteIndexable view';
 		display: [ aMirror asString ]
 		
