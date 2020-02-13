@@ -52,7 +52,7 @@ executePrimitiveMethod: aMethod on: receiver withArguments: aCollection
 			^ EPPrimitiveSuccess new value: (self mirrorOnAddress: returnValue)
 		] ensure: [ 
 			"We pop extra things..."
-			self simulator pop: (((self simulator stackPointer - self simulator framePointer) + (self simulator objectMemory wordSize * 5)) min: 0)  abs / self simulator objectMemory wordSize.
+			self simulator pop: (((self simulator stackPointer - self simulator framePointer) + (self simulator objectMemory wordSize * 4)) min: 0)  abs / self simulator objectMemory wordSize.
 			self assert: self stackIsEmpty.
 			"Recursive xeq affects primErrorCode"
 			self simulator initPrimCall.

@@ -41,7 +41,7 @@ initializeExecutionContext
 		put: rcvr.
 	
 	"top of stack is the instruction pointer"
-	stackPages longAt: (pointer := pointer - self objectMemory wordSize) put: theIP.
+	"stackPages longAt: (pointer := pointer - self objectMemory wordSize) put: theIP."
 	page headSP: pointer.
 
 	self simulator setStackPageAndLimit: page.
