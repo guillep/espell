@@ -1,3 +1,0 @@
-*EspellSimulator
-runLeakCheckerFor: gcModes
-	

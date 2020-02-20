@@ -1,4 +1,0 @@
-*EspellSimulator
-checkStackIntegrity
-	
-	^ true
