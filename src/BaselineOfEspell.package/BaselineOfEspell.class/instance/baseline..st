@@ -17,7 +17,7 @@ baseline: spec
 				baseline: 'VMMaker'
 				with: [ 
 					spec
-						repository: 'github://pharo-project/opensmalltalk-vm:headless' ].
+						repository: 'github://pharo-project/opensmalltalk-vm:v8.3.0-alpha' ].
 
 			spec package: 'EspellSimulator' with: [ spec requires: #( 'Espell' 'VMMaker' ) ].
 			spec package: 'Espell' with: [ spec requires: #( 'ASTInterpreter' ) ]. ]
