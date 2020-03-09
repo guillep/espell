@@ -6,11 +6,11 @@ gtInspectorIn: composite
 		display: [ 
 			| cr sclass |
 			sclass := self basicClass superclass.
-			cr := Character cr.
+			cr := Character cr asString.
 			self classNameWithOrigin, cr,
-			'hash: ',self identityHash, cr,
+			'hash: ',self identityHash asString, cr,
 			'Superclass: ', (sclass isNilObject ifTrue: [ sclass asString ] ifFalse: [ sclass asClassMirror classNameFromAnyOrigin asString ]), cr,
-			'instSpec: ', self instSpec , ' = ', self instSpecDescription, cr,
-			'instSize: ', self instSize , cr,  
+			'instSpec: ', self instSpec asString, ' = ', self instSpecDescription, cr,
+			'instSize: ', self instSize asString, cr,  
 			'format: ', self format asString , cr];
 		when: [ true ] 
