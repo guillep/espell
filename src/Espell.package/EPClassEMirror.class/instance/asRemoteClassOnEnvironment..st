@@ -1,3 +1,4 @@
 converting
 asRemoteClassOnEnvironment: anEPRemoteEnvironment
-	^ self target object class
+	
+	^ self target object

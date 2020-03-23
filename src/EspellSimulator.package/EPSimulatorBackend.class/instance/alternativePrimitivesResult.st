@@ -3,4 +3,5 @@ alternativePrimitivesResult
 	^ alternativePrimitivesResult
 		ifNil: [ alternativePrimitivesResult := 
 			{(#primitiveSnapshot -> true).
-			 (#primitiveImageName -> 'imagename')} asDictionary ]
+			 (#primitiveImageName -> 'imagename').
+			 (#primitiveQuit -> true)} asDictionary ]

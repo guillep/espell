@@ -41,7 +41,6 @@ executePrimitiveMethod: aMethod on: receiver withArguments: aCollection
 				function := self simulator functionPointerFor: aMethod primitive inClass: nil.
 				function = 0 ifTrue: [ ^ EPPrimitiveFailed new ].
 				self simulator primitiveFunctionPointer: function.
-				
 				self dispatchFunctionPointer: function.
 				self simulator maybeRetryFailureDueToForwarding: aMethod primitive.
 			].
