@@ -1,6 +1,6 @@
 comparing
 = anotherMirror
 	
-	anotherMirror isOzMirror ifFalse: [ ^ false ].
+	([anotherMirror isOzMirror] on:Exception do: [ false ]) ifFalse: [ ^ false ].
 	
 	^ self pointsToSameObject: anotherMirror

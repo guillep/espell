@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "EPGlobalBinding",
+	"category" : "Espell-HighLevel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPClassBinding",
+	"type" : "normal"
+}

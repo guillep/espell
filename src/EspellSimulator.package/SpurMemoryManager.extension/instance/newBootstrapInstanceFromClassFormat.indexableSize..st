@@ -4,6 +4,7 @@ newBootstrapInstanceFromClassFormat: classFormat indexableSize: nElements
 	<var: #nElements type: #usqInt>
 	"Allocate an instance of a variable class, excepting CompiledMethod."
 	| instSpec numSlots classIndex newObj fillValue |
+	self halt.
 	instSpec := self instSpecOfClassFormat: classFormat.
 	classIndex := 0.
 	fillValue := 0.

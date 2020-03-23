@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "EPMirror",
+	"category" : "Espell-LowLevel-Mirrors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "EPDASTBlockExternalMirror",
+	"type" : "normal"
+}

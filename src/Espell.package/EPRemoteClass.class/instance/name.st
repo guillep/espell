@@ -1,4 +1,4 @@
 accessing
 name
 
-	^ mirror className
+	^ mirror classNameFromAnyOrigin 

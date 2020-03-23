@@ -3,4 +3,4 @@ methodClass
 
 	"The CompiledMethod instance in most special objects arrays.
 	Smalltalk specialObjectsArray indexOf: CompiledMethod"
-	^ specialObjectsArray at: 17
+	^ (specialObjectsArray at: 17) asClassMirror

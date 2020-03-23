@@ -1,0 +1,3 @@
+converting
+asRGClass
+	^ target object
