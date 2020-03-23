@@ -1,3 +1,0 @@
-accessing-artificial
-object
-	^ nil
