@@ -16,8 +16,7 @@ baseline: spec
 			spec
 				baseline: 'Spur'
 				with: [ 
-					spec
-						repository: 'github://demarey/pharo-vm:spur64/mc' "waiting PR to be integrated: 'github://pharo-project/pharo-vm:spur64/mc'" ].
+					spec repository: 'github://pharo-project/opensmalltalk-vm' ].
 
 			spec package: 'EspellSimulator' with: [ spec requires: #( 'Espell' 'Spur' ) ].
 			spec package: 'Espell' with: [ spec requires: #( 'ASTInterpreter' ) ]. ]
