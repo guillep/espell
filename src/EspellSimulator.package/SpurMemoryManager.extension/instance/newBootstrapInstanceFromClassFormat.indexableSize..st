@@ -38,6 +38,7 @@ newBootstrapInstanceFromClassFormat: classFormat indexableSize: nElements
 					 Allow fixed classes to be instantiated here iff nElements = 0."
 					 (nElements ~= 0 or: [instSpec > self lastPointerFormat]) ifTrue:
 						[^nil].
+					 fillValue := nilObj.
 					 numSlots := self fixedFieldsOfClassFormat: classFormat]. "non-indexable"
 	numSlots > self maxSlotsForNewSpaceAlloc
 		ifTrue:
