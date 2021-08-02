@@ -5,7 +5,16 @@ basicCompileDoItFromSourceCode: sourceCode
 	| highLevelUndefinedObjectClass env |
 	env := EPRemoteEnvironment on: objectSpace backend systemDictionary.
 	highLevelUndefinedObjectClass := env classForClassMirror: objectSpace nilObject basicClass.
+	
 	^ (OpalCompiler new
+		options: #(+ optionFullBlockClosure);
 		noPattern: true;
+		source: sourceCode;
+		encoderClass: EncoderForSistaV1;
+		class: highLevelUndefinedObjectClass;
 		environment: (EPDummyEnvironment on: objectSpace);
-		source: sourceCode; class: highLevelUndefinedObjectClass; requestor: nil; failBlock: [self error]; parse) generate
+		requestor: nil;
+		productionEnvironment: self class environment;
+		failBlock: [ self error ];
+		parseDoIt) generate
+

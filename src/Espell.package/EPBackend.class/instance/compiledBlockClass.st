@@ -1,0 +1,4 @@
+special objects
+compiledBlockClass
+
+	^ compiledBlockClass

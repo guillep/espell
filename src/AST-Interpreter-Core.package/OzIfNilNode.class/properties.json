@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "OzOptimizedMessageNode",
+	"category" : "AST-Interpreter-Core-Optimized",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"trueCondition",
+		"falseCondition",
+		"checkForNil"
+	],
+	"name" : "OzIfNilNode",
+	"type" : "normal"
+}

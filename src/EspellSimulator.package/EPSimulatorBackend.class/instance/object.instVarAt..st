@@ -2,7 +2,7 @@ primitives
 object: anObject instVarAt: index 
 	
 	| address |
-	address := self objectMemory fetchPointer: index - 1 ofObject: anObject address.	
+	address := self objectMemory fetchPointer: index - 1 ofObject: anObject target address.	
 	((self objectMemory isNonImmediate: address)
 		and: [self objectMemory isForwarded: address])
 			ifTrue: [ | forwardedObject |

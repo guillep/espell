@@ -5,13 +5,6 @@ baseline: spec
 		for: #common
 		do: [ 
 			spec description: 'Espell Object Spaces'.			
-			spec configuration: 'ASTInterpreter' with: [
-				spec
-					className: #ConfigurationOfASTInterpreter;
-					versionString: '0.7.5';
-					loads: #('default');
-					repository: 'http://smalltalkhub.com/mc/Pharo/AST-Interpreter/main' ].
-
 			"Needs VM simulator"
 			spec
 				baseline: 'VMMaker'
@@ -19,5 +12,8 @@ baseline: spec
 					spec
 						repository: 'github://pharo-project/opensmalltalk-vm/smalltalksrc' ].
 
+			spec package: 'AST-Interpreter-Core'.
+			spec package: 'AST-Interpreter-Extension' with: [ spec requires: #( 'AST-Interpreter-Core' ) ].
+			
 			spec package: 'EspellSimulator' with: [ spec requires: #( 'Espell' 'VMMaker' ) ].
-			spec package: 'Espell' with: [ spec requires: #( 'ASTInterpreter' ) ]. ]
+			spec package: 'Espell' with: [ spec requires: #( 'AST-Interpreter-Core' 'AST-Interpreter-Extension' ) ]. ]

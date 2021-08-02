@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "RBMethodNode",
+	"category" : "AST-Interpreter-Core-Optimized",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"original"
+	],
+	"name" : "OzOptimizedMethodNode",
+	"type" : "normal"
+}
