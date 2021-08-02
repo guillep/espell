@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "<historical>",
+	"super" : "Error",
+	"category" : "AST-Interpreter-Core-Exceptions",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"cause"
+	],
+	"name" : "InterpretationError",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "OzOptimizedMethodAccessorNode",
+	"category" : "AST-Interpreter-Core-Optimized",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "OzAccessorWriteNode",
+	"type" : "normal"
+}

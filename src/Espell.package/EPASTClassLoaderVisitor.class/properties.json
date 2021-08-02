@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "RBProgramNode",
+	"super" : "RBProgramNodeVisitor",
 	"category" : "Espell-HighLevel",
 	"classinstvars" : [ ],
 	"pools" : [ ],

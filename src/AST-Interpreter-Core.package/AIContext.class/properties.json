@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "MarcusDenker 6/9/2014 16:42",
+	"super" : "Object",
+	"category" : "AST-Interpreter-Core-Base",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"closure",
+		"temporaries",
+		"arguments",
+		"outerContext",
+		"currentExecutedNode"
+	],
+	"name" : "AIContext",
+	"type" : "normal"
+}

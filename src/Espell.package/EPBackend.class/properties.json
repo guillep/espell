@@ -14,7 +14,8 @@
 		"byteSymbolMapping",
 		"largePositiveIntegerMapping",
 		"largeNegativeIntegerMapping",
-		"instanceVariableMapping"
+		"instanceVariableMapping",
+		"compiledBlockClass"
 	],
 	"name" : "EPBackend",
 	"type" : "normal"

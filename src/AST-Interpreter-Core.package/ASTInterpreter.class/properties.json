@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "<historical>",
+	"super" : "Object",
+	"category" : "AST-Interpreter-Core-Base",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"context",
+		"gotoContext",
+		"currentNode"
+	],
+	"name" : "ASTInterpreter",
+	"type" : "normal"
+}

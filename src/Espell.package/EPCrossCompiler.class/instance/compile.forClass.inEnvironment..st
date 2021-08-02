@@ -12,4 +12,4 @@ compile: sourceCode forClass: aClass inEnvironment: anEnvironment
 					name: e node name;
 					objectSpace: anEnvironment;
 					yourself) ].
-	^ self translateToRemoteCompiledMethod: localCompiledMethod
+	^ localCompiledMethod asLiteralInObjectSpace: objectSpace alreadyTransformed: Dictionary new

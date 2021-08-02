@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "ASTInterpreter",
+	"category" : "AST-Interpreter-Core-Optimized",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "OptimizedASTInterpreter",
+	"type" : "normal"
+}

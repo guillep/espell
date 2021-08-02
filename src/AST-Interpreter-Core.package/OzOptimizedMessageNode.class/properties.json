@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "RBMessageNode",
+	"category" : "AST-Interpreter-Core-Optimized",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"original"
+	],
+	"name" : "OzOptimizedMessageNode",
+	"type" : "normal"
+}

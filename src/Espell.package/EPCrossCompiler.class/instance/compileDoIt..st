@@ -3,4 +3,4 @@ compileDoIt: sourceCode
 
 	| localCompiledMethod |
 	localCompiledMethod := self basicCompileDoItFromSourceCode: sourceCode.
-	^ self translateToRemoteCompiledMethod: localCompiledMethod
+	^ localCompiledMethod asLiteralInObjectSpace: objectSpace alreadyTransformed: Dictionary new

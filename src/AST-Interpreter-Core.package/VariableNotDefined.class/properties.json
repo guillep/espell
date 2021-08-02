@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "<historical>",
+	"super" : "Error",
+	"category" : "AST-Interpreter-Core-Exceptions",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"variableName",
+		"context"
+	],
+	"name" : "VariableNotDefined",
+	"type" : "normal"
+}

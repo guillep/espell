@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "<historical>",
+	"super" : "BlockClosure",
+	"category" : "AST-Interpreter-Core-Base",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"homeContext",
+		"code"
+	],
+	"name" : "ASTBlockClosure",
+	"type" : "variable"
+}

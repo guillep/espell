@@ -1,3 +1,0 @@
-*Espell
-isGlobalClassNameBinding
-	^ assoc isGlobalClassNameBinding
