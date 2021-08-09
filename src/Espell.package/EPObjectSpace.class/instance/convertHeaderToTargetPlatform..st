@@ -14,4 +14,4 @@ convertHeaderToTargetPlatform: localCompiledCode
 	^ headerFlagForEncoder + (localCompiledCode numArgs bitShift: 24)
 	  + (localCompiledCode numTemps bitShift: 18)
 	  + localCompiledCode literals size
-	  + (localCompiledCode hasPrimitive bitShift: 16)
+	  + (localCompiledCode isPrimitive asBit bitShift: 16)
