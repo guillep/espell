@@ -10,7 +10,7 @@ baseline: spec
 				baseline: 'VMMaker'
 				with: [ 
 					spec
-						repository: 'github://pharo-project/opensmalltalk-vm:pharo-9/smalltalksrc' ].
+						repository: 'github://pharo-project/pharo-project/pharo-vm:pharo-10/smalltalksrc' ].
 
 			spec package: 'AST-Interpreter-Core'.
 			spec package: 'AST-Interpreter-Extension' with: [ spec requires: #( 'AST-Interpreter-Core' ) ].
