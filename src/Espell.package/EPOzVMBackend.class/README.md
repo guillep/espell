@@ -1,1 +1,0 @@
-I am an espell backend that works on the Oz Virtual machine. Camille defines me as a Parasithic object space because I live in the same heap transparently.
