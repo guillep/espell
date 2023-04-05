@@ -1,4 +1,0 @@
-primitives
-giveChanceToRun
-
-	self primitiveResumeFrom: specialObjectsArray target

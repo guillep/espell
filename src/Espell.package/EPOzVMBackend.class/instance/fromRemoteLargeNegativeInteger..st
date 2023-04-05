@@ -1,4 +1,0 @@
-converting
-fromRemoteLargeNegativeInteger: aNegativeInteger
-
-	^ largeNegativeIntegerMapping fromRemote: aNegativeInteger
