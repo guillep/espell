@@ -7,4 +7,6 @@ iterateSymbolWeakSet: aWeakSet with: aBlock
 		| element |
 		element := array at: i.
 		(nil ~~ element target and: [ element isNilObject not and: [ element ~= flag ] ])
-			ifTrue: [ aBlock value: element ] ]
+			ifTrue: [ 
+				"a WeakSet contains ephemeric objects containing the real element in the 1st IV"
+				aBlock value: (element instanceVariableAtIndex: 1) ] ]

@@ -1,11 +1,13 @@
 accessing
 like: anObject ifAbsent: aBlock
+
 	"Answer an object in the receiver that is equal to anObject,
 	or evaluate the block if not found. Relies heavily on hash properties"
 
-	| element array flag |
+	| element array |
 	array := mirror instanceVariableAtIndex: 2.
-	flag := mirror instanceVariableAtIndex: 3.
-	((element  := array at: (self scanFor: anObject)) = flag or: [ element isNilObject ])
+	(element := array at: (self scanFor: anObject)) isNilObject
 		ifTrue: [ ^ aBlock value ]
-		ifFalse: [ ^ element ]
+		ifFalse: [
+			"a WeakSet contains ephemeric objects containing the real element in the 1st IV" 
+			^ element instanceVariableAtIndex: 1 ]
