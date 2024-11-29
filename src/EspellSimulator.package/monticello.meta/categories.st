@@ -1,1 +1,1 @@
-SystemOrganization addCategory: #EspellSimulator!
+self packageOrganizer ensurePackage: #EspellSimulator withTags: #()!
