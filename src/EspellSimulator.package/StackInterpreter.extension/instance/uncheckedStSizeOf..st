@@ -7,6 +7,6 @@ uncheckedStSizeOf: oop
 	<inline: false>
 	hdr := objectMemory baseHeader: oop.
 	fmt := objectMemory formatOfHeader: hdr.
-	totalLength := objectMemory lengthOf: oop baseHeader: hdr format: fmt.
+	totalLength := objectMemory lengthOf: oop format: fmt.
 	fixedFields := objectMemory fixedFieldsOf: oop format: fmt length: totalLength.
 	^totalLength - fixedFields

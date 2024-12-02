@@ -1,1 +1,1 @@
-SystemOrganization addCategory: #BaselineOfEspell!
+self packageOrganizer ensurePackage: #BaselineOfEspell withTags: #()!
