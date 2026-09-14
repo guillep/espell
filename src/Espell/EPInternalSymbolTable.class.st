@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'cache'
 	],
-	#category : 'Espell-HighLevel'
+	#category : #'Espell-HighLevel'
 }
 
 { #category : #public }
@@ -121,19 +121,16 @@ EPInternalSymbolTable >> like: aString ifAbsent: aBlock [
 { #category : #public }
 EPInternalSymbolTable >> symbolsDo: aBlock [
 
-	| symbolClass symbolClassPools arrayClass |
+	| symbolTable arrayClass newSymbolsWeakSet oldSymbolsWeakSet |
 	arrayClass := objectSpace backend arrayClass.
-	symbolClass := objectSpace backend symbolTableClass asClassMirror.
-	symbolClassPools := symbolClass classPool instanceVariableAtIndex: (self instanceVariableMapping dictionaryArrayIndex).
-	1 to: symbolClassPools size do: [ :i | | associationOrNil |
-		associationOrNil := symbolClassPools at: i.
-		associationOrNil isNilObject ifFalse: [ | symbolSet |
-			symbolSet := associationOrNil instanceVariableAtIndex: 2.
-			symbolSet isNilObject ifFalse: [
-				symbolSet basicClass = arrayClass
-					ifTrue: [ self iterateSymbolArray: symbolSet with: aBlock ]
-					ifFalse: [ self iterateSymbolWeakSet: symbolSet with: aBlock] ] ].
-	].
+	symbolTable := objectSpace interpreter evaluateCode: 'SymbolTable system'.
+	newSymbolsWeakSet := symbolTable instanceVariableAtIndex: 1.
+	oldSymbolsWeakSet := symbolTable instanceVariableAtIndex: 2.
+	{ newSymbolsWeakSet . oldSymbolsWeakSet } do: [ :symbolSet |
+		symbolSet isNilObject ifFalse: [
+			symbolSet basicClass = arrayClass
+				ifTrue: [ self iterateSymbolArray: symbolSet with: aBlock ]
+				ifFalse: [ self iterateSymbolWeakSet: symbolSet with: aBlock] ] ]
 ]
 
 { #category : #accessing }
