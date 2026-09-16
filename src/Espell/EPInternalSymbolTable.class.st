@@ -67,7 +67,9 @@ EPInternalSymbolTable >> initialize [
 EPInternalSymbolTable >> installSymbol: aRemoteSymbol [
 
 	cache at: aRemoteSymbol asLocalLiteral put: aRemoteSymbol.
-	^ objectSpace interpreter evaluateCode: 'Symbol intern: aSymbol' withTemps: { 'aSymbol' -> aRemoteSymbol }
+	^ objectSpace interpreter
+		evaluateCode: 'SymbolTable system unsafeAdd: aSymbol'
+		withTemps: { 'aSymbol' -> aRemoteSymbol }
 ]
 
 { #category : #'private-iterating' }
@@ -94,28 +96,11 @@ EPInternalSymbolTable >> iterateSymbolWeakSet: aWeakSet with: aBlock [
 ]
 
 { #category : #public }
-EPInternalSymbolTable >> like: aString ifAbsent: aBlock [
+EPInternalSymbolTable >> like: aString ifAbsent: failBlock [
 
-	| symbolClass symbolClassPools arrayClass |
-	arrayClass := objectSpace backend arrayClass.
-	symbolClass := objectSpace backend symbolTableClass asClassMirror.
-	symbolClassPools := symbolClass classPool instanceVariableAtIndex: (objectSpace backend instanceVariableMapping dictionaryArrayIndex).
-	1 to: symbolClassPools size do: [ :i | | associationOrNil |
-		associationOrNil := symbolClassPools at: i.
-		associationOrNil isNilObject ifFalse: [ | symbolSet |
-			symbolSet := associationOrNil instanceVariableAtIndex: 2.
-			symbolSet isNilObject ifFalse: [
-				symbolSet basicClass = arrayClass
-					ifTrue: [ 
-						self
-							iterateSymbolArray: symbolSet
-							with:  [ :remoteSymbol | remoteSymbol asLocalString = aString ifTrue: [ ^ remoteSymbol ] ]. ]
-					ifFalse: [ 
-						| found |
-						found := (EPRemoteWeakSet on: symbolSet) like: aString ifAbsent: [ nil ].
-						found ifNotNil: [ ^ found ]]
-					] ] ].
-		^ aBlock value
+	self symbolsDo: [ :aRemoteSymbol | 
+		aRemoteSymbol asLocalString = aString ifTrue: [ ^ aRemoteSymbol ] ].
+	^ failBlock value
 ]
 
 { #category : #public }
