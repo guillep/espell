@@ -1,6 +1,6 @@
-Extension { #name : #StackInterpreterPrimitives }
+Extension { #name : 'StackInterpreterPrimitives' }
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreterPrimitives >> uncheckedContextStSzeOf: oop [
 	"Special version of primitiveSize for accessing contexts.
 	 Written to be varargs for use from mirror primitives."

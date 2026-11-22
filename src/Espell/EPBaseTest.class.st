@@ -1,19 +1,21 @@
 Class {
-	#name : #EPBaseTest,
-	#superclass : #TestCase,
+	#name : 'EPBaseTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'objectSpace'
 	],
-	#category : 'Espell-Tests'
+	#category : 'Espell-Tests',
+	#package : 'Espell',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPBaseTest class >> resources [
 
 	^{ EPTestResource }
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 EPBaseTest >> setUp [
 
 	super setUp.

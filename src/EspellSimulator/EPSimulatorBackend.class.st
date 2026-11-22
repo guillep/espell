@@ -1,26 +1,27 @@
 Class {
-	#name : #EPSimulatorBackend,
-	#superclass : #EPBackend,
+	#name : 'EPSimulatorBackend',
+	#superclass : 'EPBackend',
 	#instVars : [
 		'simulator',
 		'extraRoots'
 	],
-	#category : 'EspellSimulator'
+	#category : 'EspellSimulator',
+	#package : 'EspellSimulator'
 }
 
-{ #category : #'instance-creation' }
+{ #category : 'instance-creation' }
 EPSimulatorBackend class >> for32Bit [
 
 	^ self withOptions: #(#ObjectMemory #Spur32BitMemoryManager)
 ]
 
-{ #category : #'instance-creation' }
+{ #category : 'instance-creation' }
 EPSimulatorBackend class >> for64Bit [
 
 	^ self withOptions: #(#ObjectMemory #Spur64BitMemoryManager)
 ]
 
-{ #category : #'instance-creation' }
+{ #category : 'instance-creation' }
 EPSimulatorBackend class >> simulator: aSimulator [
 	
 	^ self new
@@ -28,7 +29,7 @@ EPSimulatorBackend class >> simulator: aSimulator [
 		yourself
 ]
 
-{ #category : #'instance-creation' }
+{ #category : 'instance-creation' }
 EPSimulatorBackend class >> withOptions: options [
 
 	| simulator |
@@ -39,13 +40,13 @@ EPSimulatorBackend class >> withOptions: options [
 	^ self simulator: simulator
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 EPSimulatorBackend >> addExtraRoot: anObject [
 
 	extraRoots add: anObject
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> arrayClass: aMirror [ 
 	
 	super arrayClass: aMirror.
@@ -61,13 +62,13 @@ EPSimulatorBackend >> arrayClass: aMirror [
 	self objectMemory classAtIndex: self objectMemory arrayClassIndexPun putUnchecked: aMirror target address.
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> basicIdentityHashOf: aMirror [
 	
 	^ self objectMemory hashBitsOf: aMirror target address
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> basicIdentityHashOnClass: aHandle [
 
 	^ [ self objectMemory ensureBehaviorHash: aHandle address]
@@ -76,7 +77,7 @@ EPSimulatorBackend >> basicIdentityHashOnClass: aHandle [
 			e resumeUnchecked: nil ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> basicNewOn: theClass [
 	
 	| newOop newObject |
@@ -95,7 +96,7 @@ EPSimulatorBackend >> basicNewOn: theClass [
 	^ newObject
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> basicNewOn: theClass withSize: anEPSimulatorSmallIntegerMirror [ 
 	
 	| newOop newObject |
@@ -114,13 +115,13 @@ EPSimulatorBackend >> basicNewOn: theClass withSize: anEPSimulatorSmallIntegerMi
 	^ newObject
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> basicSizeOf: anEPMirror [ 
 	
 	^ self simulator uncheckedStSizeOf: anEPMirror target address
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> become: anObject into: anotherObject [
 	
 	| origin destiny |
@@ -145,21 +146,21 @@ EPSimulatorBackend >> become: anObject into: anotherObject [
 	].
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> blockClass: aMirror [ 
 	
 	super blockClass: aMirror.
 	self installClass: aMirror inClassTableIndex: 37
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> byteArrayClass: aMirror [ 
 	
 	super byteArrayClass: aMirror.
 	self installClass: aMirror inClassTableIndex: 50.
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> byteStringClass: aMirror [ 
 	
 	super byteStringClass: aMirror.
@@ -168,7 +169,7 @@ EPSimulatorBackend >> byteStringClass: aMirror [
 	aMirror target: aMirror target asClassIndexHandle.
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> characterClass: aClass [
 
 	super characterClass: aClass.
@@ -177,57 +178,57 @@ EPSimulatorBackend >> characterClass: aClass [
 	aClass target: aClass target asClassIndexHandle.
 ]
 
-{ #category : #'class table' }
+{ #category : 'class table' }
 EPSimulatorBackend >> classAtIndex: anInteger [ 
 	
 	^ simulator objectMemory classAtIndex: anInteger
 ]
 
-{ #category : #s }
+{ #category : 's' }
 EPSimulatorBackend >> classHandle: aClass setTo: anObject [
 	
 	self objectMemory changeClassOf: anObject address to: aClass address
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> classOf: aMirror [
 	
 	^ self objectMemory fetchClassOf: aMirror target address
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> compactClassIndexOf: aClassMirror [
 	
 	"All classes in Spur are compact, which also means that Spur has no compact classes"
 	^ 0
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> compiledMethod: anEPVMCompiledMethodMirror objectAt: anInteger [ 
 	
 	^ self object: anEPVMCompiledMethodMirror instVarAt: anInteger
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> compiledMethod: anEPVMCompiledMethodMirror objectAt: anInteger put: anEPMirror [ 
 	
 	self object: anEPVMCompiledMethodMirror instVarAt: anInteger put: anEPMirror
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> contextClass: aMirror [ 
 	
 	super contextClass: aMirror.
 	self installClass: aMirror inClassTableIndex: 36.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> contextSizeOf: anEPContextMirror [ 
 	
 	^ self simulator uncheckedContextStSzeOf: anEPContextMirror target address
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> createCompiledBlockWithSize: bytecodeSize andHeader: methodHeader [ 
 	
 	"self objectMemory instantiateCompiledMethodClass: self methodClass target address indexableSize: bytecodeSize"
@@ -239,7 +240,7 @@ EPSimulatorBackend >> createCompiledBlockWithSize: bytecodeSize andHeader: metho
 			value asMethodMirror
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> createCompiledMethodWithSize: bytecodeSize andHeader: methodHeader [ 
 	
 	"self objectMemory instantiateCompiledMethodClass: self methodClass target address indexableSize: bytecodeSize"
@@ -251,7 +252,7 @@ EPSimulatorBackend >> createCompiledMethodWithSize: bytecodeSize andHeader: meth
 			value asMethodMirror
 ]
 
-{ #category : #bootstrap }
+{ #category : 'bootstrap' }
 EPSimulatorBackend >> createObjectWithFormat: classFormat withSize: aSize [
 	
 	^ self mirrorOnAddress: (simulator objectMemory 
@@ -259,7 +260,7 @@ EPSimulatorBackend >> createObjectWithFormat: classFormat withSize: aSize [
 		indexableSize: aSize)
 ]
 
-{ #category : #bootstrap }
+{ #category : 'bootstrap' }
 EPSimulatorBackend >> createObjectWithFormat: classFormat withSize: aSize classIndex: classIndex [
 	
 	| oop |
@@ -276,7 +277,7 @@ EPSimulatorBackend >> createObjectWithFormat: classFormat withSize: aSize classI
 	^ self mirrorOnAddress: oop.
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> executePrimitiveMethod: aMethod on: receiver withArguments: aCollection [ 
 
 	| returnValue |
@@ -337,7 +338,7 @@ EPSimulatorBackend >> executePrimitiveMethod: aMethod on: receiver withArguments
 			self simulator internalizeIPandSP].
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> executePrimitiveNumber: number on: receiver withArguments: aCollection [ 
 
 	| returnValue |
@@ -371,7 +372,7 @@ EPSimulatorBackend >> executePrimitiveNumber: number on: receiver withArguments:
 			self simulator internalizeIPandSP].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSimulatorBackend >> falseObject [
 	
 	"The first special object.
@@ -379,7 +380,7 @@ EPSimulatorBackend >> falseObject [
 	^ self mirrorOnAddress: simulator objectMemory falseObject
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> falseObject: anEPMirror [
 	"The first special object.
 	Smalltalk specialObjectsArray indexOf: nil"
@@ -391,14 +392,14 @@ EPSimulatorBackend >> falseObject: anEPMirror [
 	simulator objectMemory falseObject: anEPMirror target address
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> floatClass: aMirror [ 
 	
 	super floatClass: aMirror.
 	self installClass: aMirror inClassTableIndex: 34.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> floatObject: anEPFloatMirror at: anInteger put: anEPMirror [ 
 	
 	self
@@ -407,7 +408,7 @@ EPSimulatorBackend >> floatObject: anEPFloatMirror at: anInteger put: anEPMirror
 		withArguments: { self smallIntegerMirrorOn: anInteger . anEPMirror }
 ]
 
-{ #category : #bootstrap }
+{ #category : 'bootstrap' }
 EPSimulatorBackend >> forBootstrap [
 
 	self objectMemory
@@ -427,7 +428,7 @@ EPSimulatorBackend >> forBootstrap [
 	self simulator transcript: ThreadSafeTranscript new.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> fromLocalByteArray: aCollection [ 
 	
 	| remoteByteArray |
@@ -438,7 +439,7 @@ EPSimulatorBackend >> fromLocalByteArray: aCollection [
 	^ remoteByteArray
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> fromLocalByteString: aString [ 
 	
 	| remoteString |
@@ -449,7 +450,7 @@ EPSimulatorBackend >> fromLocalByteString: aString [
 	^ remoteString
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPSimulatorBackend >> fromLocalByteSymbol: aByteSymbol [
 
 	| remoteSymbol |
@@ -460,19 +461,19 @@ EPSimulatorBackend >> fromLocalByteSymbol: aByteSymbol [
 	^ remoteSymbol
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPSimulatorBackend >> fromLocalCharacter: aCharacter [ 
 	
 	^ self mirrorOnAddress: (self objectMemory characterObjectOf: aCharacter codePoint)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> fromLocalFloat: aLocalFloat [ 
 	
 	^ self floatMirrorOn: (self handleOnAddress: (simulator objectMemory floatObjectOf: aLocalFloat))
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPSimulatorBackend >> fromLocalInteger: aLocalInteger [
 	
 	| integer |
@@ -482,7 +483,7 @@ EPSimulatorBackend >> fromLocalInteger: aLocalInteger [
 		ifFalse: [ self mirrorOnAddress: integer ].
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> fromLocalNegativeInteger: anInteger [ 
 	
 	^ self fromLocalInteger: anInteger
@@ -493,7 +494,7 @@ EPSimulatorBackend >> fromLocalNegativeInteger: anInteger [
 	^integerMirror"
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> fromLocalPositiveInteger: anInteger [ 
 	
 	^ self fromLocalInteger: anInteger
@@ -504,7 +505,7 @@ EPSimulatorBackend >> fromLocalPositiveInteger: anInteger [
 	^integerMirror"
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPSimulatorBackend >> fromRemoteByteString: anEPMirror [ 
 	
 	| localString |
@@ -515,27 +516,27 @@ EPSimulatorBackend >> fromRemoteByteString: anEPMirror [
 	^ localString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> fromRemoteByteSymbol: anEPMirror [ 
 	
 	
 	^ Symbol intern: (self fromRemoteByteString: anEPMirror)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> fromSmallInteger: anInteger [ 
 	
 	^ self fromLocalInteger: anInteger
 	"^ self smallIntegerMirrorOn: anInteger"
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> fullBlockClass: aMirror [
 	
 	self installClass: aMirror inClassTableIndex: 38
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> handleOnAddress: anAddress [
 
 	^ EPSimulatorAddressHandle new
@@ -544,7 +545,7 @@ EPSimulatorBackend >> handleOnAddress: anAddress [
 			yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> handleOnClassIndex: aClassIndex [
 
 	^ EPSimulatorClassTableHandle new
@@ -553,7 +554,7 @@ EPSimulatorBackend >> handleOnClassIndex: aClassIndex [
 			yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> handleOnExternalObject: anObject [
 
 	^ EPSimulatorExternalObjectHandle new
@@ -562,26 +563,26 @@ EPSimulatorBackend >> handleOnExternalObject: anObject [
 			yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> hasPrimitiveFailed: anEPMirror [ 
 	
 	"if we arrived here is because the primitive did not fail"
 	^ false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> headerOfCompiledMethod: anEPSimulatorAddressHandle [ 
 	
 	^ (self compiledMethod: anEPSimulatorAddressHandle objectAt: 1) asSmallInteger
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPSimulatorBackend >> initialize [
 	super initialize.
 	extraRoots := Set new.
 ]
 
-{ #category : #bootstrap }
+{ #category : 'bootstrap' }
 EPSimulatorBackend >> initializeExecutionContext [
 
 	| page pointer stackPages theIP theMethod rcvr numArgs |
@@ -635,19 +636,19 @@ EPSimulatorBackend >> initializeExecutionContext [
 	self simulator internalizeIPandSP.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> initializeTempsInStackOfContext: anEPContextMirror [ 
 	
 	^ self executePrimitiveNumber: 76 on: anEPContextMirror withArguments: { self smallIntegerMirrorOn: anEPContextMirror method numberOfTemps }
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> instSpecOfClass: anEPClassMirror [ 
 	
 	^ self simulator objectMemory instSpecOfClass: anEPClassMirror target address
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> installClass: aMirror inClassTableIndex: anInteger [ 
 	
 	self objectMemory setHashBitsOf: aMirror target address to: anInteger.
@@ -655,76 +656,76 @@ EPSimulatorBackend >> installClass: aMirror inClassTableIndex: anInteger [
 	aMirror target: aMirror target asClassIndexHandle.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> instanceFixedSizeOf: aClass [
 	
 	^ aClass format bitAnd: 16rFFFF
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> integerValueOf: anEPMirror [ 
 	
 	^ self objectMemory integerValueOf: anEPMirror target address
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> isBitsClass: anEPClassMirror [ 
 	
 	^ (self instSpecOfClass: anEPClassMirror) >= 7
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPSimulatorBackend >> isForwarderAddress: anInteger [ 
 	
 	^ simulator objectMemory isForwarded: anInteger
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPSimulatorBackend >> isSmallInteger: aHandle [ 
 	
 	^ self objectMemory isIntegerObject: aHandle address
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> largeNegativeIntegerClass: aMirror [ 
 	
 	super largeNegativeIntegerClass: aMirror.
 	self installClass: aMirror inClassTableIndex: 32.
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> largePositiveIntegerClass: aMirror [ 
 	
 	super largePositiveIntegerClass: aMirror.
 	self installClass: aMirror inClassTableIndex: 33
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> messageClass: aMirror [ 
 	
 	super messageClass: aMirror.
 	self installClass: aMirror inClassTableIndex: 35.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSimulatorBackend >> minSmallInteger [
 
 	^ simulator objectMemory minSmallInteger
 ]
 
-{ #category : #mirrors }
+{ #category : 'mirrors' }
 EPSimulatorBackend >> mirrorOnAddress: anObject [
 	
 	^ self mirrorOn: (self handleOnAddress: anObject)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> mirrorOnExternalHandle: anObject [
 	
 	^ self mirrorOn: (self handleOnExternalObject: anObject)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSimulatorBackend >> nilObject [
 	
 	"The first special object.
@@ -732,7 +733,7 @@ EPSimulatorBackend >> nilObject [
 	^ self mirrorOnAddress: simulator objectMemory nilObject
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> nilObject: anEPMirror [
 	"The first special object.
 	Smalltalk specialObjectsArray indexOf: nil"
@@ -742,13 +743,13 @@ EPSimulatorBackend >> nilObject: anEPMirror [
 	simulator objectMemory nilObject: anEPMirror target address
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> object: anObject at: anInteger [
 	
 	^ self mirrorOnAddress: (simulator stObject: anObject address at: anInteger)
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> object: anObject at: anInteger put: aValue [
 	
 	simulator objectMemory
@@ -757,13 +758,13 @@ EPSimulatorBackend >> object: anObject at: anInteger put: aValue [
 		put: aValue
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> object: anObject byteAt: anInteger [
 	
 	^ simulator objectMemory fetchByte: anInteger ofObject: anObject address
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> object: anObject instVarAt: index [ 
 	
 	| address |
@@ -777,13 +778,13 @@ EPSimulatorBackend >> object: anObject instVarAt: index [
 	^ self mirrorOnAddress: address
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> object: object instVarAt: index put: aValue [
 	
 	simulator objectMemory storePointer: index - 1 ofObject: object withValue: aValue
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> object: anObject uncheckedAt: anInteger [
 	
 	^ self mirrorOnAddress: (simulator objectMemory
@@ -791,20 +792,20 @@ EPSimulatorBackend >> object: anObject uncheckedAt: anInteger [
 		ofObject: anObject address)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSimulatorBackend >> objectMemory [
 	
 	^ simulator objectMemory
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> pointClass: aMirror [ 
 	
 	super pointClass: aMirror.
 	self installClass: aMirror inClassTableIndex: 54.
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPSimulatorBackend >> rawHashOf: aMirror [
 	
 	"this method does not initialize the hash of the object"
@@ -812,25 +813,25 @@ EPSimulatorBackend >> rawHashOf: aMirror [
 	^ self objectMemory rawHashBitsOf: aMirror target
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> semaphoreClass: aMirror [ 
 	
 	super semaphoreClass: aMirror.
 	self installClass: aMirror inClassTableIndex: 48.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSimulatorBackend >> simulator [
 	^ simulator
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSimulatorBackend >> simulator: aSimulator [ 
 	
 	simulator := aSimulator
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> smallFloatClass: aClass [
 
 	"SmallFloat is a special class that resides in the first page of the class table.
@@ -847,7 +848,7 @@ EPSimulatorBackend >> smallFloatClass: aClass [
 	aClass target: aClass target asClassIndexHandle.
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> smallIntegerClass: aClass [
 
 	super smallIntegerClass: aClass.
@@ -867,27 +868,27 @@ EPSimulatorBackend >> smallIntegerClass: aClass [
 	aClass target: aClass target asClassIndexHandle.
 ]
 
-{ #category : #mirrors }
+{ #category : 'mirrors' }
 EPSimulatorBackend >> smallIntegerMirrorOn: anInteger [ 
 	
 	^ EPSimulatorSmallIntegerMirror on: (self handleOnAddress: (self objectMemory integerObjectOf: anInteger)) from: self
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> specialObjectsArray: aMirror [ 
 	
 	specialObjectsArray := aMirror.
 	simulator objectMemory specialObjectsOop: aMirror target address.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorBackend >> stackIsEmpty [
 	
 	"We have an initial stack of 20"
 	^ self simulator stackPointer - self simulator framePointer == (self simulator objectMemory wordSize * 5) negated
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSimulatorBackend >> trueObject [
 	
 	"The first special object.
@@ -895,7 +896,7 @@ EPSimulatorBackend >> trueObject [
 	^ self mirrorOnAddress: simulator objectMemory trueObject
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPSimulatorBackend >> trueObject: anEPMirror [
 	"The first special object.
 	Smalltalk specialObjectsArray indexOf: nil"
@@ -907,7 +908,7 @@ EPSimulatorBackend >> trueObject: anEPMirror [
 	simulator objectMemory trueObject: anEPMirror target address
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSimulatorBackend >> wordSize [
 	
 	"for now"

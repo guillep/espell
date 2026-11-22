@@ -1,23 +1,25 @@
 Class {
-	#name : #OzAccessorWriteNode,
-	#superclass : #OzOptimizedMethodAccessorNode,
-	#category : 'AST-Interpreter-Core-Optimized'
+	#name : 'OzAccessorWriteNode',
+	#superclass : 'OzOptimizedMethodAccessorNode',
+	#category : 'AST-Interpreter-Core-Optimized',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Optimized'
 }
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 OzAccessorWriteNode class >> replace: aNode [
 
 	^ self new
 		replace: aNode
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 OzAccessorWriteNode >> accept: visitor on: receiver message: aMessage [
 	
 	^ receiver instanceVariableAtIndex: self index put: aMessage arguments first
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 OzAccessorWriteNode >> replace: aMethodNode [
 
 	variableNode := aMethodNode body statements first variable.

@@ -1,6 +1,6 @@
-Extension { #name : #ByteArray }
+Extension { #name : 'ByteArray' }
 
-{ #category : #'*Espell-Extensions' }
+{ #category : '*Espell-Extensions' }
 ByteArray >> asLiteralInObjectSpace: anObjectSpace [
 	
 	^anObjectSpace fromLocalByteArray: self

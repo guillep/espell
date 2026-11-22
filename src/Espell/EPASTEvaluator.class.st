@@ -1,6 +1,6 @@
 Class {
-	#name : #EPASTEvaluator,
-	#superclass : #Object,
+	#name : 'EPASTEvaluator',
+	#superclass : 'Object',
 	#instVars : [
 		'objectSpace',
 		'codeProvider',
@@ -8,16 +8,18 @@ Class {
 		'environment',
 		'astCache'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTEvaluator >> builder [
 
 	^ builder
 ]
 
-{ #category : #'class-maps' }
+{ #category : 'class-maps' }
 EPASTEvaluator >> classMapAt: aClass put: aDefinition [
 
 	classMap 
@@ -25,29 +27,29 @@ EPASTEvaluator >> classMapAt: aClass put: aDefinition [
 		put: aDefinition
 ]
 
-{ #category : #'class-maps' }
+{ #category : 'class-maps' }
 EPASTEvaluator >> classOf: anObject [
 
 	^ self mappingOf: anObject basicClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTEvaluator >> codeProvider [
 	^ codeProvider
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTEvaluator >> codeProvider: aCodeProvider [
 	codeProvider := aCodeProvider
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 EPASTEvaluator >> compile: aString [
 
 	^ self compile: aString withTemps: #()
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 EPASTEvaluator >> compile: aString withTemps: someTemps [
 	| ast  compilationContext |
 	ast := self parse: aString.
@@ -61,37 +63,37 @@ EPASTEvaluator >> compile: aString withTemps: someTemps [
 	^ ast
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTEvaluator >> environment [
 	
 	^ environment ifNil: [ objectSpace environment ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTEvaluator >> environment: anOzEnvironment [
 
 	environment := anOzEnvironment
 ]
 
-{ #category : #interpreting }
+{ #category : 'interpreting' }
 EPASTEvaluator >> evaluateAST: ast [
 	
 	^ self newInterpreter evaluateAST: ast.
 ]
 
-{ #category : #interpreting }
+{ #category : 'interpreting' }
 EPASTEvaluator >> evaluateCode: someCode [
 
 	^ self evaluateCode: someCode withTemps: #()
 ]
 
-{ #category : #interpreting }
+{ #category : 'interpreting' }
 EPASTEvaluator >> evaluateCode: someCode withTemps: aCollectionOfTemps [
 
 	^self evaluateAST: (self compile: someCode withTemps: aCollectionOfTemps) 
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPASTEvaluator >> initialize [
 
 	super initialize.
@@ -100,13 +102,13 @@ EPASTEvaluator >> initialize [
 	astCache := IdentityDictionary new.
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPASTEvaluator >> interpreterClass: aClass [
 
 	interpreterClass := aClass
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 EPASTEvaluator >> isClassDefinitionSelector: aSelector [
 	
 	^ #(
@@ -118,14 +120,14 @@ EPASTEvaluator >> isClassDefinitionSelector: aSelector [
 	weakSubclass:instanceVariableNames:classVariableNames:) includes: aSelector
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 EPASTEvaluator >> isTraitDefinitionSelector: aSelector [
 	
 	^ #(named: named:uses:category:)
 		includes: aSelector
 ]
 
-{ #category : #'class-maps' }
+{ #category : 'class-maps' }
 EPASTEvaluator >> mappingOf: anObject [
 
 	(anObject target species = EPSimulatorExternalObjectHandle) ifTrue: [
@@ -147,7 +149,7 @@ EPASTEvaluator >> mappingOf: anObject [
 	"self error: 'mapping for class not found'."
 ]
 
-{ #category : #interpreting }
+{ #category : 'interpreting' }
 EPASTEvaluator >> newInterpreter [
 	| newInterpreter |
 	newInterpreter := interpreterClass new.
@@ -156,24 +158,24 @@ EPASTEvaluator >> newInterpreter [
 	^newInterpreter.
 ]
 
-{ #category : #'class-maps' }
+{ #category : 'class-maps' }
 EPASTEvaluator >> objectMirrorOnLocalObject: anObject [
 
 	^ objectSpace objectMirrorOn: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTEvaluator >> objectSpace [
 
 	^ objectSpace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTEvaluator >> objectSpace: anObjectSpace [
 	objectSpace := anObjectSpace
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 EPASTEvaluator >> parse: aString [
 
 	| expression |

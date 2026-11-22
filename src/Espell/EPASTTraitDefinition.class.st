@@ -1,13 +1,15 @@
 Class {
-	#name : #EPASTTraitDefinition,
-	#superclass : #RBProgramNode,
+	#name : 'EPASTTraitDefinition',
+	#superclass : 'RBProgramNode',
 	#instVars : [
 		'message'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPASTTraitDefinition class >> fromMessageNode: aMessageNode [
 
 	^ self new
@@ -15,19 +17,19 @@ EPASTTraitDefinition class >> fromMessageNode: aMessageNode [
 		yourself.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTTraitDefinition >> acceptVisitor: aProgramNodeVisitor [ 
 
 	^aProgramNodeVisitor visitTraitDefinition: self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 EPASTTraitDefinition >> formattedCode [
 
 	^ message formattedCode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTTraitDefinition >> hasTraitComposition [
 	
 	| compositionNode |
@@ -35,13 +37,13 @@ EPASTTraitDefinition >> hasTraitComposition [
 	^ compositionNode isArray not or: [ compositionNode children notEmpty ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTTraitDefinition >> message [
 
 	^ message
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTTraitDefinition >> messageNode: aMessageNode [
 
 	message := aMessageNode.
@@ -50,13 +52,13 @@ EPASTTraitDefinition >> messageNode: aMessageNode [
 	self parent: parent.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTTraitDefinition >> source [
 	
 	^ message source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTTraitDefinition >> traitComposition [
 	
 	| traitCompositionIndex |

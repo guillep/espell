@@ -2,17 +2,19 @@
 I represent the entry point for primitive execution. I keep record of all primitives and their specific transformations. Then, people can just ask me to execute a primitive by number (or name and module).
 "
 Class {
-	#name : #EPVMPrimitiveResolver,
-	#superclass : #Object,
+	#name : 'EPVMPrimitiveResolver',
+	#superclass : 'Object',
 	#instVars : [
 		'numberedPrimitives',
 		'modules',
 		'backend'
 	],
-	#category : 'Espell-LowLevel-Primitives'
+	#category : 'Espell-LowLevel-Primitives',
+	#package : 'Espell',
+	#tag : 'LowLevel-Primitives'
 }
 
-{ #category : #'well known primitives' }
+{ #category : 'well known primitives' }
 EPVMPrimitiveResolver >> atIndex: anIndexMirror ofString: aStringMirror put: aCharacterMirror [
 	
 	^ self
@@ -21,23 +23,23 @@ EPVMPrimitiveResolver >> atIndex: anIndexMirror ofString: aStringMirror put: aCh
 		arguments: { anIndexMirror target . aCharacterMirror asLocalLiteral }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPVMPrimitiveResolver >> backend [
 
 	^ backend
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPVMPrimitiveResolver >> backend: aBackend [
 	backend := aBackend
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPVMPrimitiveResolver >> basicExecutePrimitive: aPrimitiveNumber onObject: anObject [
 	^ self basicExecutePrimitive: aPrimitiveNumber onObject: anObject withArguments: { }
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPVMPrimitiveResolver >> basicExecutePrimitive: aPrimitiveNumber onObject: anObject withArguments: anArrayOfArguments [
 	| result |
 	result := backend mirrorOn: ((ProtoObject >> #tryPrimitive:withArgs:)
@@ -47,13 +49,13 @@ EPVMPrimitiveResolver >> basicExecutePrimitive: aPrimitiveNumber onObject: anObj
 	^result
 ]
 
-{ #category : #'well known primitives' }
+{ #category : 'well known primitives' }
 EPVMPrimitiveResolver >> basicNewOn: aClassHandle [
 	
 	^ self basicNewOn: aClassHandle withSize: 0
 ]
 
-{ #category : #'well known primitives' }
+{ #category : 'well known primitives' }
 EPVMPrimitiveResolver >> basicNewOn: aClassHandle withSize: aSizeObjectMirror [
 
 	^ self
@@ -62,7 +64,7 @@ EPVMPrimitiveResolver >> basicNewOn: aClassHandle withSize: aSizeObjectMirror [
 		arguments: { aSizeObjectMirror }
 ]
 
-{ #category : #'well known primitives' }
+{ #category : 'well known primitives' }
 EPVMPrimitiveResolver >> changeClassOf: anObjectMirror to: aClassMirror [
 
 	self
@@ -71,7 +73,7 @@ EPVMPrimitiveResolver >> changeClassOf: anObjectMirror to: aClassMirror [
 		withArguments: { anObjectMirror target }.
 ]
 
-{ #category : #'well known primitives' }
+{ #category : 'well known primitives' }
 EPVMPrimitiveResolver >> classOf: anObjectHandle [
 	
 	^ self
@@ -80,7 +82,7 @@ EPVMPrimitiveResolver >> classOf: anObjectHandle [
 		arguments: {  }
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPVMPrimitiveResolver >> hasPrimitiveFailed: result [
 	"A primitive that fails doesn't always return ContextPart primitiveFailToken but returns ContextPart primitiveFailTokenFor: errorCode.
 	A possible errorCode is nil, which corresponds to ContextPart primitiveFailToken.
@@ -99,7 +101,7 @@ EPVMPrimitiveResolver >> hasPrimitiveFailed: result [
 			token first == result target first and: [ token second == result target second ] ]
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPVMPrimitiveResolver >> initialize [
 	super initialize.
 	numberedPrimitives := Dictionary new.
@@ -198,7 +200,7 @@ EPVMPrimitiveResolver >> initialize [
 			installOn: self.
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPVMPrimitiveResolver >> invokePrimitiveMethod: aCompiledMethod on: receiver arguments: arguments [
 	^ aCompiledMethod isNamedPrimitive
 		ifTrue: [ ((self namedPrimitiveForMethod: aCompiledMethod)
@@ -209,7 +211,7 @@ EPVMPrimitiveResolver >> invokePrimitiveMethod: aCompiledMethod on: receiver arg
 							andArguments: arguments) execute ]
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPVMPrimitiveResolver >> invokePrimitiveNumber: aNumber on: receiver arguments: arguments [
 
 	^ ((self primitiveForNumber: aNumber)
@@ -219,13 +221,13 @@ EPVMPrimitiveResolver >> invokePrimitiveNumber: aNumber on: receiver arguments: 
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPVMPrimitiveResolver >> modules [
 
 	^ modules
 ]
 
-{ #category : #'primitive-configuration' }
+{ #category : 'primitive-configuration' }
 EPVMPrimitiveResolver >> namedPrimitiveForMethod: aMethod [
 
 	| primitivePragma module |
@@ -238,30 +240,30 @@ EPVMPrimitiveResolver >> namedPrimitiveForMethod: aMethod [
 		yourself
 ]
 
-{ #category : #'primitive-configuration' }
+{ #category : 'primitive-configuration' }
 EPVMPrimitiveResolver >> numberedPrimitives [
 	^numberedPrimitives
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPVMPrimitiveResolver >> objectSpace [
 
 	^ backend
 ]
 
-{ #category : #'primitive-configuration' }
+{ #category : 'primitive-configuration' }
 EPVMPrimitiveResolver >> primitiveForModuleName: aPrimitiveModuleName put: aPrimitiveModule [
 	^ modules at: aPrimitiveModuleName put: aPrimitiveModule
 ]
 
-{ #category : #'primitive-configuration' }
+{ #category : 'primitive-configuration' }
 EPVMPrimitiveResolver >> primitiveForNumber: aPrimitiveNumber [
 	^ self numberedPrimitives
 		at: aPrimitiveNumber
 		ifAbsent: [ ^EPNumberedPrimitive new number: aPrimitiveNumber; installOn: self; yourself. ]
 ]
 
-{ #category : #'primitive-configuration' }
+{ #category : 'primitive-configuration' }
 EPVMPrimitiveResolver >> primitiveForNumber: aPrimitiveNumber put: aPrimitive [
 	^ self numberedPrimitives at: aPrimitiveNumber put: aPrimitive
 ]

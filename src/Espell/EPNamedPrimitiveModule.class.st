@@ -7,16 +7,18 @@ normalizePositive
 	ContextPart primitiveFailToken
 "
 Class {
-	#name : #EPNamedPrimitiveModule,
-	#superclass : #Object,
+	#name : 'EPNamedPrimitiveModule',
+	#superclass : 'Object',
 	#instVars : [
 		'primitives',
 		'name'
 	],
-	#category : 'Espell-LowLevel-Primitives'
+	#category : 'Espell-LowLevel-Primitives',
+	#package : 'Espell',
+	#tag : 'LowLevel-Primitives'
 }
 
-{ #category : #'primitive-accessing' }
+{ #category : 'primitive-accessing' }
 EPNamedPrimitiveModule >> addPrimitive: aPrimitive [ 
 
 	aPrimitive module: self.
@@ -24,27 +26,27 @@ EPNamedPrimitiveModule >> addPrimitive: aPrimitive [
 	^ aPrimitive
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPNamedPrimitiveModule >> initialize [ 
 	
 	super initialize.
 	primitives := Dictionary new.
 ]
 
-{ #category : #installing }
+{ #category : 'installing' }
 EPNamedPrimitiveModule >> installOn: aPrimitiveResolver [ 
 
 	"self resolver: aPrimitiveResolver."
 	aPrimitiveResolver primitiveForModuleName: name put: self.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPNamedPrimitiveModule >> name: primitiveName [ 
 
 	name := primitiveName
 ]
 
-{ #category : #'primitive-accessing' }
+{ #category : 'primitive-accessing' }
 EPNamedPrimitiveModule >> primitiveNamed: aPrimitiveName [
 
 	^ primitives

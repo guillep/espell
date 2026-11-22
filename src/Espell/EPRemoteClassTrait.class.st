@@ -1,13 +1,15 @@
 Class {
-	#name : #EPRemoteClassTrait,
-	#superclass : #EPRemoteTrait,
+	#name : 'EPRemoteClassTrait',
+	#superclass : 'EPRemoteTrait',
 	#instVars : [
 		'instanceSide'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPRemoteClassTrait >> binding [
 
 	^ EPMetaclassBinding  new
@@ -15,25 +17,25 @@ EPRemoteClassTrait >> binding [
 			yourself 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteClassTrait >> classSide [
 
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteClassTrait >> instanceSide [
 
 	^ instanceSide
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteClassTrait >> instanceSide: aTrait [
 
 	instanceSide := aTrait
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPRemoteClassTrait >> name [
 
 	^ self instanceSide name

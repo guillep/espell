@@ -1,22 +1,24 @@
 Class {
-	#name : #EPLargePositiveIntegerMapping,
-	#superclass : #EPByteObjectMapping,
-	#category : 'Espell-LowLevel-Mappings'
+	#name : 'EPLargePositiveIntegerMapping',
+	#superclass : 'EPByteObjectMapping',
+	#category : 'Espell-LowLevel-Mappings',
+	#package : 'Espell',
+	#tag : 'LowLevel-Mappings'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPLargePositiveIntegerMapping >> localClass [
 	
 	^LargePositiveInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPLargePositiveIntegerMapping >> remoteClass [
 
 	^objectSpace largePositiveIntegerClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPLargePositiveIntegerMapping >> remoteClassName [
 
 	^objectSpace worldConfiguration largePositiveIntegerClassName

@@ -1,12 +1,12 @@
-Extension { #name : #Object }
+Extension { #name : 'Object' }
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 Object >> newParser [
 	
 	^ RBParser
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 Object >> target [
 	
 	^ self

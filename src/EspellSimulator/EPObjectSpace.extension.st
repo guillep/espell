@@ -1,6 +1,6 @@
-Extension { #name : #EPObjectSpace }
+Extension { #name : 'EPObjectSpace' }
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 EPObjectSpace class >> onSimulatedBackend [
 
 	^ self new

@@ -1,6 +1,6 @@
-Extension { #name : #UndefinedObject }
+Extension { #name : 'UndefinedObject' }
 
-{ #category : #'*AST-Interpreter-Extension' }
+{ #category : '*AST-Interpreter-Extension' }
 UndefinedObject >> asASTInterpreterContext [
 	^ nil
 ]

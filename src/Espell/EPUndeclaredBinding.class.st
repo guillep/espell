@@ -1,16 +1,18 @@
 Class {
-	#name : #EPUndeclaredBinding,
-	#superclass : #EPLiteralBinding,
-	#category : 'Espell-HighLevel'
+	#name : 'EPUndeclaredBinding',
+	#superclass : 'EPLiteralBinding',
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPUndeclaredBinding >> acceptVisitor: aProgramNodeVisitor node: aNode [
 
 	^ aProgramNodeVisitor visitGlobalVariableNode: aNode
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPUndeclaredBinding >> asLiteralInObjectSpace: anObjectSpace [
 	"If we did not find a binding for the given global, it means that the global is not declared in the bootstrap.
 	1) We then create an undeclared in the undeclared dictionary
@@ -23,25 +25,25 @@ EPUndeclaredBinding >> asLiteralInObjectSpace: anObjectSpace [
 			}.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPUndeclaredBinding >> isGlobalVariable [
 	
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPUndeclaredBinding >> isTemp [
 	
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPUndeclaredBinding >> isUninitialized [
 	
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPUndeclaredBinding >> semanticNodeClass [
 	
 	^ RBVariableNode

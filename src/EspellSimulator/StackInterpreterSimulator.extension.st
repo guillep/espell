@@ -1,32 +1,32 @@
-Extension { #name : #StackInterpreterSimulator }
+Extension { #name : 'StackInterpreterSimulator' }
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreterSimulator >> checkStackIntegrity [
 	
 	^ true
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreterSimulator >> framePointer: theFP [
 	"Simulation only"
 	<doNotGenerate>
 	framePointer := theFP
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreterSimulator >> instructionPointer: aValue [
 	<doNotGenerate>
 	instructionPointer := aValue
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreterSimulator >> primitiveFunctionPointer: oop [
 	"Apparently not sent but is used in the simulator."
 	<doNotGenerate>
 	primitiveFunctionPointer := oop
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreterSimulator >> setMethodUnchecked: aMethodObj [
 	"Set the method and determine the bytecode set based on the method header's sign.
 	 If MULTIPLEBYTECODESETS then a negative header selects the alternate bytecode set.
@@ -40,19 +40,19 @@ StackInterpreterSimulator >> setMethodUnchecked: aMethodObj [
 											ifFalse: [0]]
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreterSimulator >> stackPointer [
 	^stackPointer
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreterSimulator >> stackPointer: theSP [
 	"Simulation only"
 	<doNotGenerate>
 	stackPointer := theSP
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreterSimulator >> thisClassIndex: anIndex [
 	<doNotGenerate>
 	thisClassIndex := anIndex

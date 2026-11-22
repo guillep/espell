@@ -1,6 +1,6 @@
-Extension { #name : #AssertionFailure }
+Extension { #name : 'AssertionFailure' }
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 AssertionFailure >> isResumable [
 
 	^ true

@@ -1,31 +1,33 @@
 Class {
-	#name : #OzIfNilNode,
-	#superclass : #OzOptimizedMessageNode,
+	#name : 'OzIfNilNode',
+	#superclass : 'OzOptimizedMessageNode',
 	#instVars : [
 		'trueCondition',
 		'falseCondition',
 		'checkForNil'
 	],
-	#category : 'AST-Interpreter-Core-Optimized'
+	#category : 'AST-Interpreter-Core-Optimized',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Optimized'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 OzIfNilNode >> acceptVisitor: aVisitor [
 	
 	^ aVisitor visitIfNilNode: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OzIfNilNode >> checkForNil [
 	^ checkForNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OzIfNilNode >> falseCondition [
 	^ falseCondition
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OzIfNilNode >> replace: aMessageNode [
 
 	checkForNil := aMessageNode selector beginsWith: 'ifNil'.
@@ -41,7 +43,7 @@ OzIfNilNode >> replace: aMessageNode [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OzIfNilNode >> trueCondition [
 	^ trueCondition
 ]

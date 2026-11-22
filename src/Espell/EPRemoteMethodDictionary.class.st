@@ -1,16 +1,18 @@
 Class {
-	#name : #EPRemoteMethodDictionary,
-	#superclass : #EPRemoteObject,
-	#category : 'Espell-HighLevel'
+	#name : 'EPRemoteMethodDictionary',
+	#superclass : 'EPRemoteObject',
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteMethodDictionary >> array [
 
 	^ mirror instanceVariableAtIndex: 2
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteMethodDictionary >> at: aString [ 
 	
 	1 to: mirror size do: [ :index | | key |
@@ -21,7 +23,7 @@ EPRemoteMethodDictionary >> at: aString [
 	KeyNotFound signalFor: aString in: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteMethodDictionary >> includesKey: aString [ 
 	
 	1 to: mirror size do: [ :index | | key |
@@ -30,7 +32,7 @@ EPRemoteMethodDictionary >> includesKey: aString [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteMethodDictionary >> keys [
 	| keys |
 	keys := OrderedCollection new.
@@ -40,7 +42,7 @@ EPRemoteMethodDictionary >> keys [
 	^ keys
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteMethodDictionary >> values [
 	| values array |
 	values := OrderedCollection new.

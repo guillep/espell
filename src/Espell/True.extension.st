@@ -1,6 +1,6 @@
-Extension { #name : #True }
+Extension { #name : 'True' }
 
-{ #category : #'*Espell-Extensions' }
+{ #category : '*Espell-Extensions' }
 True >> asLiteralInObjectSpace: anObjectSpace [
 
 	^anObjectSpace trueObject

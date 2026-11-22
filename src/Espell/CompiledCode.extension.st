@@ -1,13 +1,13 @@
-Extension { #name : #CompiledCode }
+Extension { #name : 'CompiledCode' }
 
-{ #category : #'*Espell' }
+{ #category : '*Espell' }
 CompiledCode >> asLiteralInObjectSpace: anObjectSpace [
 	
 	"Nobody should call me"
 	^ 1halt.
 ]
 
-{ #category : #'*Espell' }
+{ #category : '*Espell' }
 CompiledCode >> asLiteralInObjectSpace: anObjectSpace alreadyTransformed: aDictionary [
 		
 	^ anObjectSpace fromLocalCompiledCode: self alreadyTransformed: aDictionary

@@ -1,6 +1,6 @@
-Extension { #name : #RBParser }
+Extension { #name : 'RBParser' }
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 RBParser class >> parseParameterNames: aString [ 
 	
 	^ (self parseMethod: aString) argumentNames

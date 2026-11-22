@@ -1,11 +1,11 @@
-Extension { #name : #Array }
+Extension { #name : 'Array' }
 
-{ #category : #'*Espell-Extensions' }
+{ #category : '*Espell-Extensions' }
 Array class >> asLiteralInObjectSpace: anEPObjectSpace [ 
 	^ anEPObjectSpace classNamed: #Array
 ]
 
-{ #category : #'*Espell-Extensions' }
+{ #category : '*Espell-Extensions' }
 Array >> asLiteralInObjectSpace: anObjectSpace [
 	"Method only for literal arrays!"
 	^ anObjectSpace 

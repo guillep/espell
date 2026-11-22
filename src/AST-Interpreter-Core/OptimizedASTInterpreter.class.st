@@ -1,10 +1,12 @@
 Class {
-	#name : #OptimizedASTInterpreter,
-	#superclass : #ASTInterpreter,
-	#category : 'AST-Interpreter-Core-Optimized'
+	#name : 'OptimizedASTInterpreter',
+	#superclass : 'ASTInterpreter',
+	#category : 'AST-Interpreter-Core-Optimized',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Optimized'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 OptimizedASTInterpreter >> isAccessor: aMethodNode [
 
 	aMethodNode isCompiledMethod ifTrue: [ ^ false ].
@@ -14,7 +16,7 @@ OptimizedASTInterpreter >> isAccessor: aMethodNode [
 	^ aMethodNode body statements first value isInstanceVariable
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OptimizedASTInterpreter >> isMutator: aMethodNode [
 
 	| assignment |
@@ -29,7 +31,7 @@ OptimizedASTInterpreter >> isMutator: aMethodNode [
 	^ assignment value isArgumentVariable
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OptimizedASTInterpreter >> optimizedSend: aNode [
 	
 	"Optimized sends are for block nodes only"
@@ -39,7 +41,7 @@ OptimizedASTInterpreter >> optimizedSend: aNode [
 		includes: aNode parent selector
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OptimizedASTInterpreter >> send: aMessage to: receiver class: class [
 	| method replacedMethod |
 	
@@ -54,7 +56,7 @@ OptimizedASTInterpreter >> send: aMessage to: receiver class: class [
 		message: aMessage
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OptimizedASTInterpreter >> send: aMessage to: receiver class: class inNode: aMessageNode [
 	| method replacedMethod |
 	
@@ -71,7 +73,7 @@ OptimizedASTInterpreter >> send: aMessage to: receiver class: class inNode: aMes
 		message: aMessage
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OptimizedASTInterpreter >> tryToReplace: aMessageNode [
 	
 	(aMessageNode selector = #ifTrue:ifFalse:)
@@ -93,7 +95,7 @@ OptimizedASTInterpreter >> tryToReplace: aMessageNode [
 	^ nil
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OptimizedASTInterpreter >> tryToReplaceMethod: aMethodNode [
 	
 	(self isAccessor: aMethodNode)
@@ -104,13 +106,13 @@ OptimizedASTInterpreter >> tryToReplaceMethod: aMethodNode [
 	^ nil
 ]
 
-{ #category : #'visiting-special-nodes' }
+{ #category : 'visiting-special-nodes' }
 OptimizedASTInterpreter >> visitAccessorReadMethodNode: aMethodNode [
 	
 	^ self readInstVarAt: aMethodNode index named: nil
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 OptimizedASTInterpreter >> visitArgumentNode: aVariableNode [ 
 	| definingScope |
 	definingScope := aVariableNode binding originalVar definingScope.
@@ -123,7 +125,7 @@ OptimizedASTInterpreter >> visitArgumentNode: aVariableNode [
 	^ self readTemporaryAt: -1 named: aVariableNode name
 ]
 
-{ #category : #'visiting-special-nodes' }
+{ #category : 'visiting-special-nodes' }
 OptimizedASTInterpreter >> visitIfFalseNode: anIfFalseNode [
 	| theReceiver block |
 	theReceiver := self interpret: anIfFalseNode receiver.
@@ -134,7 +136,7 @@ OptimizedASTInterpreter >> visitIfFalseNode: anIfFalseNode [
 	^ self interpret: block.
 ]
 
-{ #category : #'visiting-special-nodes' }
+{ #category : 'visiting-special-nodes' }
 OptimizedASTInterpreter >> visitIfNilNode: anIfNilNode [
 	| theReceiver |
 	theReceiver := self interpret: anIfNilNode receiver.
@@ -161,7 +163,7 @@ OptimizedASTInterpreter >> visitIfNilNode: anIfNilNode [
 
 ]
 
-{ #category : #'visiting-special-nodes' }
+{ #category : 'visiting-special-nodes' }
 OptimizedASTInterpreter >> visitIfNode: anIfNode [
 	| theReceiver block |
 	theReceiver := self interpret: anIfNode receiver.
@@ -177,7 +179,7 @@ OptimizedASTInterpreter >> visitIfNode: anIfNode [
 	]
 ]
 
-{ #category : #'visiting-special-nodes' }
+{ #category : 'visiting-special-nodes' }
 OptimizedASTInterpreter >> visitIfTrueNode: anIfTrueNode [
 	| theReceiver block |
 	theReceiver := self interpret: anIfTrueNode receiver.
@@ -197,7 +199,7 @@ OptimizedASTInterpreter >> visitIfTrueNode: anIfTrueNode [
 	^ self interpret: block.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 OptimizedASTInterpreter >> visitMessageNode: aMessageNode [
 
 	| replacement |
@@ -207,7 +209,7 @@ OptimizedASTInterpreter >> visitMessageNode: aMessageNode [
 	^ super visitMessageNode: aMessageNode
 ]
 
-{ #category : #'visiting-special-nodes' }
+{ #category : 'visiting-special-nodes' }
 OptimizedASTInterpreter >> visitToDoNode: aToDoNode [
 
 	| from to lastResult |
@@ -228,7 +230,7 @@ OptimizedASTInterpreter >> visitToDoNode: aToDoNode [
 	^ aToDoNode fromNode acceptVisitor: self
 ]
 
-{ #category : #'visiting-special-nodes' }
+{ #category : 'visiting-special-nodes' }
 OptimizedASTInterpreter >> visitWhileTrueNode: aWhileTrueNode [
 
 	| theReceiver lastResult |

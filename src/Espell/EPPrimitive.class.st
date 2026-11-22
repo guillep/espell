@@ -7,15 +7,17 @@ I am an abstract class representing a primitive. I have methods to wrap myself t
 These transformations are needed because of VM restrictions: some primitives will check the types of receiver/arguments to work properly. So with these transformations we ""fake"" it.
 "
 Class {
-	#name : #EPPrimitive,
-	#superclass : #Object,
+	#name : 'EPPrimitive',
+	#superclass : 'Object',
 	#instVars : [
 		'resolver'
 	],
-	#category : 'Espell-LowLevel-Primitives'
+	#category : 'Espell-LowLevel-Primitives',
+	#package : 'Espell',
+	#tag : 'LowLevel-Primitives'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPPrimitive >> executionWithReceiver: aReceiver andArguments: anArrayOfArguments [
 	
 	^ EPPrimitiveExecution new
@@ -25,37 +27,37 @@ EPPrimitive >> executionWithReceiver: aReceiver andArguments: anArrayOfArguments
 		yourself
 ]
 
-{ #category : #installing }
+{ #category : 'installing' }
 EPPrimitive >> installOn: aPrimitiveResolver [
 
 	self basicInstall: self inResolver: aPrimitiveResolver
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPPrimitive >> objectSpace [
 
 	^resolver objectSpace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPPrimitive >> resolver: aPrimitiveResolver [
 
 	resolver := aPrimitiveResolver
 ]
 
-{ #category : #decorating }
+{ #category : 'decorating' }
 EPPrimitive >> transformArgumentsToRemoteLiteral [
 
 	^EPArgumentsToLocalLiteralPrimitiveDecorator decorate: self
 ]
 
-{ #category : #decorating }
+{ #category : 'decorating' }
 EPPrimitive >> transformResultToRemoteClass [
 
 	^EPResultToRemoteClassPrimitiveDecorator decorate: self
 ]
 
-{ #category : #decorating }
+{ #category : 'decorating' }
 EPPrimitive >> transformResultToRemoteLiteral [
 
 	^EPResultToRemoteLiteralPrimitiveDecorator decorate: self

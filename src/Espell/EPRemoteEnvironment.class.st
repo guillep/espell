@@ -1,20 +1,22 @@
 Class {
-	#name : #EPRemoteEnvironment,
-	#superclass : #EPRemoteObject,
+	#name : 'EPRemoteEnvironment',
+	#superclass : 'EPRemoteObject',
 	#instVars : [
 		'sourceFiles',
 		'imageFileName'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteEnvironment >> bindingOf: aString [ 
 	
 	^ self globalsDictionary bindingOf: aString
 ]
 
-{ #category : #mapping }
+{ #category : 'mapping' }
 EPRemoteEnvironment >> classForClassMirror: anEPClassMirror [ 
 	
 	(self isMeta: anEPClassMirror)
@@ -22,13 +24,13 @@ EPRemoteEnvironment >> classForClassMirror: anEPClassMirror [
 	^ EPRemoteClass on: anEPClassMirror environment: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteEnvironment >> classNamed: aString [ 
 	
 	^ self globalNamed: aString
 ]
 
-{ #category : #'source code' }
+{ #category : 'source code' }
 EPRemoteEnvironment >> getSourceFromFile: anEPRemoteMethod [ 
 
 	| position sourcePointer fileIndex |
@@ -39,7 +41,7 @@ EPRemoteEnvironment >> getSourceFromFile: anEPRemoteMethod [
 	^ self sourceCodeInFile: fileIndex inPosition: position.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteEnvironment >> globalNamed: aString [ 
 	
 	^ EPRemoteClass
@@ -47,37 +49,37 @@ EPRemoteEnvironment >> globalNamed: aString [
 		environment: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteEnvironment >> globalsDictionary [
 	
 	^ EPRemoteDictionary on: mirror
 ]
 
-{ #category : #'source code' }
+{ #category : 'source code' }
 EPRemoteEnvironment >> imageFileName: aName [
 
 	imageFileName := aName asFileReference
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPRemoteEnvironment >> includesClassNamed: aString [ 
 	
 	^ self globalsDictionary includesKey: aString
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPRemoteEnvironment >> isMeta: aMirror [
 	
 	^ (self classNamed: #Metaclass) mirror = aMirror basicClass
 ]
 
-{ #category : #mapping }
+{ #category : 'mapping' }
 EPRemoteEnvironment >> metaclassForClassMirror: anEPClassMirror [ 
 	
 	^ EPRemoteMetaClass on: anEPClassMirror environment: self
 ]
 
-{ #category : #'source code' }
+{ #category : 'source code' }
 EPRemoteEnvironment >> sourceCodeForMethod: anEPRemoteMethod [
 	
 	| trailer source |
@@ -99,7 +101,7 @@ EPRemoteEnvironment >> sourceCodeForMethod: anEPRemoteMethod [
 	^source
 ]
 
-{ #category : #'source code' }
+{ #category : 'source code' }
 EPRemoteEnvironment >> sourceCodeInFile: fileIndex inPosition: position [
 
 	| theFile |
@@ -110,7 +112,7 @@ EPRemoteEnvironment >> sourceCodeInFile: fileIndex inPosition: position [
 		theFile nextChunk] ensure: [theFile close]
 ]
 
-{ #category : #'source code' }
+{ #category : 'source code' }
 EPRemoteEnvironment >> sourceFiles [
 
 	sourceFiles ifNotNil: [ ^ sourceFiles ].
@@ -123,7 +125,7 @@ EPRemoteEnvironment >> sourceFiles [
 	^ sourceFiles
 ]
 
-{ #category : #'source code' }
+{ #category : 'source code' }
 EPRemoteEnvironment >> sourceFilesAtIndex: anInteger [ 
 
 	^ self sourceFiles at: anInteger

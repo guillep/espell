@@ -1,34 +1,36 @@
 Class {
-	#name : #EPByteSymbolMapping,
-	#superclass : #EPByteStringMapping,
-	#category : 'Espell-LowLevel-Mappings'
+	#name : 'EPByteSymbolMapping',
+	#superclass : 'EPByteStringMapping',
+	#category : 'Espell-LowLevel-Mappings',
+	#package : 'Espell',
+	#tag : 'LowLevel-Mappings'
 }
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPByteSymbolMapping >> fromRemote: aRemoteByteSymbol [
 	| localString |
 	localString := super fromRemote: aRemoteByteSymbol.
 	^Symbol intern: localString.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPByteSymbolMapping >> remoteClass [
 
 	^ objectSpace byteSymbolClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPByteSymbolMapping >> remoteClass: aRemoteClass [
 
 	remoteClass := aRemoteClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPByteSymbolMapping >> remoteClassName [
 	^objectSpace worldConfiguration byteSymbolClassName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPByteSymbolMapping >> symbolTable [
 	
 	^ objectSpace symbolTable

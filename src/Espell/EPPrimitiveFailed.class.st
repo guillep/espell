@@ -1,18 +1,19 @@
 Class {
-	#name : #EPPrimitiveFailed,
-	#superclass : #EPPrimitiveResult,
+	#name : 'EPPrimitiveFailed',
+	#superclass : 'EPPrimitiveResult',
 	#instVars : [
 		'code'
 	],
-	#category : 'Espell'
+	#category : 'Espell',
+	#package : 'Espell'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPPrimitiveFailed >> code: anInteger [ 
 	code := anInteger
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPPrimitiveFailed >> hasFailed [
 	
 	^ true

@@ -1,32 +1,34 @@
 Class {
-	#name : #EPTestResource,
-	#superclass : #TestResource,
+	#name : 'EPTestResource',
+	#superclass : 'TestResource',
 	#instVars : [
 		'imagesDirectory',
 		'objectSpace'
 	],
-	#category : #'Espell-Tests'
+	#category : 'Espell-Tests',
+	#package : 'Espell',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 EPTestResource >> imageFileName [
 
 	^ self imagesDirectory / 'Pharo-30864.image'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 EPTestResource >> imagesDirectory [
 
 	^ FileSystem workingDirectory / 'images'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPTestResource >> objectSpace [
 
 	^ objectSpace
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 EPTestResource >> setUp [ 
 
 	imagesDirectory := self imagesDirectory.
@@ -50,7 +52,7 @@ EPTestResource >> setUp [
 	objectSpace loadImage: self imageFileName
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 EPTestResource >> tearDown [
 
 	objectSpace := nil.

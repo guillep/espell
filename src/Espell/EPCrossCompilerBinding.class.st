@@ -1,20 +1,22 @@
 Class {
-	#name : #EPCrossCompilerBinding,
-	#superclass : #Object,
+	#name : 'EPCrossCompilerBinding',
+	#superclass : 'Object',
 	#instVars : [
 		'class',
 		'environment'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'slot-accessing' }
+{ #category : 'slot-accessing' }
 EPCrossCompilerBinding >> allSlots [
 
 	^ class allSlots
 ]
 
-{ #category : #'binding-accessing' }
+{ #category : 'binding-accessing' }
 EPCrossCompilerBinding >> binding [
 
 	^ class isMeta
@@ -28,7 +30,7 @@ EPCrossCompilerBinding >> binding [
 				  yourself ]
 ]
 
-{ #category : #'binding-accessing' }
+{ #category : 'binding-accessing' }
 EPCrossCompilerBinding >> bindingOf: aString [
 
 	(class classVarNames includes: aString asSymbol)
@@ -55,34 +57,34 @@ EPCrossCompilerBinding >> bindingOf: aString [
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPCrossCompilerBinding >> class: aRFiClass [ 
 	class := aRFiClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPCrossCompilerBinding >> className [
 	
 	^ class name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPCrossCompilerBinding >> environment [
 	^ environment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPCrossCompilerBinding >> environment: aCompilerEnvironment [ 
 	environment := aCompilerEnvironment
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPCrossCompilerBinding >> hasTempVector [
 	
 	^ false
 ]
 
-{ #category : #'binding-accessing' }
+{ #category : 'binding-accessing' }
 EPCrossCompilerBinding >> innerBindingOf: aString [
 
 	(class classVarNames includes: aString asSymbol) ifTrue: [ 
@@ -97,14 +99,14 @@ EPCrossCompilerBinding >> innerBindingOf: aString [
 	^ nil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPCrossCompilerBinding >> isBehavior [ 
 
 	"I am mimicing the outer scopes that are behaviors... so Opal is fine"
 	^ true
 ]
 
-{ #category : #lookup }
+{ #category : 'lookup' }
 EPCrossCompilerBinding >> lookupVar: aName declare: aBoolean [
 
 	self allSlots detect: [ :e | e name = aName ] ifFound: [ :e | ^ e ].
@@ -116,13 +118,13 @@ EPCrossCompilerBinding >> lookupVar: aName declare: aBoolean [
 	^ environment bindingOf: aName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPCrossCompilerBinding >> name [
 
 	^ self className
 ]
 
-{ #category : #bindings }
+{ #category : 'bindings' }
 EPCrossCompilerBinding >> newBindingFor: aRFiClass [ 
 	
 	^ EPCrossCompilerBinding new
@@ -130,7 +132,7 @@ EPCrossCompilerBinding >> newBindingFor: aRFiClass [
 		environment: environment
 ]
 
-{ #category : #bindings }
+{ #category : 'bindings' }
 EPCrossCompilerBinding >> superclassBinding [
 	
 	^ self newBindingFor: class superclass

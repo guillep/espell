@@ -2,12 +2,14 @@
 I am a context mirror object providing basic operations to work on context objects inside an object space. I provide operations to manipulate the stack and the execution of a method, like setting the program counter and temporary variables.
 "
 Class {
-	#name : #EPContextMirror,
-	#superclass : #EPMirror,
-	#category : 'Espell-LowLevel-Mirrors'
+	#name : 'EPContextMirror',
+	#superclass : 'EPMirror',
+	#category : 'Espell-LowLevel-Mirrors',
+	#package : 'Espell',
+	#tag : 'LowLevel-Mirrors'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPContextMirror class >> createContextForMethod: aRemoteCompiledMethod inObjectSpace: anObjectSpace [
 	| contextClassMirror newContext |
 	contextClassMirror := anObjectSpace backend contextClass asClassMirror.
@@ -22,7 +24,7 @@ EPContextMirror class >> createContextForMethod: aRemoteCompiledMethod inObjectS
 	^newContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> arguments [
 	"returns the arguments of a message invocation"
 	
@@ -33,41 +35,41 @@ EPContextMirror >> arguments [
 	^ arguments
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> at: anIndex [
 	
 	^ self tempAt: anIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> at: anIndex put: anObject [
 	
 	^ self tempAt: anIndex put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> basicSize [
 
 	^ backend contextSizeOf: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> closure [
 	^self instanceVariableAtIndex: (self backend instanceVariableMapping contextClosureOrNilIndex)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> closure: aClosureMirror [
 	self instanceVariableAtIndex: (self backend instanceVariableMapping contextClosureOrNilIndex) put: aClosureMirror
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> frameSize [
 
 	^ self method isNilObject ifTrue: [ CompiledMethod fullFrameSize ] ifFalse: [self method frameSize]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> initializeTemporaryVariables [
 
 	"This will push in the context's stack a nil for each of the temporary variables of the method. Both the primitive and the code that follows are in theory doing the same."
@@ -77,45 +79,45 @@ EPContextMirror >> initializeTemporaryVariables [
 	].
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPContextMirror >> isDead [
 	^ (self instanceVariableAtIndex: (self backend instanceVariableMapping contextPcIndex)) isNilObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> method [
 	^(self instanceVariableAtIndex: (self backend instanceVariableMapping contextMethodIndex)) asMethodMirror
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> method: aMethodMirror [
 	self instanceVariableAtIndex: (self backend instanceVariableMapping contextMethodIndex) put: aMethodMirror
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> methodReturnContext [
 	(self closure pointsToSameObject: backend nilObject)
 		ifTrue: [ ^ self ].
 	^ self closure outerContext methodReturnContext
 ]
 
-{ #category : #'initialize - release' }
+{ #category : 'initialize - release' }
 EPContextMirror >> primitiveInitializeTempsInStack [
 	
 	backend initializeTempsInStackOfContext: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> receiver [
 	^self instanceVariableAtIndex: (self backend instanceVariableMapping contextReceiverIndex)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> receiver: aMirror [
 	self instanceVariableAtIndex: (self backend instanceVariableMapping contextReceiverIndex) put: aMirror
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> sender [
 
 	| sender |
@@ -124,38 +126,38 @@ EPContextMirror >> sender [
 	^ sender asContextMirror
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> sender: aMirror [
 	self instanceVariableAtIndex: (self backend instanceVariableMapping contextSenderIndex) put: aMirror
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> stackPointer [
 	^(self instanceVariableAtIndex: (self backend instanceVariableMapping contextStackpIndex)) target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> stackPointer: anInteger [
 	self instanceVariableAtIndex: (self backend instanceVariableMapping contextStackpIndex) put: (backend smallIntegerMirrorOn: anInteger)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> startpc [
 	^(self instanceVariableAtIndex: (self backend instanceVariableMapping contextPcIndex)) target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> startpc: anInteger [
 	self instanceVariableAtIndex: (self backend instanceVariableMapping contextPcIndex) put: (backend smallIntegerMirrorOn: anInteger)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> tempAt: anIndex [
 	
 	^ backend mirrorOn: (self executePrimitive: 210 withArgs: { anIndex })
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPContextMirror >> tempAt: anIndex put: anObjectMirror [
 	
 	self executePrimitive: 211 withArgs: { anIndex . anObjectMirror target }

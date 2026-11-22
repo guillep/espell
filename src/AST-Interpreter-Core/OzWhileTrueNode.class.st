@@ -1,30 +1,32 @@
 Class {
-	#name : #OzWhileTrueNode,
-	#superclass : #OzOptimizedMessageNode,
+	#name : 'OzWhileTrueNode',
+	#superclass : 'OzOptimizedMessageNode',
 	#instVars : [
 		'condition',
 		'isWhileFalse'
 	],
-	#category : 'AST-Interpreter-Core-Optimized'
+	#category : 'AST-Interpreter-Core-Optimized',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Optimized'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 OzWhileTrueNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitWhileTrueNode: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OzWhileTrueNode >> condition [
 	^ condition
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 OzWhileTrueNode >> expectedBooleanValue [
 	
 	^ isWhileFalse ifTrue: [ 'False' ] ifFalse: [ 'True' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OzWhileTrueNode >> replace: aMessageNode [
 
 	isWhileFalse := aMessageNode selector beginsWith: 'whileFalse'.

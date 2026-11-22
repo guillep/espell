@@ -2,23 +2,25 @@
 I am a system dictionary. I provide access to the system dictionary inside an object space.
 "
 Class {
-	#name : #EPSystemDictionary,
-	#superclass : #Object,
+	#name : 'EPSystemDictionary',
+	#superclass : 'Object',
 	#instVars : [
 		'systemDictionary',
 		'objectSpace',
 		'cache'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSystemDictionary class >> withSystemDictionary: aSystemDictionaryMirror [
 
 	^ self new withSystemDictionary: aSystemDictionaryMirror; yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPSystemDictionary >> at: aString [ 
 	
 	cache at: aString ifPresent: [ :global | ^global ].
@@ -29,7 +31,7 @@ EPSystemDictionary >> at: aString [
 				'key' -> (aString asSymbol asLiteralInObjectSpace: objectSpace) }
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPSystemDictionary >> at: aString put: aValue [
 	
 	cache at: aString put: aValue.
@@ -42,7 +44,7 @@ EPSystemDictionary >> at: aString put: aValue [
 				'aValue' -> aValue }
 ]
 
-{ #category : #binding }
+{ #category : 'binding' }
 EPSystemDictionary >> bindingOf: aName [
 
 	^ objectSpace interpreter
@@ -52,14 +54,14 @@ EPSystemDictionary >> bindingOf: aName [
 			'key' -> (aName asSymbol asLiteralInObjectSpace: objectSpace) }
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 EPSystemDictionary >> buildCache [
 
 	objectSpace backend classes do: [ :each |
 		cache at: each className put: each ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSystemDictionary >> globalObjects [
 	
 	"We get the real system dictionary"
@@ -73,7 +75,7 @@ EPSystemDictionary >> globalObjects [
 	^ (1 to: globalsArray size) collect: [ :i | globalsArray at: i ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPSystemDictionary >> includesGlobalNamed: aString [ 
 	
 	cache at: aString ifPresent: [ :global | ^ true ].
@@ -85,36 +87,36 @@ EPSystemDictionary >> includesGlobalNamed: aString [
 			asBoolean
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 EPSystemDictionary >> initialize [
 
 	super initialize.
 	cache := EPDictionary new.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 EPSystemDictionary >> initializeWithObjectSpace: anObjectSpace [
 	
 	objectSpace := anObjectSpace
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPSystemDictionary >> internalSystemDictionary [
 	
 	^ objectSpace backend systemDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSystemDictionary >> objectSpace [
 	^ objectSpace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSystemDictionary >> objectSpace: anObjectSpace [ 
 	objectSpace := anObjectSpace
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPSystemDictionary >> size [
 	
 	^ (objectSpace interpreter
@@ -122,7 +124,7 @@ EPSystemDictionary >> size [
 			withTemps: { 'systemDictionary' -> systemDictionary }) asSmallInteger
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 EPSystemDictionary >> withSystemDictionary: aSystemDictionary [
 
 	systemDictionary := aSystemDictionary

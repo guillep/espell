@@ -1,6 +1,6 @@
-Extension { #name : #Association }
+Extension { #name : 'Association' }
 
-{ #category : #'*Espell-Extensions' }
+{ #category : '*Espell-Extensions' }
 Association >> asLiteralInObjectSpace: anObjectSpace [
 
 	| espellGlobal |
@@ -15,13 +15,13 @@ Association >> asLiteralInObjectSpace: anObjectSpace [
 	^ espellGlobal asLiteralInObjectSpace: anObjectSpace.
 ]
 
-{ #category : #'*Espell' }
+{ #category : '*Espell' }
 Association >> isGlobalClassNameBinding [
 	^ (self value isClass or: [ self value isTrait ])
 		and: [ self variable key == self value name ]
 ]
 
-{ #category : #'*Espell' }
+{ #category : '*Espell' }
 Association >> isGlobalVariable [
 	^ true
 ]

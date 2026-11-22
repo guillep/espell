@@ -1,14 +1,16 @@
 Class {
-	#name : #EPClassVariableBinding,
-	#superclass : #EPLiteralBinding,
+	#name : 'EPClassVariableBinding',
+	#superclass : 'EPLiteralBinding',
 	#instVars : [
 		'ownerName',
 		'binding'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPClassVariableBinding class >> fromSton: stonReader [
 
 	| binding |
@@ -19,20 +21,20 @@ EPClassVariableBinding class >> fromSton: stonReader [
 	^ binding
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 EPClassVariableBinding >> accept: anEPASTInterpreter assign: anEPMirror inNode: aRBVariableNode [ 
 	
 	^ (anEPASTInterpreter environment classNamed: ownerName)
 			classPool at: name put: anEPMirror
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPClassVariableBinding >> acceptVisitor: aProgramNodeVisitor node: aNode [
 
 	^ aProgramNodeVisitor visitClassVariableNode: aNode
 ]
 
-{ #category : #'literal resolution' }
+{ #category : 'literal resolution' }
 EPClassVariableBinding >> asLiteralInEnvironment: anEnvironment [
 	^ binding
 		ifNil: [ 
@@ -46,43 +48,43 @@ EPClassVariableBinding >> asLiteralInEnvironment: anEnvironment [
 			self error: ('Variable {1} not defined' format: {(self printString)}) ]
 ]
 
-{ #category : #'literal resolution' }
+{ #category : 'literal resolution' }
 EPClassVariableBinding >> asLiteralInObjectSpace: anObjectSpace [
 
 	^ ((objectSpace classNamed: ownerName)
 			classPool bindingOf: name)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPClassVariableBinding >> isClassVariableBinding [
 	
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPClassVariableBinding >> isGlobalVariable [
 	
 	^ false
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPClassVariableBinding >> name: aBindingName ownerName: anOwnerName objectSpace: anObjectSpace [
 	self ownerName: anOwnerName.
 	self name: aBindingName objectSpace: anObjectSpace.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassVariableBinding >> ownerName [
 	^ ownerName
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPClassVariableBinding >> ownerName: anOwnerName [
 	
 	ownerName := anOwnerName
 ]
 
-{ #category : #'literal resolution' }
+{ #category : 'literal resolution' }
 EPClassVariableBinding >> printOn: aStream [
 
 	aStream
@@ -91,20 +93,20 @@ EPClassVariableBinding >> printOn: aStream [
 		nextPutAll: name.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassVariableBinding >> readWith: anEPASTInterpreter inNode: aRBVariableNode [ 
 	
 	^ (anEPASTInterpreter environment classNamed: ownerName)
 			classPool at: name
 ]
 
-{ #category : #'literal resolution' }
+{ #category : 'literal resolution' }
 EPClassVariableBinding >> value [
 	"we keep track in the remote representation"
 	^(self asLiteralInObjectSpace: objectSpace) instanceVariableAtIndex: 2
 ]
 
-{ #category : #'literal resolution' }
+{ #category : 'literal resolution' }
 EPClassVariableBinding >> value: anObject [
 	"we keep track in the remote representation"
 	^(self asLiteralInObjectSpace: objectSpace) instanceVariableAtIndex: 2 put: anObject

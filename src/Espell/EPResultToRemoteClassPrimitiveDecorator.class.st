@@ -6,24 +6,26 @@ I am a primitive decorator that transforms the result of the getclass primitive 
 - compact classes: instances of compact classes have no direct pointer to their classes but an index to a special array. The VM will then fetch the corresponding class from this array but not use the one in the object space. We perform the corresponding mapping if it is a compact class.
 "
 Class {
-	#name : #EPResultToRemoteClassPrimitiveDecorator,
-	#superclass : #EPPrimitiveDecorator,
-	#category : 'Espell-LowLevel-Primitives'
+	#name : 'EPResultToRemoteClassPrimitiveDecorator',
+	#superclass : 'EPPrimitiveDecorator',
+	#category : 'Espell-LowLevel-Primitives',
+	#package : 'Espell',
+	#tag : 'LowLevel-Primitives'
 }
 
-{ #category : #'compact classes' }
+{ #category : 'compact classes' }
 EPResultToRemoteClassPrimitiveDecorator >> compactClassAt: anInteger ifNone: aBlockClosure [ 
 	
 	^ resolver backend compactClassAt: anInteger ifNone: aBlockClosure 
 ]
 
-{ #category : #'compact classes' }
+{ #category : 'compact classes' }
 EPResultToRemoteClassPrimitiveDecorator >> compactClassIndexOfFormat: anInteger [ 
 	
 	^ resolver backend compactClassIndexOfFormat: anInteger
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPResultToRemoteClassPrimitiveDecorator >> postProcessResult: aResult [
 
 	| format compactClassIndex  |
@@ -35,7 +37,7 @@ EPResultToRemoteClassPrimitiveDecorator >> postProcessResult: aResult [
 	^aResult
 ]
 
-{ #category : #'immediate classes' }
+{ #category : 'immediate classes' }
 EPResultToRemoteClassPrimitiveDecorator >> smallIntegerClass [
 	
 	^ resolver backend smallIntegerClass

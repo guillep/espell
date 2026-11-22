@@ -1,6 +1,6 @@
-Extension { #name : #ByteSymbol }
+Extension { #name : 'ByteSymbol' }
 
-{ #category : #'*Espell-Extensions' }
+{ #category : '*Espell-Extensions' }
 ByteSymbol >> asLiteralInObjectSpace: anObjectSpace [
 
 	^anObjectSpace fromLocalByteSymbol: self

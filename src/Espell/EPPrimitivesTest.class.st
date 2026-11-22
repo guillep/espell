@@ -1,19 +1,21 @@
 Class {
-	#name : #EPPrimitivesTest,
-	#superclass : #EPBaseTest,
+	#name : 'EPPrimitivesTest',
+	#superclass : 'EPBaseTest',
 	#instVars : [
 		'primitiveResolver'
 	],
-	#category : 'Espell-Tests'
+	#category : 'Espell-Tests',
+	#package : 'Espell',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPPrimitivesTest class >> resources [
 
 	^{ EPTestResource }
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 EPPrimitivesTest >> setUp [
 
 	super setUp.
@@ -21,13 +23,13 @@ EPPrimitivesTest >> setUp [
 	primitiveResolver := EPVMPrimitiveResolver new backend: objectSpace backend; yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPPrimitivesTest >> testExecutePrimitive [
 
 	objectSpace backend nilObject markExperimentalBit: true
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPPrimitivesTest >> testPrimitiveClassOfReturnsClassForImmediateObjects [
 
 	"(SmallInteger >> #>) primitive"
@@ -43,7 +45,7 @@ EPPrimitivesTest >> testPrimitiveClassOfReturnsClassForImmediateObjects [
 	self assert: result equals: objectSpace backend smallIntegerClass
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPPrimitivesTest >> testPrimitiveResolverBasicNewObject [
 
 	| result |
@@ -57,7 +59,7 @@ EPPrimitivesTest >> testPrimitiveResolverBasicNewObject [
 	self assert: (result at: 2) isNilObject
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPPrimitivesTest >> testPrimitiveResolverPrimitiveGetClass [
 
 	| result |
@@ -68,7 +70,7 @@ EPPrimitivesTest >> testPrimitiveResolverPrimitiveGetClass [
 	self assert: result equals: objectSpace backend smallIntegerClass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPPrimitivesTest >> testPrimitiveResolverStringAt [
 
 	| result |
@@ -81,7 +83,7 @@ EPPrimitivesTest >> testPrimitiveResolverStringAt [
 	self assert: result asLocalLiteral equals: $A.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPPrimitivesTest >> testPrimitiveResolverStringAtPut [
 
 	| string |
@@ -94,7 +96,7 @@ EPPrimitivesTest >> testPrimitiveResolverStringAtPut [
 	self assert: string asLocalLiteral equals: 'A'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPPrimitivesTest >> testPrimitiveWithFalseBooleanReturn [
 
 	"(SmallInteger >> #>) primitive"
@@ -112,7 +114,7 @@ EPPrimitivesTest >> testPrimitiveWithFalseBooleanReturn [
 	self assert: result equals: objectSpace backend falseObject.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPPrimitivesTest >> testPrimitiveWithTrueBooleanReturn [
 
 	"(SmallInteger >> #<) primitive"

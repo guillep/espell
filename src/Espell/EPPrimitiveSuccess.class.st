@@ -1,18 +1,19 @@
 Class {
-	#name : #EPPrimitiveSuccess,
-	#superclass : #EPPrimitiveResult,
+	#name : 'EPPrimitiveSuccess',
+	#superclass : 'EPPrimitiveResult',
 	#instVars : [
 		'value'
 	],
-	#category : 'Espell'
+	#category : 'Espell',
+	#package : 'Espell'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPPrimitiveSuccess >> value [
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPPrimitiveSuccess >> value: anEPMirror [ 
 	value := anEPMirror
 ]

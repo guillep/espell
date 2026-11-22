@@ -1,14 +1,16 @@
 Class {
-	#name : #EPCompilationTest,
-	#superclass : #EPBaseTest,
+	#name : 'EPCompilationTest',
+	#superclass : 'EPBaseTest',
 	#instVars : [
 		'evaluator',
 		'environment'
 	],
-	#category : 'Espell-Tests'
+	#category : 'Espell-Tests',
+	#package : 'Espell',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 EPCompilationTest >> setUp [
 
 	super setUp.
@@ -16,7 +18,7 @@ EPCompilationTest >> setUp [
 	environment := EPRemoteEnvironment on: objectSpace backend systemDictionary.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPCompilationTest >> testSemanticAnalysisWithClassVariable [
 
 	| ast compilationContext |
@@ -36,7 +38,7 @@ EPCompilationTest >> testSemanticAnalysisWithClassVariable [
 	self assert: ast binding assoc ownerName equals: #Object.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPCompilationTest >> testSemanticAnalysisWithClassVariableInClassSide [
 
 	| ast compilationContext |
@@ -56,7 +58,7 @@ EPCompilationTest >> testSemanticAnalysisWithClassVariableInClassSide [
 	self assert: ast binding assoc ownerName equals: #Object.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPCompilationTest >> testSemanticAnalysisWithGlobalVariable [
 
 	| ast compilationContext |
@@ -75,7 +77,7 @@ EPCompilationTest >> testSemanticAnalysisWithGlobalVariable [
 	self assert: ast binding assoc name equals: #Object.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPCompilationTest >> testSemanticAnalysisWithPureConstants [
 
 	| ast compilationContext |
@@ -86,7 +88,7 @@ EPCompilationTest >> testSemanticAnalysisWithPureConstants [
 	ast methodNode doSemanticAnalysisInContext: compilationContext.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPCompilationTest >> testSemanticAnalysisWithSharedVariable [
 
 	| ast compilationContext |

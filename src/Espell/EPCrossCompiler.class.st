@@ -1,13 +1,15 @@
 Class {
-	#name : #EPCrossCompiler,
-	#superclass : #Object,
+	#name : 'EPCrossCompiler',
+	#superclass : 'Object',
 	#instVars : [
 		'objectSpace'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 EPCrossCompiler >> basicCompileDoItFromSourceCode: sourceCode [
 
 	"Ugly. We should not build a remote environment on demand like this. Think wether to put it in the object space or make the cross compiler know it."
@@ -30,7 +32,7 @@ EPCrossCompiler >> basicCompileDoItFromSourceCode: sourceCode [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPCrossCompiler >> basicCompileSourceCode: sourceCode forClass: aClass [
 
 	| options |
@@ -49,7 +51,7 @@ EPCrossCompiler >> basicCompileSourceCode: sourceCode forClass: aClass [
 		parse) generate
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 EPCrossCompiler >> compile: sourceCode forClass: aClass inEnvironment: anEnvironment [
 
 	| localCompiledMethod binding |
@@ -66,7 +68,7 @@ EPCrossCompiler >> compile: sourceCode forClass: aClass inEnvironment: anEnviron
 	^ localCompiledMethod asLiteralInObjectSpace: objectSpace alreadyTransformed: Dictionary new
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 EPCrossCompiler >> compileDoIt: sourceCode [
 
 	| localCompiledMethod |
@@ -74,7 +76,7 @@ EPCrossCompiler >> compileDoIt: sourceCode [
 	^ localCompiledMethod asLiteralInObjectSpace: objectSpace alreadyTransformed: Dictionary new
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPCrossCompiler >> createCompiledMethodWithSize: methodSize andHeader: header [
 
 	^ objectSpace backend
@@ -82,7 +84,7 @@ EPCrossCompiler >> createCompiledMethodWithSize: methodSize andHeader: header [
 		andHeader: header
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPCrossCompiler >> objectSpace: anEPObjectSpace [ 
 	objectSpace := anEPObjectSpace
 ]

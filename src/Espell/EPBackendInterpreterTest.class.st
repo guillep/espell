@@ -1,13 +1,15 @@
 Class {
-	#name : #EPBackendInterpreterTest,
-	#superclass : #EPBaseTest,
+	#name : 'EPBackendInterpreterTest',
+	#superclass : 'EPBaseTest',
 	#instVars : [
 		'interpreter'
 	],
-	#category : 'Espell-Tests'
+	#category : 'Espell-Tests',
+	#package : 'Espell',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 EPBackendInterpreterTest >> setUp [
 
 	super setUp.
@@ -20,7 +22,7 @@ EPBackendInterpreterTest >> setUp [
 		objectSpace: objectSpace backend)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPBackendInterpreterTest >> testInterpreterDictionary [
 
 	| result |
@@ -29,7 +31,7 @@ EPBackendInterpreterTest >> testInterpreterDictionary [
 	self assert: result basicClass name equals: 'Dictionary'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPBackendInterpreterTest >> testInterpreterPrimitiveAdd [
 
 	| result |

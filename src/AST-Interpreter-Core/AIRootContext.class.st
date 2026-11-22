@@ -6,84 +6,86 @@ I am a specific context for the ASTInterpreter that represents the first context
 
 "
 Class {
-	#name : #AIRootContext,
-	#superclass : #AIBlockContext,
+	#name : 'AIRootContext',
+	#superclass : 'AIBlockContext',
 	#instVars : [
 		'method'
 	],
-	#category : 'AST-Interpreter-Core-Base'
+	#category : 'AST-Interpreter-Core-Base',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Base'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 AIRootContext >> = anObject [
 	^ self == anObject
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 AIRootContext >> debugPrintString [
 	^self methodClass
 ]
 
-{ #category : #'exception-handling' }
+{ #category : 'exception-handling' }
 AIRootContext >> handleSignal: exception [
 
 	<reflective: #rootContextHandleSignal:message:>
 	^ exception resumeUnchecked: exception defaultAction
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 AIRootContext >> hasExceptionHandler [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 AIRootContext >> isRootContext [
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIRootContext >> method [
 	^ method
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIRootContext >> method: aString [
 	method := FakeCompiledMethod new sourceCode: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIRootContext >> methodClass [ 
 	^self class
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIRootContext >> outerContext [
 	^ nil
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 AIRootContext >> printOn: aStream [
 	aStream nextPutAll: 'AIRootContext: ';
 		nextPutAll: 'AIRootContext>>DoIt'.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIRootContext >> receiver [
 	^ self
 ]
 
-{ #category : #continuation }
+{ #category : 'continuation' }
 AIRootContext >> resume: aValue [
 	"<reflective: #escape:message:>"
 	^ super resume: aValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIRootContext >> returnContext [
 	^ self outerContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIRootContext >> tempNamed: aName put: aValue [
 	"This code permits temp to work in root context "
 	

@@ -1,25 +1,27 @@
 Class {
-	#name : #OzIfNode,
-	#superclass : #OzOptimizedMessageNode,
+	#name : 'OzIfNode',
+	#superclass : 'OzOptimizedMessageNode',
 	#instVars : [
 		'trueCondition',
 		'falseCondition'
 	],
-	#category : 'AST-Interpreter-Core-Optimized'
+	#category : 'AST-Interpreter-Core-Optimized',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Optimized'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 OzIfNode >> acceptVisitor: anASTInterpreter [ 
 	
 	^ anASTInterpreter visitIfNode: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OzIfNode >> falseCondition [
 	^ falseCondition
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OzIfNode >> replace: aMessageNode [
 
 	receiver := aMessageNode receiver.
@@ -29,7 +31,7 @@ OzIfNode >> replace: aMessageNode [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OzIfNode >> trueCondition [
 	^ trueCondition
 ]

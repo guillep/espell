@@ -1,6 +1,6 @@
-Extension { #name : #OCASTSemanticAnalyzer }
+Extension { #name : 'OCASTSemanticAnalyzer' }
 
-{ #category : #'*Espell' }
+{ #category : '*Espell' }
 OCASTSemanticAnalyzer >> analyze: aNode [
 	self visitNode: aNode.
 	OCASTClosureAnalyzer new visitNode: aNode.

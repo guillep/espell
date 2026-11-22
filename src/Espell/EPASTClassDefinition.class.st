@@ -1,13 +1,15 @@
 Class {
-	#name : #EPASTClassDefinition,
-	#superclass : #RBProgramNode,
+	#name : 'EPASTClassDefinition',
+	#superclass : 'RBProgramNode',
 	#instVars : [
 		'message'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPASTClassDefinition class >> fromMessageNode: aMessageNode [
 
 	^ self new
@@ -15,13 +17,13 @@ EPASTClassDefinition class >> fromMessageNode: aMessageNode [
 		yourself.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTClassDefinition >> acceptVisitor: aProgramNodeVisitor [ 
 
 	^aProgramNodeVisitor visitClassDefinition: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> classPool [
 	
 
@@ -32,13 +34,13 @@ EPASTClassDefinition >> classPool [
 		value substrings collect: [ :name | RBVariableNode named: name asSymbol ].
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 EPASTClassDefinition >> formattedCode [
 
 	^ message formattedCode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> hasTraitComposition [
 	
 	| compositionNode |
@@ -49,13 +51,13 @@ EPASTClassDefinition >> hasTraitComposition [
 	^ compositionNode isArray not or: [ compositionNode children notEmpty ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> message [
 
 	^ message
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> messageNode: aMessageNode [
 
 	message := aMessageNode.
@@ -64,13 +66,13 @@ EPASTClassDefinition >> messageNode: aMessageNode [
 	self parent: parent.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> name [
 	self halt.
 	^ (message arguments at: 1) value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> sharedPools [
 	
 
@@ -81,23 +83,23 @@ EPASTClassDefinition >> sharedPools [
 		value substrings collect: [ :name | RBVariableNode named: name asSymbol ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> source [
 	
 	^ message source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> start [
 	^ message start
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> stop [
 	^ message stop
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> superclass [
 
 	| assignmentNode block |
@@ -106,19 +108,19 @@ EPASTClassDefinition >> superclass [
 	^ block body statements first messages first arguments first.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> temporaries [
 	
 	^ message temporaries
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> temporaryNames [
 	
 	^ message temporaryNames
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTClassDefinition >> traitComposition [
 	
 	^ message statements second arguments first

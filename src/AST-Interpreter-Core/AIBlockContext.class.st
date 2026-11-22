@@ -15,16 +15,18 @@ homeContext
 
 "
 Class {
-	#name : #AIBlockContext,
-	#superclass : #AIContext,
+	#name : 'AIBlockContext',
+	#superclass : 'AIContext',
 	#instVars : [
 		'homeContext',
 		'exceptionHandler'
 	],
-	#category : 'AST-Interpreter-Core-Base'
+	#category : 'AST-Interpreter-Core-Base',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 AIBlockContext class >> fromVMContext: aBlockContext [
 	|sender|
 	sender := aBlockContext sender.
@@ -39,7 +41,7 @@ AIBlockContext class >> fromVMContext: aBlockContext [
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 AIBlockContext >> = anAIBlockContext [
 
 	(super = anAIBlockContext) ifFalse: [^false].
@@ -48,7 +50,7 @@ AIBlockContext >> = anAIBlockContext [
 	^true
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 AIBlockContext >> debugPrintString [
 	^'Block in : ', 
 		self methodClass name, 
@@ -58,55 +60,55 @@ AIBlockContext >> debugPrintString [
 		self code formattedCode printString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIBlockContext >> exceptionHandler [
 	^ exceptionHandler
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIBlockContext >> exceptionHandler: anExceptionHandler [
 	exceptionHandler := anExceptionHandler
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 AIBlockContext >> hasExceptionHandler [
 	^ exceptionHandler isNil not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIBlockContext >> homeContext [
 
 	^ homeContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIBlockContext >> homeContext: aContext [
 
 	homeContext := aContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIBlockContext >> method [
 	^ self homeContext method
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIBlockContext >> methodClass [
 	^ self homeContext methodClass
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 AIBlockContext >> printOn: aStream [
 	aStream nextPutAll: 'AIBlockCtxt: '.
 	aStream nextPutAll: self code formattedCode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIBlockContext >> receiver [
 	^ self homeContext receiver
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIBlockContext >> returnContext [
 	^ self homeContext returnContext
 ]

@@ -1,10 +1,12 @@
 Class {
-	#name : #EPRemoteWeakSet,
-	#superclass : #EPRemoteObject,
-	#category : 'Espell-HighLevel'
+	#name : 'EPRemoteWeakSet',
+	#superclass : 'EPRemoteObject',
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteWeakSet >> like: anObject ifAbsent: aBlock [
 	"Answer an object in the receiver that is equal to anObject,
 	or evaluate the block if not found. Relies heavily on hash properties"
@@ -17,7 +19,7 @@ EPRemoteWeakSet >> like: anObject ifAbsent: aBlock [
 		ifFalse: [ ^ element ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPRemoteWeakSet >> scanFor: anObject [
 	"Scan the key array for the first slot containing either flag (indicating an empty slot) or an element that matches anObject. Answer the index of that slot or raise an error if no slot is found. This method will be overridden in various subclasses that have different interpretations for matching elements."
 

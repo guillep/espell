@@ -1,6 +1,6 @@
-Extension { #name : #RBMessageNode }
+Extension { #name : 'RBMessageNode' }
 
-{ #category : #'*AST-Interpreter-Extension' }
+{ #category : '*AST-Interpreter-Extension' }
 RBMessageNode >> = anObject [ 
 	self == anObject ifTrue: [^true].
 	anObject isMessage ifFalse: [ ^ false ].
@@ -12,7 +12,7 @@ RBMessageNode >> = anObject [
 	^true
 ]
 
-{ #category : #'*AST-Interpreter-Extension' }
+{ #category : '*AST-Interpreter-Extension' }
 RBMessageNode >> polymorphicInlineCache [
 
 	^ self

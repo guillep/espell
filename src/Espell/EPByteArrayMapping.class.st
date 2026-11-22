@@ -1,22 +1,24 @@
 Class {
-	#name : #EPByteArrayMapping,
-	#superclass : #EPByteObjectMapping,
-	#category : 'Espell-LowLevel-Mappings'
+	#name : 'EPByteArrayMapping',
+	#superclass : 'EPByteObjectMapping',
+	#category : 'Espell-LowLevel-Mappings',
+	#package : 'Espell',
+	#tag : 'LowLevel-Mappings'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPByteArrayMapping >> localClass [
 	
 	^ByteArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPByteArrayMapping >> remoteClass [
 
 	^objectSpace byteArrayClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPByteArrayMapping >> remoteClassName [
 
 	^objectSpace worldConfiguration byteArrayClassName

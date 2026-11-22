@@ -1,6 +1,6 @@
-Extension { #name : #InterpreterPlugin }
+Extension { #name : 'InterpreterPlugin' }
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 InterpreterPlugin >> methodWithoutPrimitive: method [
 	"Answer either aMethod or a copy of aMehtod, such that the result does /not/ have a primitive."
 	<doNotGenerate>
@@ -13,7 +13,7 @@ InterpreterPlugin >> methodWithoutPrimitive: method [
 	^ mn generate: method trailer
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 InterpreterPlugin >> tupleOrNilForTranslatedPrimitiveSelector: selector [
 	"Answer a tuple of {simulation method, types, subsidiary methods, original method}
 	 for the selector of a translated primitive.  If the method cannot be simulated, for

@@ -1,6 +1,6 @@
-Extension { #name : #Character }
+Extension { #name : 'Character' }
 
-{ #category : #'*Espell-Extensions' }
+{ #category : '*Espell-Extensions' }
 Character >> asLiteralInObjectSpace: anObjectSpace [
 
 	^anObjectSpace fromLocalCharacter: self
