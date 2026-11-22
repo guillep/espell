@@ -1,66 +1,68 @@
 Class {
-	#name : #EPSpecialObjectsTest,
-	#superclass : #EPBaseTest,
-	#category : 'Espell-Tests'
+	#name : 'EPSpecialObjectsTest',
+	#superclass : 'EPBaseTest',
+	#category : 'Espell-Tests',
+	#package : 'Espell',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSpecialObjectsTest class >> resources [
 
 	^{ EPTestResource }
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 EPSpecialObjectsTest >> setUp [
 
 	super setUp.
 	objectSpace := EPTestResource current objectSpace
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPSpecialObjectsTest >> testArrayClassCompactIndexIsThree [
 
 	self assert: objectSpace backend arrayClass asClassMirror compactClassIndex equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPSpecialObjectsTest >> testArrayClassLooksLikeAClass [
 
 	self assert: (objectSpace backend looksLikeClass: objectSpace backend arrayClass)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPSpecialObjectsTest >> testCompactClassAtArrayIndexIsArrayClass [
 
 	self assert: ((objectSpace backend compactClassAt: Array indexIfCompact ifNone: [ nil ])
 		pointsToSameObject: objectSpace backend arrayClass)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPSpecialObjectsTest >> testCompactClassesNotEmpty [
 
 	self assert: objectSpace backend compactClasses notEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPSpecialObjectsTest >> testFalseObjectIsFalse [
 
 	self deny: objectSpace backend falseObject asBoolean.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPSpecialObjectsTest >> testNilObjectIsNil [
 
 	self assert: objectSpace backend nilObject isNilObject.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPSpecialObjectsTest >> testSmallIntegerIsSmallInteger [
 
 	self assert: (objectSpace backend mirrorOn: 2) isSmallInteger.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPSpecialObjectsTest >> testSpecialObjectsArrayIsArray [
 
 	self
@@ -68,13 +70,13 @@ EPSpecialObjectsTest >> testSpecialObjectsArrayIsArray [
 		equals: objectSpace backend arrayClass
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPSpecialObjectsTest >> testSystemDictionaryIsSystemDictionary [
 
 	self assert: objectSpace backend systemDictionary basicClass className equals: 'SystemDictionary'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPSpecialObjectsTest >> testSystemDictionaryNotEmpty [
 
 	| tally |
@@ -83,7 +85,7 @@ EPSpecialObjectsTest >> testSystemDictionaryNotEmpty [
 	self assert: tally target > 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPSpecialObjectsTest >> testTrueObjectIsTrue [
 
 	self assert: objectSpace backend trueObject asBoolean.

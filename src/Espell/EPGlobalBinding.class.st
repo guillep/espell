@@ -1,28 +1,30 @@
 Class {
-	#name : #EPGlobalBinding,
-	#superclass : #EPLiteralBinding,
-	#category : 'Espell-HighLevel'
+	#name : 'EPGlobalBinding',
+	#superclass : 'EPLiteralBinding',
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPGlobalBinding >> accept: anEPASTInterpreter assign: anEPMirror inNode: aRBVariableNode [ 
 	
 	anEPASTInterpreter environment globalNamed: name put: anEPMirror
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPGlobalBinding >> acceptVisitor: aProgramNodeVisitor node: aNode [
 
 	^ aProgramNodeVisitor visitGlobalVariableNode: aNode
 ]
 
-{ #category : #analyzing }
+{ #category : 'analyzing' }
 EPGlobalBinding >> analyzeRead: aRBVariableNode by: anOCASTSemanticAnalyzer [ 
 
 	
 ]
 
-{ #category : #'literal resolution' }
+{ #category : 'literal resolution' }
 EPGlobalBinding >> asLiteralInObjectSpace: anObjectSpace [
 
 	| binding |
@@ -41,7 +43,7 @@ EPGlobalBinding >> asLiteralInObjectSpace: anObjectSpace [
 		]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPGlobalBinding >> isGlobalClassNameBinding [
 	
 	"For bootstrapping purposes, all variables are writtable.
@@ -50,25 +52,25 @@ EPGlobalBinding >> isGlobalClassNameBinding [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPGlobalBinding >> isGlobalVariable [
 	
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPGlobalBinding >> isGlobalVariableBinding [
 	
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPGlobalBinding >> readWith: anEPASTInterpreter inNode: aRBVariableNode [ 
 	
 	^ anEPASTInterpreter environment globalNamed: name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPGlobalBinding >> value: anObject [
 	"we keep track in the local representation of the environment of the object space"
 	environment at: self name put: anObject.

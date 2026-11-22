@@ -1,6 +1,6 @@
-Extension { #name : #LargeNegativeInteger }
+Extension { #name : 'LargeNegativeInteger' }
 
-{ #category : #'*Espell-Extensions' }
+{ #category : '*Espell-Extensions' }
 LargeNegativeInteger >> asLiteralInObjectSpace: anObjectSpace [
 	
 	^ anObjectSpace fromLocalNegativeInteger: self

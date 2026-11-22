@@ -2,12 +2,14 @@
 I am a mirror on a process object providing basic process operations.
 "
 Class {
-	#name : #EPProcessMirror,
-	#superclass : #EPMirror,
-	#category : 'Espell-LowLevel-Mirrors'
+	#name : 'EPProcessMirror',
+	#superclass : 'EPMirror',
+	#category : 'Espell-LowLevel-Mirrors',
+	#package : 'Espell',
+	#tag : 'LowLevel-Mirrors'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPProcessMirror class >> createProcessForContext: aContextMirror andPriority: aPriority inObjectSpace: anObjectSpace [
 	| newProcess |
 	newProcess := anObjectSpace backend processClass asClassMirror basicNew asProcessMirror.
@@ -16,25 +18,25 @@ EPProcessMirror class >> createProcessForContext: aContextMirror andPriority: aP
 	^newProcess
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPProcessMirror >> asProcessMirror [
 
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPProcessMirror >> context [
 	^ (self instanceVariableAtIndex: (self backend instanceVariableMapping processContextIndex)) asContextMirror
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPProcessMirror >> context: aContextMirror [
 	self 
 		instanceVariableAtIndex: (self backend instanceVariableMapping processContextIndex)
 		put: aContextMirror
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 EPProcessMirror >> dequeue [
 	| theList |
 	
@@ -45,7 +47,7 @@ EPProcessMirror >> dequeue [
 	self privateRemoveFromList: theList.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPProcessMirror >> name: aString [
 	
 	self 
@@ -53,12 +55,12 @@ EPProcessMirror >> name: aString [
 		put: (aString asLiteralInObjectSpace: self backend)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPProcessMirror >> priority [
 	^ (self instanceVariableAtIndex: (self backend instanceVariableMapping processPriorityIndex)) target asSmallInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPProcessMirror >> priority: aPriorityInteger [
 
 	self 
@@ -66,19 +68,19 @@ EPProcessMirror >> priority: aPriorityInteger [
 		put: (aPriorityInteger asLiteralInObjectSpace: self backend)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPProcessMirror >> priorityList [
 
 	^ self instanceVariableAtIndex: (self backend instanceVariableMapping processPriorityListIndex)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPProcessMirror >> priorityList: aList [
 
 	self instanceVariableAtIndex: (self backend instanceVariableMapping processPriorityListIndex) put: aList
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPProcessMirror >> privateRemoveFromList: theList [
 	(self
 		pointsToSameObject: (theList instanceVariableAtIndex: self backend instanceVariableMapping processNextLinkIndex))
@@ -107,19 +109,19 @@ EPProcessMirror >> privateRemoveFromList: theList [
 			]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 EPProcessMirror >> queue [
 
 	self objectSpace processor queueProcess: self
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 EPProcessMirror >> suspend [
 	self dequeue.
 	self objectSpace processor activeProcess = self ifTrue: [ self objectSpace processor activateNextProcessIfNone: [] ].
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 EPProcessMirror >> terminate [
 
 	self suspend.

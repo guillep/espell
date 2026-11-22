@@ -1,38 +1,40 @@
 Class {
-	#name : #EPExternalSymbolTable,
-	#superclass : #EPSymbolTable,
+	#name : 'EPExternalSymbolTable',
+	#superclass : 'EPSymbolTable',
 	#instVars : [
 		'symbols'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #public }
+{ #category : 'public' }
 EPExternalSymbolTable >> at: aLocalSymbol [
 
 	^ symbols at: aLocalSymbol
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 EPExternalSymbolTable >> includesKey: aLocalSymbol [
 
 	^ symbols includesKey: aLocalSymbol
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 EPExternalSymbolTable >> initialize [
 
 	super initialize.
 	symbols := EPDictionary new.
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 EPExternalSymbolTable >> installSymbol: aRemoteSymbol [
 
 	^ symbols at: aRemoteSymbol asLocalString asSymbol put: aRemoteSymbol
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 EPExternalSymbolTable >> symbolsDo: aBlock [
 
 	symbols copy keysAndValuesDo: [ :key :value |
@@ -40,7 +42,7 @@ EPExternalSymbolTable >> symbolsDo: aBlock [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPExternalSymbolTable >> toInternalSymbolTable [
 
 	| internal |

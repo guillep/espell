@@ -4,16 +4,18 @@ I am an error that is triggered when a variable not defined in a context is call
 It is catched in case of a DoIt because there you don't need to declare temporaries.
 "
 Class {
-	#name : #VariableNotDefined,
-	#superclass : #Error,
+	#name : 'VariableNotDefined',
+	#superclass : 'Error',
 	#instVars : [
 		'variableName',
 		'context'
 	],
-	#category : 'AST-Interpreter-Core-Exceptions'
+	#category : 'AST-Interpreter-Core-Exceptions',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Exceptions'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 VariableNotDefined class >> signalForVariable: aName context: aContext [
 	^self new 
 		variableName: aName;
@@ -21,32 +23,32 @@ VariableNotDefined class >> signalForVariable: aName context: aContext [
 		signal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 VariableNotDefined >> context [
 	^ context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 VariableNotDefined >> context: anObject [
 	context := anObject
 ]
 
-{ #category : #handling }
+{ #category : 'handling' }
 VariableNotDefined >> createTemp [
 	context createTemp: variableName
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 VariableNotDefined >> isResumable [
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 VariableNotDefined >> variableName [
 	^ variableName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 VariableNotDefined >> variableName: anObject [
 	variableName := anObject
 ]

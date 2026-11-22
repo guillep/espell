@@ -4,18 +4,20 @@ I am a primitive decorator in charge of initialize new objects created with the 
 Bit fields will stay as they are
 "
 Class {
-	#name : #EPNewObjectInitializationPrimitiveDecorator,
-	#superclass : #EPPrimitiveDecorator,
-	#category : 'Espell-LowLevel-Primitives'
+	#name : 'EPNewObjectInitializationPrimitiveDecorator',
+	#superclass : 'EPPrimitiveDecorator',
+	#category : 'Espell-LowLevel-Primitives',
+	#package : 'Espell',
+	#tag : 'LowLevel-Primitives'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPNewObjectInitializationPrimitiveDecorator >> nilObject [
 	
 	^ resolver backend nilObject
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPNewObjectInitializationPrimitiveDecorator >> postProcessResult: newObject [
 	
 	| theClass |	

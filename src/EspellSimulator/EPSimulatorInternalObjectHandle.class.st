@@ -1,35 +1,36 @@
 Class {
-	#name : #EPSimulatorInternalObjectHandle,
-	#superclass : #EPSimulatorHandle,
-	#category : 'EspellSimulator'
+	#name : 'EPSimulatorInternalObjectHandle',
+	#superclass : 'EPSimulatorHandle',
+	#category : 'EspellSimulator',
+	#package : 'EspellSimulator'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 EPSimulatorInternalObjectHandle >> = aHandle [
 
 	^ self species = aHandle species
 		and: [ self address == aHandle address ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorInternalObjectHandle >> asSmallInteger [
 	
 	^ backend integerValueOf: self
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 EPSimulatorInternalObjectHandle >> hash [
 
 	^ self address hash
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPSimulatorInternalObjectHandle >> instanceVariableAtIndex: anInteger [ 
 	
 	^ backend object: self instVarAt: anInteger
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 EPSimulatorInternalObjectHandle >> species [
 
 	^ EPSimulatorInternalObjectHandle

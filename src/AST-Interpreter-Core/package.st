@@ -1,1 +1,1 @@
-Package { #name : #'AST-Interpreter-Core' }
+Package { #name : 'AST-Interpreter-Core' }

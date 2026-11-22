@@ -1,19 +1,21 @@
 Class {
-	#name : #EPSymbolTable,
-	#superclass : #Object,
+	#name : 'EPSymbolTable',
+	#superclass : 'Object',
 	#instVars : [
 		'objectSpace'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #public }
+{ #category : 'public' }
 EPSymbolTable >> at: aLocalSymbol [
 
 	^ self at: aLocalSymbol ifAbsent: [ self error: 'key not found: ', aLocalSymbol ]
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 EPSymbolTable >> at: aLocalSymbol ifAbsent: aBlock [
 
 	self symbolsDo: [ :remoteSymbol | remoteSymbol asLocalString = aLocalSymbol
@@ -21,13 +23,13 @@ EPSymbolTable >> at: aLocalSymbol ifAbsent: aBlock [
 	^ aBlock value
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 EPSymbolTable >> at: aLocalSymbol ifAbsentPut: aBlock [
 
 	^ self at: aLocalSymbol ifAbsent: [ self installSymbol: aBlock value ]
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 EPSymbolTable >> includesKey: aLocalSymbol [
 
 	self symbolsDo: [ :remoteSymbol | remoteSymbol asLocalString = aLocalSymbol 
@@ -35,18 +37,18 @@ EPSymbolTable >> includesKey: aLocalSymbol [
 	^ false
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 EPSymbolTable >> installSymbol: aRemoteSymbol [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSymbolTable >> objectSpace: anObjectSpace [
 
 	objectSpace := anObjectSpace
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 EPSymbolTable >> symbolsDo: aBlock [
 	self subclassResponsibility
 ]

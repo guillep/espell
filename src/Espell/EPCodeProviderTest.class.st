@@ -1,19 +1,21 @@
 Class {
-	#name : #EPCodeProviderTest,
-	#superclass : #EPBaseTest,
+	#name : 'EPCodeProviderTest',
+	#superclass : 'EPBaseTest',
 	#instVars : [
 		'environment'
 	],
-	#category : 'Espell-Tests'
+	#category : 'Espell-Tests',
+	#package : 'Espell',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPCodeProviderTest class >> resources [
 
 	^{ EPTestResource }
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 EPCodeProviderTest >> setUp [
 
 	super setUp.
@@ -24,7 +26,7 @@ EPCodeProviderTest >> setUp [
 			yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 EPCodeProviderTest >> testFindIfNilSourceInFile [
 	
 	| classDefinition method |

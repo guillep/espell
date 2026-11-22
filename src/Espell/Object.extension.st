@@ -1,6 +1,6 @@
-Extension { #name : #Object }
+Extension { #name : 'Object' }
 
-{ #category : #'*Espell' }
+{ #category : '*Espell' }
 Object >> asLiteralInObjectSpace: anObjectSpace alreadyTransformed: aDictionary [
 
 	^ self asLiteralInObjectSpace: anObjectSpace

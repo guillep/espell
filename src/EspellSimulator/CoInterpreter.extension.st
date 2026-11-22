@@ -1,6 +1,6 @@
-Extension { #name : #CoInterpreter }
+Extension { #name : 'CoInterpreter' }
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 CoInterpreter >> checkForAndFollowForwardedPrimitiveState: index [
 	"Override to log"
 	<option: #SpurObjectMemory>

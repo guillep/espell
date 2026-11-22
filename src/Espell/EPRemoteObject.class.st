@@ -1,14 +1,16 @@
 Class {
-	#name : #EPRemoteObject,
-	#superclass : #Object,
+	#name : 'EPRemoteObject',
+	#superclass : 'Object',
 	#instVars : [
 		'mirror',
 		'environment'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'instance-creation' }
+{ #category : 'instance-creation' }
 EPRemoteObject class >> on: anEPMirror [ 
 	
 	^ self new
@@ -16,7 +18,7 @@ EPRemoteObject class >> on: anEPMirror [
 		yourself
 ]
 
-{ #category : #'instance-creation' }
+{ #category : 'instance-creation' }
 EPRemoteObject class >> on: anEPMirror environment: anEnvironment [
 	
 	^ self new
@@ -24,32 +26,32 @@ EPRemoteObject class >> on: anEPMirror environment: anEnvironment [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteObject >> basicClass [
 
 	^ environment classForClassMirror: mirror basicClass
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPRemoteObject >> initializeWithMirror: anEPClassMirror [ 
 	
 	mirror := anEPClassMirror
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPRemoteObject >> initializeWithMirror: anEPClassMirror environment: anEnvironment [
 	
 	mirror := anEPClassMirror.
 	environment := anEnvironment
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPRemoteObject >> isMethodContextClass [
 
 	^ mirror isMethodContextClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteObject >> mirror [
 
 	^ mirror

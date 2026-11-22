@@ -1,13 +1,15 @@
 Class {
-	#name : #EPByteObjectMapping,
-	#superclass : #Object,
+	#name : 'EPByteObjectMapping',
+	#superclass : 'Object',
 	#instVars : [
 		'objectSpace'
 	],
-	#category : 'Espell-LowLevel-Mappings'
+	#category : 'Espell-LowLevel-Mappings',
+	#package : 'Espell',
+	#tag : 'LowLevel-Mappings'
 }
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPByteObjectMapping >> fromLocal: aByteObject [
 	| remoteByteClass remoteByteObject |
 	remoteByteClass := self remoteClass.
@@ -16,7 +18,7 @@ EPByteObjectMapping >> fromLocal: aByteObject [
 	^remoteByteObject
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPByteObjectMapping >> fromRemote: aRemoteByteObject [
 	| remoteByteObjectMirror newString |
 	remoteByteObjectMirror := aRemoteByteObject.
@@ -30,29 +32,29 @@ EPByteObjectMapping >> fromRemote: aRemoteByteObject [
 	^newString
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPByteObjectMapping >> inLocal: localByteObject at: index putRemote: aMirror [
 
 	localByteObject basicAt: index put: aMirror target asSmallInteger.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPByteObjectMapping >> localClass [
 
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPByteObjectMapping >> objectSpace [
 	^objectSpace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPByteObjectMapping >> objectSpace: anObjectSpace [
 	objectSpace := anObjectSpace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPByteObjectMapping >> remoteClassName [
 	self subclassResponsibility
 ]

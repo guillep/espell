@@ -1,13 +1,15 @@
 Class {
-	#name : #EPDummyEnvironment,
-	#superclass : #Object,
+	#name : 'EPDummyEnvironment',
+	#superclass : 'Object',
 	#instVars : [
 		'objectSpace'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPDummyEnvironment class >> on: anEPObjectSpace [ 
 	
 	^ self new
@@ -15,7 +17,7 @@ EPDummyEnvironment class >> on: anEPObjectSpace [
 		yourself
 ]
 
-{ #category : #binding }
+{ #category : 'binding' }
 EPDummyEnvironment >> bindingOf: aName [
 
 	^ EPGlobalBinding new
@@ -23,7 +25,7 @@ EPDummyEnvironment >> bindingOf: aName [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPDummyEnvironment >> objectSpace: anEPObjectSpace [ 
 
 	objectSpace := anEPObjectSpace

@@ -1,49 +1,51 @@
 Class {
-	#name : #EPASTInterpreter,
-	#superclass : #OptimizedASTInterpreter,
+	#name : 'EPASTInterpreter',
+	#superclass : 'OptimizedASTInterpreter',
 	#instVars : [
 		'evaluator',
 		'astCache'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPASTInterpreter >> astCache: aCache [
 	astCache := aCache
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 EPASTInterpreter >> blockClosureEnsure: aBlockClosure message: aMessage [
 	
 	^ super blockClosureEnsure: aBlockClosure target target message: aMessage
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 EPASTInterpreter >> blockClosureOnDo: aBlockClosure message: aMessage [
 	
 	^ super blockClosureOnDo: (self unwrapBlockClosure: aBlockClosure) message: aMessage
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 EPASTInterpreter >> blockClosureValue: aBlockClosure message: aMessage [
 	
 	^ super blockClosureValue: aBlockClosure target message: aMessage
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 EPASTInterpreter >> blockClosureValueWithArguments: aBlockClosure message: aMessage [
 	
 	^ super blockClosureValueWithArguments: (self unwrapBlockClosure: aBlockClosure) message: aMessage
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPASTInterpreter >> classOf: anObject [
 
 	^evaluator classOf: anObject
 ]
 
-{ #category : #'method evaluation' }
+{ #category : 'method evaluation' }
 EPASTInterpreter >> closureAST: aClosure forReceiver: aReceiver [
 	| astToBind compilationContext |
 	
@@ -59,13 +61,13 @@ EPASTInterpreter >> closureAST: aClosure forReceiver: aReceiver [
 		doSemanticAnalysis).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTInterpreter >> environment [
 	
 	^ evaluator environment
 ]
 
-{ #category : #interpretation }
+{ #category : 'interpretation' }
 EPASTInterpreter >> evaluateAST: someAST [
 	self 
 		methodContextFor: someAST methodNode
@@ -76,12 +78,12 @@ EPASTInterpreter >> evaluateAST: someAST [
 	^self interpret: someAST
 ]
 
-{ #category : #interpretation }
+{ #category : 'interpretation' }
 EPASTInterpreter >> evaluateCode: someCode [
 	^self evaluateAST: (self compile: someCode)
 ]
 
-{ #category : #'method evaluation' }
+{ #category : 'method evaluation' }
 EPASTInterpreter >> hasPrimitiveFailed: result [
 	"A primitive that fails doesn't always return ContextPart primitiveFailToken but returns ContextPart primitiveFailTokenFor: errorCode.
 	A possible errorCode is nil, which corresponds to ContextPart primitiveFailToken.
@@ -90,13 +92,13 @@ EPASTInterpreter >> hasPrimitiveFailed: result [
 	^evaluator objectSpace backend hasPrimitiveFailed: result
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPASTInterpreter >> initialize [
 	super initialize.
 	astCache := IdentityDictionary new.
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPASTInterpreter >> initializeAstOfBehaviorDefinition: definition fromBehavior: mirror [
 	definition methods do: [ :methodDefinition | 
 		self
@@ -105,20 +107,20 @@ EPASTInterpreter >> initializeAstOfBehaviorDefinition: definition fromBehavior: 
 	].
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPASTInterpreter >> initializeAstOfMethodDefinition: definition fromBehavior: mirror [
 	ASTCache
 		at: definition
 		put: (definition generateASTBindedTo: mirror inObjectSpace: evaluator objectSpace)
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPASTInterpreter >> initializeWithEvaluator: anEvaluator [
 
 	evaluator := anEvaluator
 ]
 
-{ #category : #'method evaluation' }
+{ #category : 'method evaluation' }
 EPASTInterpreter >> invokeMethod: aClosure on: receiver message: aMessage [
 	| result |
 
@@ -139,7 +141,7 @@ EPASTInterpreter >> invokeMethod: aClosure on: receiver message: aMessage [
 	^ result
 ]
 
-{ #category : #'method evaluation' }
+{ #category : 'method evaluation' }
 EPASTInterpreter >> invokePrimitiveMethod: aMethod on: receiver message: aMessage [
 	| result |
 	
@@ -162,7 +164,7 @@ EPASTInterpreter >> invokePrimitiveMethod: aMethod on: receiver message: aMessag
 		message: aMessage
 ]
 
-{ #category : #'method evaluation' }
+{ #category : 'method evaluation' }
 EPASTInterpreter >> invokeReflectiveMethod: aClosure on: receiver message: aMessage [
 	| annotation selector result |
 	
@@ -183,14 +185,14 @@ EPASTInterpreter >> invokeReflectiveMethod: aClosure on: receiver message: aMess
 		message: aMessage
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPASTInterpreter >> loadClass: aGlobalVariable [
 
 	"^ aGlobalVariable binding assoc bindingContext sourceEnvironment classNamed: aGlobalVariable name"
 	^ evaluator environment createBehaviorFromDefinition: (evaluator environment definitionNamed: aGlobalVariable name)
 ]
 
-{ #category : #lookup }
+{ #category : 'lookup' }
 EPASTInterpreter >> lookupFrom: aRFiClass until: aBlockClosure ifNone: aBlockClosure3 [ 
 	
 	| lookupClass |
@@ -201,7 +203,7 @@ EPASTInterpreter >> lookupFrom: aRFiClass until: aBlockClosure ifNone: aBlockClo
 	aBlockClosure3 value.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPASTInterpreter >> lookupSelector: selector in: class [
 	| found |
 	"This I think could be safe to remove"
@@ -215,19 +217,19 @@ EPASTInterpreter >> lookupSelector: selector in: class [
 	^ (found methods detect: [ :m | m selector = selector ]) ast
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPASTInterpreter >> mappingOf: anObject [
 
 	^evaluator mappingOf: anObject
 ]
 
-{ #category : #context }
+{ #category : 'context' }
 EPASTInterpreter >> methodContextFor: aCompiledMethod receiver: receiver message: aMessage [
 	super methodContextFor: aCompiledMethod receiver: receiver message: aMessage.
 	context temporaries keysDo: [ :k | context temporaries at: k put: evaluator objectSpace nilObject ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> newClassLoaderVisitor [
 
 	^ EPASTClassLoaderVisitor new
@@ -235,7 +237,7 @@ EPASTInterpreter >> newClassLoaderVisitor [
 		yourself
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 EPASTInterpreter >> object: receiver performMessageInSuperclass: aMessage [	
 	"Check if the message to perform is valid and if so, execute it"
 	
@@ -250,18 +252,18 @@ EPASTInterpreter >> object: receiver performMessageInSuperclass: aMessage [
 	^self send: message to: receiver class: lookupClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPASTInterpreter >> objectSpace [
 	
 	^ evaluator objectSpace
 ]
 
-{ #category : #slots }
+{ #category : 'slots' }
 EPASTInterpreter >> readInstVarAt: index named: name [
 	^ self currentSelf instanceVariableAtIndex: index
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPASTInterpreter >> unwrapBlockClosure: maybeBlock [
 	
 	^ maybeBlock target object
@@ -272,18 +274,18 @@ EPASTInterpreter >> unwrapBlockClosure: maybeBlock [
 	^ block"
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitArrayNode: anArrayNode [
 	
 	^ evaluator objectSpace newArrayWithAll: (super acceptArrayNode: anArrayNode)
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitBlockNode: aBlockNode [
 	^ evaluator objectSpace backend mirrorOnExternalHandle: (super visitBlockNode: aBlockNode)
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitClassDefinition: anOzClassDefinition [ 
 	
 	anOzClassDefinition superclass acceptVisitor: self newClassLoaderVisitor.
@@ -292,29 +294,29 @@ EPASTInterpreter >> visitClassDefinition: anOzClassDefinition [
 	^ anOzClassDefinition message acceptVisitor: self.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitGlobalVariableNode: aVariableNode [
 	
 	^ aVariableNode binding readWith: self inNode: aVariableNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitInstanceVariableNode: aRBInstanceVariableNode [ 
 	
 	^ aRBInstanceVariableNode binding readWith: self inNode: aRBInstanceVariableNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitLiteralArrayNode: aNode [
 	^ self visitLiteralNode: aNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitLiteralNode: aLiteralNode [
 	^aLiteralNode value asLiteralInObjectSpace: evaluator objectSpace
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitMessageNode: aMessageNode [
 	
 	| replacement receiver |
@@ -329,7 +331,7 @@ EPASTInterpreter >> visitMessageNode: aMessageNode [
 	^ self visitMessageNode: aMessageNode receiver: receiver.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitSequenceNode: aSequenceNode [
 	| lastResult |
 	lastResult := evaluator objectSpace nilObject.
@@ -342,13 +344,13 @@ EPASTInterpreter >> visitSequenceNode: aSequenceNode [
 	^ lastResult
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitThisContextNode: thisContextNode [
 	self halt.
 	^ super visitThisContextNode: thisContextNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitTraitDefinition: anOzClassDefinition [ 
 	
 	"anOzClassDefinition message receiver acceptVisitor: self newClassLoaderVisitor."
@@ -356,7 +358,7 @@ EPASTInterpreter >> visitTraitDefinition: anOzClassDefinition [
 	^ anOzClassDefinition message acceptVisitor: self.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPASTInterpreter >> visitVariableNode: aVariableNode [
 
 	| theBinding |
@@ -366,7 +368,7 @@ EPASTInterpreter >> visitVariableNode: aVariableNode [
 	^ theBinding readWith: self inNode: aVariableNode
 ]
 
-{ #category : #slots }
+{ #category : 'slots' }
 EPASTInterpreter >> write: aValue at: index named: name [
 	^ self currentSelf instanceVariableAtIndex: index put: aValue
 ]

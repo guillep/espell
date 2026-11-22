@@ -1,13 +1,15 @@
 Class {
-	#name : #EPMethodMapping,
-	#superclass : #Object,
+	#name : 'EPMethodMapping',
+	#superclass : 'Object',
 	#instVars : [
 		'objectSpace'
 	],
-	#category : 'Espell-LowLevel-Mappings'
+	#category : 'Espell-LowLevel-Mappings',
+	#package : 'Espell',
+	#tag : 'LowLevel-Mappings'
 }
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPMethodMapping >> createCompiledMethodWithSize: bytecodeSize andHeader: aMethodHeader [
 	
 	^ self objectSpace backend methodMirrorOn: 
@@ -16,7 +18,7 @@ EPMethodMapping >> createCompiledMethodWithSize: bytecodeSize andHeader: aMethod
 				andHeader: (aMethodHeader asLiteralInObjectSpace: self objectSpace))
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPMethodMapping >> fromLocal: aCompiledMethod [
 	| methodMirror methodSize |
 	methodSize := aCompiledMethod bytecodes size + CompiledMethodTrailer empty size.
@@ -28,7 +30,7 @@ EPMethodMapping >> fromLocal: aCompiledMethod [
 	^methodMirror
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPMethodMapping >> fromLocal: aCompiledMethod inEnvironment: anEnvironment [
 	| methodMirror methodSize |
 	methodSize := aCompiledMethod bytecode size + CompiledMethodTrailer empty size.
@@ -42,7 +44,7 @@ EPMethodMapping >> fromLocal: aCompiledMethod inEnvironment: anEnvironment [
 	^methodMirror
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPMethodMapping >> fromRemote: aRemoteCompiledMethod [
 	| method mirror methodTrailer |
 	mirror := aRemoteCompiledMethod asMethodMirror.
@@ -60,12 +62,12 @@ EPMethodMapping >> fromRemote: aRemoteCompiledMethod [
 	^ method
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMethodMapping >> objectSpace [
 	^objectSpace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMethodMapping >> objectSpace: anObjectSpace [
 	objectSpace := anObjectSpace
 ]

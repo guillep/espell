@@ -1,6 +1,6 @@
-Extension { #name : #SpurMemoryManager }
+Extension { #name : 'SpurMemoryManager' }
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 SpurMemoryManager >> classAtIndex: classIndex putUnchecked: objOop [
 	"for become & GC of classes"
 	| classTablePage |
@@ -14,7 +14,7 @@ SpurMemoryManager >> classAtIndex: classIndex putUnchecked: objOop [
 		withValue: objOop
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 SpurMemoryManager >> newBootstrapInstanceFromClassFormat: classFormat classIndex: classIndex [
 	| instSpec numSlots newObj |
 	instSpec := self instSpecOfClassFormat: classFormat.
@@ -30,7 +30,7 @@ SpurMemoryManager >> newBootstrapInstanceFromClassFormat: classFormat classIndex
 	^newObj
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 SpurMemoryManager >> newBootstrapInstanceFromClassFormat: classFormat indexableSize: nElements [
 	<api>
 	<var: #nElements type: #usqInt>
@@ -85,7 +85,7 @@ SpurMemoryManager >> newBootstrapInstanceFromClassFormat: classFormat indexableS
 	^newObj
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 SpurMemoryManager >> newBootstrapInstanceFromClassFormat: classFormat indexableSize: nElements classIndex: classIndex [
 	<api>
 	<var: #nElements type: #usqInt>
@@ -138,12 +138,12 @@ SpurMemoryManager >> newBootstrapInstanceFromClassFormat: classFormat indexableS
 	^newObj
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 SpurMemoryManager >> runLeakCheckerFor: gcModes [
 	
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 SpurMemoryManager >> signedMachineIntegerFor: value [
 	
 	^ self wordSize = 8

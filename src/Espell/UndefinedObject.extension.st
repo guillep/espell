@@ -1,6 +1,6 @@
-Extension { #name : #UndefinedObject }
+Extension { #name : 'UndefinedObject' }
 
-{ #category : #'*Espell-Extensions' }
+{ #category : '*Espell-Extensions' }
 UndefinedObject >> asLiteralInObjectSpace: anObjectSpace [
 
 	^anObjectSpace nilObject

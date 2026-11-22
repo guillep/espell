@@ -1,6 +1,6 @@
-Extension { #name : #ArgumentVariable }
+Extension { #name : 'ArgumentVariable' }
 
-{ #category : #'*AST-Interpreter-Extension' }
+{ #category : '*AST-Interpreter-Extension' }
 ArgumentVariable >> readWith: anInterpreter inNode: aVariableNode [
 
 	| definingScope argIndex |

@@ -1,13 +1,15 @@
 Class {
-	#name : #EPRealLiteralBinding,
-	#superclass : #EPLiteralBinding,
+	#name : 'EPRealLiteralBinding',
+	#superclass : 'EPLiteralBinding',
 	#instVars : [
 		'value'
 	],
-	#category : 'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPRealLiteralBinding class >> name: aName value: aValue [
 
 	^ self new
@@ -16,30 +18,30 @@ EPRealLiteralBinding class >> name: aName value: aValue [
 		yourself
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 EPRealLiteralBinding >> acceptVisitor: aProgramNodeVisitor node: aNode [
 
 	^ aProgramNodeVisitor visitGlobalVariableNode: aNode
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPRealLiteralBinding >> isGlobalVariable [
 	
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRealLiteralBinding >> readWith: anEPASTInterpreter inNode: aRBVariableNode [ 
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRealLiteralBinding >> value [
 
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRealLiteralBinding >> value: aValue [
 
 	value := aValue

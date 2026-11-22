@@ -2,127 +2,129 @@
 I am a class mirror object providing basic operations to work on class objects inside an object space.
 "
 Class {
-	#name : #EPClassMirror,
-	#superclass : #EPMirror,
-	#category : 'Espell-LowLevel-Mirrors'
+	#name : 'EPClassMirror',
+	#superclass : 'EPMirror',
+	#category : 'Espell-LowLevel-Mirrors',
+	#package : 'Espell',
+	#tag : 'LowLevel-Mirrors'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPClassMirror >> asClassMirror [
 
 	"no need to convert"
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> basicIdentityHash [
 
 	^ target basicIdentityHashOnClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> basicNew [
 	
 	^ backend basicNewOn: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> basicNew: aSize [
 
 	^ backend basicNewOn: self withSize: (backend smallIntegerMirrorOn: aSize)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> basicSetClassName: aClassNameMirror [ 
 	
 	^ self instanceVariableAtIndex: (self backend instanceVariableMapping classNameIndex) put: aClassNameMirror
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> className [
 	
 	^ backend fromRemoteByteSymbol: (self instanceVariableAtIndex: (self backend instanceVariableMapping classNameIndex))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> className: aString [ 
 	
 	^ self instanceVariableAtIndex: (self backend instanceVariableMapping classNameIndex) put: (aString asLiteralInObjectSpace: self backend)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> classPool [
 	
 	"We wish this is a classpool dictionary"
 	^ self instanceVariableAtIndex: (self backend instanceVariableMapping classPoolIndex)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> classPool: aClassPool [
 	
 	"We wish this is a class where this fits"
 	^ self instanceVariableAtIndex: (self backend instanceVariableMapping classPoolIndex) put: aClassPool
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> classSide [
 	
 	^ self basicClass
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPClassMirror >> compactClassIndex [
 
 	^ backend compactClassIndexOf: self.
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> format [
 	^(self instanceVariableAtIndex: (self backend instanceVariableMapping classFormatIndex)) asSmallInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> format: aFormat [
 	^ self instanceVariableAtIndex: (self backend instanceVariableMapping classFormatIndex) put: (backend smallIntegerMirrorOn: aFormat)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> instanceFixedSize [
 	
 	^ backend instanceFixedSizeOf: self.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPClassMirror >> isBitsClass [
 
 	^ backend isBitsClass: self
 	
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPClassMirror >> isBytesClass [
 
 	^ self instanceSpecification >= 8
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPClassMirror >> isCompact [
 
 	^ self compactClassIndex ~= 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> methodDictionary [
 	^ self instanceVariableAtIndex: (self backend instanceVariableMapping classMethodDictionaryIndex)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> methodDictionary: aDictionary [
 	^ self instanceVariableAtIndex: (self backend instanceVariableMapping classMethodDictionaryIndex) put: aDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPClassMirror >> superclass [
 	^ (self instanceVariableAtIndex: (self backend instanceVariableMapping classSuperclassIndex)) asClassMirror
 ]

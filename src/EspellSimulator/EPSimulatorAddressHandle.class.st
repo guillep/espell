@@ -1,24 +1,25 @@
 Class {
-	#name : #EPSimulatorAddressHandle,
-	#superclass : #EPSimulatorInternalObjectHandle,
+	#name : 'EPSimulatorAddressHandle',
+	#superclass : 'EPSimulatorInternalObjectHandle',
 	#instVars : [
 		'address'
 	],
-	#category : 'EspellSimulator'
+	#category : 'EspellSimulator',
+	#package : 'EspellSimulator'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSimulatorAddressHandle >> address [
 
 	^ address
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPSimulatorAddressHandle >> address: anInteger [ 
 	address := anInteger
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPSimulatorAddressHandle >> asClassIndexHandle [
 
 	| hash |
@@ -27,7 +28,7 @@ EPSimulatorAddressHandle >> asClassIndexHandle [
 	^ backend handleOnClassIndex: hash.
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 EPSimulatorAddressHandle >> printOn: aStream [
 
 	super printOn: aStream.

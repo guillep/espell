@@ -1,17 +1,19 @@
 Class {
-	#name : #EPRemoteOrderedCollection,
-	#superclass : #EPRemoteObject,
-	#category : 'Espell-HighLevel'
+	#name : 'EPRemoteOrderedCollection',
+	#superclass : 'EPRemoteObject',
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #iterating }
+{ #category : 'iterating' }
 EPRemoteOrderedCollection >> anySatisfy: aBlockClosure [ 
 	
 	self do: [ :each | (aBlockClosure value: each) ifTrue: [ ^ true ] ].
 	^ false
 ]
 
-{ #category : #iterating }
+{ #category : 'iterating' }
 EPRemoteOrderedCollection >> collect: aBlockClosure [ 
 	
 	| result |
@@ -20,7 +22,7 @@ EPRemoteOrderedCollection >> collect: aBlockClosure [
 	^ result
 ]
 
-{ #category : #iterating }
+{ #category : 'iterating' }
 EPRemoteOrderedCollection >> do: aBlockClosure [ 
 	
 	| array |
@@ -30,7 +32,7 @@ EPRemoteOrderedCollection >> do: aBlockClosure [
 		elem isNilObject ifFalse: [ aBlockClosure value: elem ] ]
 ]
 
-{ #category : #iterating }
+{ #category : 'iterating' }
 EPRemoteOrderedCollection >> size [
 	
 	| firstIndex lastIndex |

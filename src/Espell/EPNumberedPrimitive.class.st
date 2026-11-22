@@ -2,22 +2,24 @@
 I represent a numbered primitive.
 "
 Class {
-	#name : #EPNumberedPrimitive,
-	#superclass : #EPPrimitive,
+	#name : 'EPNumberedPrimitive',
+	#superclass : 'EPPrimitive',
 	#instVars : [
 		'number'
 	],
-	#category : 'Espell-LowLevel-Primitives'
+	#category : 'Espell-LowLevel-Primitives',
+	#package : 'Espell',
+	#tag : 'LowLevel-Primitives'
 }
 
-{ #category : #installing }
+{ #category : 'installing' }
 EPNumberedPrimitive >> basicInstall: aPrimitive inResolver: aPrimitiveResolver [
 
 	self resolver: aPrimitiveResolver.
 	aPrimitiveResolver primitiveForNumber: number put: aPrimitive.
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPNumberedPrimitive >> execute: anExecution [
 
 	| result |
@@ -27,7 +29,7 @@ EPNumberedPrimitive >> execute: anExecution [
 	^ self objectSpace mirrorOn: result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPNumberedPrimitive >> number: aPrimitiveNumber [
 	
 	number := aPrimitiveNumber

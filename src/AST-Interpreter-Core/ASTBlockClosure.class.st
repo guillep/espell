@@ -10,41 +10,43 @@ homeContext
 
 "
 Class {
-	#name : #ASTBlockClosure,
-	#superclass : #BlockClosure,
-	#type : #variable,
+	#name : 'ASTBlockClosure',
+	#superclass : 'BlockClosure',
+	#type : 'variable',
 	#instVars : [
 		'homeContext',
 		'code'
 	],
-	#category : 'AST-Interpreter-Core-Base'
+	#category : 'AST-Interpreter-Core-Base',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Base'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 ASTBlockClosure >> = anASTBlockClosure [
 	(anASTBlockClosure class == self class)ifFalse: [^false].
 	(self homeContext = anASTBlockClosure homeContext)ifFalse: [^false].
 	^true
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTBlockClosure >> accept: visitor [
 	^ visitor visitBlockClosure: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTBlockClosure >> code [
 
 	^ code
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTBlockClosure >> code: anObject [
 	
 	code := anObject
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 ASTBlockClosure >> cull: anArg [
 	^ self numArgs = 0 
 		ifTrue: [self value]
@@ -52,7 +54,7 @@ ASTBlockClosure >> cull: anArg [
 	
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 ASTBlockClosure >> cull: firstArg cull: secondArg [
 	^ self numArgs < 2 
 		ifTrue: [self cull: firstArg]
@@ -60,7 +62,7 @@ ASTBlockClosure >> cull: firstArg cull: secondArg [
 	
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 ASTBlockClosure >> cull: firstArg cull: secondArg cull: thirdArg [
 	^ self numArgs < 3 
 		ifTrue: [self cull: firstArg cull: secondArg]
@@ -68,7 +70,7 @@ ASTBlockClosure >> cull: firstArg cull: secondArg cull: thirdArg [
 	
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 ASTBlockClosure >> cull: firstArg cull: secondArg cull: thirdArg cull: fourthArg [
 	"Execute the receiver with four or less arguments. Check cull:cull: for examples"
 	
@@ -78,7 +80,7 @@ ASTBlockClosure >> cull: firstArg cull: secondArg cull: thirdArg cull: fourthArg
 	
 ]
 
-{ #category : #exception }
+{ #category : 'exception' }
 ASTBlockClosure >> ensure: aBlock [
 	"Evaluate a termination block after evaluating the receiver, regardless of
 	 whether the receiver's evaluation completes."
@@ -87,77 +89,77 @@ ASTBlockClosure >> ensure: aBlock [
 	PrimitiveFailed signal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTBlockClosure >> homeContext [
 
 	^ homeContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTBlockClosure >> homeContext: aContext [
 
 	homeContext := aContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTBlockClosure >> numArgs [
 	^ self code arguments size
 ]
 
-{ #category : #exception }
+{ #category : 'exception' }
 ASTBlockClosure >> on: exception do: aBlock [
 	<reflective: #blockClosureOnDo:message:>
 	PrimitiveFailed signal
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 ASTBlockClosure >> printOn: aStream [	
 	aStream nextPutAll: 'ASTBlockClosure: '.
 	aStream nextPutAll: self code formattedCode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTBlockClosure >> returnContext [
 
 	^ homeContext returnContext
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 ASTBlockClosure >> value [
 	<reflective: #blockClosureValue:message:>
 	^ self valueWithArguments: (Array new: 0)
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 ASTBlockClosure >> value: anArg [
 	<reflective: #blockClosureValue:message:>
 	^ self valueWithArguments: (Array with: anArg)
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 ASTBlockClosure >> value: anArg value: otherArg [
 	<reflective: #blockClosureValue:message:>
 	^ self valueWithArguments: (Array with: anArg with: otherArg)
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 ASTBlockClosure >> value: anArg value: otherArg value: anotherArg [
 	<reflective: #blockClosureValue:message:>
 	^ self valueWithArguments: (Array with: anArg with: otherArg with: anotherArg)
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 ASTBlockClosure >> value: anArg value: otherArg value: anotherArg value: yetAnotherArg [
 	<reflective: #blockClosureValue:message:>
 	^ self valueWithArguments: (Array with: anArg with: otherArg with: anotherArg with: yetAnotherArg)
 ]
 
-{ #category : #exception }
+{ #category : 'exception' }
 ASTBlockClosure >> valueNoContextSwitch [
 	^ self value
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 ASTBlockClosure >> valueWithArguments: anArray [
 	| newContext ncv |
 	<reflective: #blockClosureValueWithArguments:message:>
@@ -166,7 +168,7 @@ ASTBlockClosure >> valueWithArguments: anArray [
 	^PrimitiveFailed signal
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 ASTBlockClosure >> valueWithPossibleArgs: anArray [
 	| numberOfArgs |
 	numberOfArgs := self numArgs.

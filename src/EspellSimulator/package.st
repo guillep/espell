@@ -1,1 +1,1 @@
-Package { #name : #EspellSimulator }
+Package { #name : 'EspellSimulator' }

@@ -1,6 +1,6 @@
-Extension { #name : #StackInterpreter }
+Extension { #name : 'StackInterpreter' }
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreter >> checkForAndFollowForwardedPrimitiveState: primitiveIndex [
 	"In Spur a primitive may fail due to encountering a forwarder. On failure,
 	 check the accessorDepth for the primitive and if non-negative scan the
@@ -44,7 +44,7 @@ StackInterpreter >> checkForAndFollowForwardedPrimitiveState: primitiveIndex [
 	^found
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreter >> maybeRetryFailureDueToForwarding [
 	"In Spur a primitive may fail due to encountering a forwarder. On failure, check
 	 the accessorDepth for the primitive and if non-negative scan the args to the
@@ -57,7 +57,7 @@ StackInterpreter >> maybeRetryFailureDueToForwarding [
 		 self dispatchFunctionPointer: primitiveFunctionPointer]
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreter >> maybeRetryFailureDueToForwarding: primitiveIndex [
 	"In Spur a primitive may fail due to encountering a forwarder. On failure, check
 	 the accessorDepth for the primitive and if non-negative scan the args to the
@@ -70,7 +70,7 @@ StackInterpreter >> maybeRetryFailureDueToForwarding: primitiveIndex [
 		 self dispatchFunctionPointer: primitiveFunctionPointer]
 ]
 
-{ #category : #'*EspellSimulator' }
+{ #category : '*EspellSimulator' }
 StackInterpreter >> uncheckedStSizeOf: oop [
 	"Return the number of indexable fields in the given object. (i.e., what Smalltalk would return for <obj> size)."
 	"Note: Assume oop is not a SmallInteger!"

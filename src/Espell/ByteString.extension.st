@@ -1,6 +1,6 @@
-Extension { #name : #ByteString }
+Extension { #name : 'ByteString' }
 
-{ #category : #'*Espell-Extensions' }
+{ #category : '*Espell-Extensions' }
 ByteString >> asLiteralInObjectSpace: anObjectSpace [
 
 	^anObjectSpace fromLocalByteString: self

@@ -1,6 +1,6 @@
-Extension { #name : #BlockClosure }
+Extension { #name : 'BlockClosure' }
 
-{ #category : #'*AST-Interpreter-Extension' }
+{ #category : '*AST-Interpreter-Extension' }
 BlockClosure >> asASTBlockClosure [
 	^ASTBlockClosure new
 		homeContext: self home asASTInterpreterContext;

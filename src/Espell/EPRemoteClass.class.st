@@ -1,24 +1,26 @@
 Class {
-	#name : #EPRemoteClass,
-	#superclass : #EPRemoteObject,
-	#category : 'Espell-HighLevel'
+	#name : 'EPRemoteClass',
+	#superclass : 'EPRemoteObject',
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'class variables' }
+{ #category : 'class variables' }
 EPRemoteClass >> allClassVariableNames [
 	
 	self superclass ifNil: [ ^ self classVariableNames ].
 	^ self superclass allClassVariableNames, self classVariableNames
 ]
 
-{ #category : #'instance variables' }
+{ #category : 'instance variables' }
 EPRemoteClass >> allInstanceVariableNames [
 	
 	self superclass ifNil: [ ^ self instanceVariableNames ].
 	^ self superclass allInstanceVariableNames, self instanceVariableNames
 ]
 
-{ #category : #'instance variables' }
+{ #category : 'instance variables' }
 EPRemoteClass >> allSlots [
 	
 	^ self allInstanceVariableNames withIndexCollect: [ :each :index |
@@ -27,7 +29,7 @@ EPRemoteClass >> allSlots [
 			yourself ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteClass >> basicClass [
 
 	^ (environment metaclassForClassMirror: mirror basicClass)
@@ -35,13 +37,13 @@ EPRemoteClass >> basicClass [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteClass >> binding [
 	
 	^ self bindingOf: self name
 ]
 
-{ #category : #binding }
+{ #category : 'binding' }
 EPRemoteClass >> bindingOf: aString [
 	(self definesClassVariable: aString asSymbol)
 		ifTrue: [ self haltIf: [ environment isNil ].
@@ -65,50 +67,50 @@ EPRemoteClass >> bindingOf: aString [
 	^ nil
 ]
 
-{ #category : #'class variables' }
+{ #category : 'class variables' }
 EPRemoteClass >> classPool [
 	
 	^ EPRemoteDictionary on: (mirror classPool)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteClass >> classSide [
 
 	^ self basicClass
 ]
 
-{ #category : #'class variables' }
+{ #category : 'class variables' }
 EPRemoteClass >> classVariableNames [
 	
 	mirror classPool isNilObject ifTrue: [ ^ #() ].
 	^ self classPool keys asArray
 ]
 
-{ #category : #'class variables' }
+{ #category : 'class variables' }
 EPRemoteClass >> definesClassVariable: aString [ 
 	
 	^ self classVariableNames includes: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteClass >> environment [
 
 	^ environment 
 ]
 
-{ #category : #methods }
+{ #category : 'methods' }
 EPRemoteClass >> includesSelector: aString [ 
 	
 	^ self methodDictionary includesKey: aString
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPRemoteClass >> initializeWithMirror: aMirror [
 
 	mirror := aMirror asClassMirror
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPRemoteClass >> initializeWithMirror: aMirror environment: anEnvironment [
 
 	^ super
@@ -116,7 +118,7 @@ EPRemoteClass >> initializeWithMirror: aMirror environment: anEnvironment [
 		environment: anEnvironment
 ]
 
-{ #category : #binding }
+{ #category : 'binding' }
 EPRemoteClass >> innerBindingOf: aString [
 	(self definesClassVariable: aString asSymbol)
 		ifTrue: [ self haltIf: [ environment isNil ].
@@ -135,7 +137,7 @@ EPRemoteClass >> innerBindingOf: aString [
 	^ nil
 ]
 
-{ #category : #'instance variables' }
+{ #category : 'instance variables' }
 EPRemoteClass >> instanceVariableNames [
 	| remoteInstVars index |
 
@@ -147,31 +149,31 @@ EPRemoteClass >> instanceVariableNames [
 	^ remoteInstVars asLocalLiteral
 ]
 
-{ #category : #bindings }
+{ #category : 'bindings' }
 EPRemoteClass >> lookupVar: aString declare: aBoolean [ 
 	
 	^ self bindingOf: aString
 ]
 
-{ #category : #methods }
+{ #category : 'methods' }
 EPRemoteClass >> methodDictionary [
 	
 	^ EPRemoteMethodDictionary on: mirror methodDictionary environment: environment
 ]
 
-{ #category : #methods }
+{ #category : 'methods' }
 EPRemoteClass >> methods [
 	
 	^ self methodDictionary values collect: [ :each | EPRemoteMethod on: each environment: environment ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteClass >> name [
 
 	^ mirror className
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 EPRemoteClass >> printOn: aStream [
 
 	aStream
@@ -181,7 +183,7 @@ EPRemoteClass >> printOn: aStream [
 		nextPutAll: ')'
 ]
 
-{ #category : #'shared pools' }
+{ #category : 'shared pools' }
 EPRemoteClass >> sharedPools [
 	
 	| sharedPools maybeSharedPool |
@@ -191,14 +193,14 @@ EPRemoteClass >> sharedPools [
 	^ sharedPools collect: [ :sharedPool | EPRemoteClass on: sharedPool environment: environment ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteClass >> superclass [
 	
 	mirror superclass isNilObject ifTrue: [ ^ nil ].
 	^ EPRemoteClass on: mirror superclass environment: environment
 ]
 
-{ #category : #'shared pools' }
+{ #category : 'shared pools' }
 EPRemoteClass >> usesLocalPoolVarNamed: aString [ 
 	
 	| sharedPools |

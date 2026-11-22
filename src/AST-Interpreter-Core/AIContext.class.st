@@ -25,8 +25,8 @@ temporaries
 
 "
 Class {
-	#name : #AIContext,
-	#superclass : #Object,
+	#name : 'AIContext',
+	#superclass : 'Object',
 	#instVars : [
 		'closure',
 		'temporaries',
@@ -34,10 +34,12 @@ Class {
 		'outerContext',
 		'currentExecutedNode'
 	],
-	#category : 'AST-Interpreter-Core-Base'
+	#category : 'AST-Interpreter-Core-Base',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Base'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 AIContext >> = anAIContext [
 	(anAIContext class == self class)ifFalse: [^false].
 	(self closure = anAIContext closure)ifFalse: [^false].
@@ -48,7 +50,7 @@ AIContext >> = anAIContext [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> argumentNamed: aName [
 	
 	| index |
@@ -59,17 +61,17 @@ AIContext >> argumentNamed: aName [
 	^ self tempNamed: aName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> arguments [
 	^ arguments
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> arguments: aCollection [
 	arguments := aCollection
 ]
 
-{ #category : #'exception-handling' }
+{ #category : 'exception-handling' }
 AIContext >> cannotReturn: result [
 
 	closure notNil ifTrue:
@@ -80,7 +82,7 @@ AIContext >> cannotReturn: result [
 						contents: nil
 ]
 
-{ #category : #'exception-handling' }
+{ #category : 'exception-handling' }
 AIContext >> cannotReturn: result to: homeContext [
 	"The receiver tried to return result to homeContext that no longer exists."
 
@@ -90,54 +92,54 @@ AIContext >> cannotReturn: result to: homeContext [
 		signal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> closure [
 
 	^ closure
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> closure: anObject [
 	
 	closure := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> code [
 	^ self closure code
 ]
 
-{ #category : #'compatibility layer' }
+{ #category : 'compatibility layer' }
 AIContext >> contextTag [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> createTemp: aName [
 	self temporaries at: aName put: nil.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> currentExecutedNode [
 	^ currentExecutedNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> currentExecutedNode: anObject [
 	currentExecutedNode := anObject
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 AIContext >> debugPrintString [
 	self subclassResponsibility 
 ]
 
-{ #category : #continuation }
+{ #category : 'continuation' }
 AIContext >> die [
 	currentExecutedNode := nil
 ]
 
-{ #category : #'exception-handling' }
+{ #category : 'exception-handling' }
 AIContext >> findContextSuchThat: testBlock [
 	"Search self and my sender chain for first one that satisfies testBlock.  Return nil if none satisfy"
 
@@ -152,7 +154,7 @@ AIContext >> findContextSuchThat: testBlock [
 	^ nil
 ]
 
-{ #category : #'exception-handling' }
+{ #category : 'exception-handling' }
 AIContext >> findNextHandlerContext [
 	"Return the next handler marked context, returning nil if there is none.  
 	Search starts with self and proceeds up to nil."
@@ -160,7 +162,7 @@ AIContext >> findNextHandlerContext [
 	^ self findContextSuchThat: [ :ctxt| ctxt hasExceptionHandler ]
 ]
 
-{ #category : #'exception-handling' }
+{ #category : 'exception-handling' }
 AIContext >> handleSignal: exception [
 	"Sent to handler (on:do:) contexts only.  If my exception class (first arg) handles exception then execute my handle block (second arg), otherwise forward this message to the next handler context.  If none left, execute exception's defaultAction (see nil>>handleSignal:)."
 
@@ -179,12 +181,12 @@ AIContext >> handleSignal: exception [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 AIContext >> hasExceptionHandler [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> hasTempNamed: aName [
 	self temporaries 
 		at: aName 
@@ -196,22 +198,22 @@ AIContext >> hasTempNamed: aName [
 	^ self homeContext hasTempNamed: aName.
 ]
 
-{ #category : #'compatibility layer' }
+{ #category : 'compatibility layer' }
 AIContext >> home [
 	^ self homeContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> homeContext [
 	self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 AIContext >> initialize [
 	self flag: 'for now the easies solution'.
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 AIContext >> initializeContext: aContext [ 
 	self outerContext: aContext outerContext asASTInterpreterContext.
 	self arguments: aContext arguments.
@@ -219,50 +221,50 @@ AIContext >> initializeContext: aContext [
 		self temporaries at: tempName put: (aContext tempNamed: tempName)]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 AIContext >> isDead [
 	^currentExecutedNode isNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 AIContext >> isRootContext [
 	^false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> methodClass [
 	^ closure methodClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> methodNode [
     ^ currentExecutedNode methodNode
 ]
 
-{ #category : #'exception-handling' }
+{ #category : 'exception-handling' }
 AIContext >> nextHandlerContext [
 
 	^ self outerContext findNextHandlerContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> outerContext [
 
 	^ outerContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> outerContext: anObject [
 	
 	outerContext := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 AIContext >> printOn: aStream [
 	aStream nextPutAll: 'AIContext: should be instantiated'
 ]
 
-{ #category : #continuation }
+{ #category : 'continuation' }
 AIContext >> resume: value [
 	"Unwind thisContext to self and resume with value as result of last send.  Execute unwind blocks when unwinding.  ASSUMES self is a sender of thisContext"
 
@@ -285,7 +287,7 @@ AIContext >> resume: value [
 
 ]
 
-{ #category : #continuation }
+{ #category : 'continuation' }
 AIContext >> return: value [
 	"Unwind thisContext to self and return value to self's sender.  Execute any unwind blocks while unwinding.  ASSUMES self is a sender of thisContext"
 
@@ -297,21 +299,21 @@ AIContext >> return: value [
 	self outerContext resume: value
 ]
 
-{ #category : #'compatibility layer' }
+{ #category : 'compatibility layer' }
 AIContext >> selector [
 	"Answer the selector of the method that created the receiver."
 
 	^self code selector ifNil: [self code defaultSelector].
 ]
 
-{ #category : #'compatibility layer' }
+{ #category : 'compatibility layer' }
 AIContext >> sender [
 	"to make it compatible with exceptions in Pharo code"
 	
 	^self homeContext
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 AIContext >> stack [
 	|context stack limit|
 	
@@ -327,7 +329,7 @@ AIContext >> stack [
 	^ stack
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> tempNamed: aName [
 	self temporaries 
 		at: aName 
@@ -339,7 +341,7 @@ AIContext >> tempNamed: aName [
 	^ self homeContext tempNamed: aName.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> tempNamed: aName put: aValue [
 	self flag: 'the error signal doesnt work inside the interpreter '.
 	(self temporaries includesKey: aName)
@@ -352,18 +354,18 @@ AIContext >> tempNamed: aName put: aValue [
 		
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> temporaries [
 	^ temporaries ifNil: [ temporaries := SmallDictionary new]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> temporaries: aNameCollection [
 	aNameCollection do: [ :aVarName|
 		self temporaries at: aVarName put: nil ].
 ]
 
-{ #category : #continuation }
+{ #category : 'continuation' }
 AIContext >> terminateTo: previousContext value: aReturnValue [
 	"Terminate all the Contexts between me and previousContext, if previousContext is on my Context stack. Make previousContext my sender."
 
@@ -373,7 +375,7 @@ AIContext >> terminateTo: previousContext value: aReturnValue [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AIContext >> variableNamed: aName [
 
 	| index |

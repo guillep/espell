@@ -2,8 +2,8 @@
 I am an object space, defining the basic API of ""how to interact with an image""
 "
 Class {
-	#name : #EPObjectSpace,
-	#superclass : #Object,
+	#name : 'EPObjectSpace',
+	#superclass : 'Object',
 	#instVars : [
 		'environment',
 		'symbolTransformationTable',
@@ -27,10 +27,12 @@ Class {
 		'backend',
 		'mustRebuildSpecialObjectsArray'
 	],
-	#category : #'Espell-HighLevel'
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'well known objects' }
+{ #category : 'well known objects' }
 EPObjectSpace >> arrayWithAll: elements [
 	
 	| array |
@@ -41,72 +43,72 @@ EPObjectSpace >> arrayWithAll: elements [
 	^ array
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> backend [
 
 	^ backend
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> backend: aBackend [
 
 	backend := aBackend
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> bindingOfClass: aClass [
 	
 	^self bindingByName: aClass className
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> byteArrayMapping [
 	^byteArrayMapping
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> byteArrayMapping: aMapping [
 	byteArrayMapping := aMapping
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> byteStringMapping [
 	^byteStringMapping
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> byteStringMapping: aMapping [
 	byteStringMapping := aMapping
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> byteSymbolMapping [
 	^byteSymbolMapping
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> byteSymbolMapping: aMapping [
 	byteSymbolMapping := aMapping
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> characterTable [
 	^ characterTable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> characterTable: aCharacterTable [
 
 	characterTable := aCharacterTable
 ]
 
-{ #category : #'class-bootstrap' }
+{ #category : 'class-bootstrap' }
 EPObjectSpace >> classNamed: aClassName [
 
 	^ self environment at: aClassName
 ]
 
-{ #category : #'class access' }
+{ #category : 'class access' }
 EPObjectSpace >> classNamed: aClassName ifAbsent: aBlock [
 
 	| classHandle |
@@ -114,24 +116,24 @@ EPObjectSpace >> classNamed: aClassName ifAbsent: aBlock [
 	^ self classMirrorOn: classHandle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> classes [
 	^self environment classes collect: [ :c | self classMirrorOn: c ] 
 ]
 
-{ #category : #builders }
+{ #category : 'builders' }
 EPObjectSpace >> contextBuilder [
 
 	^contextBuilder
 ]
 
-{ #category : #builders }
+{ #category : 'builders' }
 EPObjectSpace >> contextBuilder: aContextBuilder [
 
 	contextBuilder := aContextBuilder
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPObjectSpace >> convertHeaderToTargetPlatform: localCompiledCode [
 
 	"I need to convert the header to the target platform. If the target platform is different wordsize the minSmallInteger changes..."
@@ -150,7 +152,7 @@ EPObjectSpace >> convertHeaderToTargetPlatform: localCompiledCode [
 	  + (localCompiledCode isPrimitive asBit bitShift: 16)
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPObjectSpace >> createClassWithFormat: aClassFormat forInstancesOfFormat: theInstancesFormat [
 
 	| mirror |
@@ -159,7 +161,7 @@ EPObjectSpace >> createClassWithFormat: aClassFormat forInstancesOfFormat: theIn
 	^mirror
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPObjectSpace >> createInstanceFromClassDefinition: aClassDefinition [
 
 	^ (self
@@ -167,42 +169,42 @@ EPObjectSpace >> createInstanceFromClassDefinition: aClassDefinition [
 		forInstancesOfFormat: aClassDefinition format) basicNew
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> createMethodDictionary [
 
 	^self createMethodDictionaryInEnvironment: self environment
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> createMethodDictionary: aSize [
 
 	^ methodDictionaryBuilder createMethodDictionary: aSize inEnvironment: self environment
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> createMethodDictionary: aSize inEnvironment: anEnvironment [
 
 	^ methodDictionaryBuilder createMethodDictionary: aSize inEnvironment: anEnvironment
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> createMethodDictionaryInEnvironment: anEnvironment [
 
 	^self createMethodDictionary: 32 inEnvironment: anEnvironment
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPObjectSpace >> createObjectWithFormat: aClassFormat [
 	^self createObjectWithFormat: aClassFormat withSize: 0
 ]
 
-{ #category : #primitives }
+{ #category : 'primitives' }
 EPObjectSpace >> createObjectWithFormat: aClassFormat withSize: aSize [
 
 	^ backend createObjectWithFormat: aClassFormat withSize: aSize
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPObjectSpace >> createProcessWithPriority: aPriority doing: anExpression [
 	^ self
 		createProcessWithPriority: aPriority
@@ -210,7 +212,7 @@ EPObjectSpace >> createProcessWithPriority: aPriority doing: anExpression [
 		withTemps: #()
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPObjectSpace >> createProcessWithPriority: aPriority doing: anExpression withTemps: someTemps [
 	| method aContext  |
 	method := self methodBuilder createDoit: anExpression withTemps: someTemps inObjectSpace: self.
@@ -218,7 +220,7 @@ EPObjectSpace >> createProcessWithPriority: aPriority doing: anExpression withTe
 	^self processBuilder createProcessForContext: aContext andPriority: aPriority inObjectSpace: self.
 ]
 
-{ #category : #'well known objects' }
+{ #category : 'well known objects' }
 EPObjectSpace >> createSpecialObjectsArray [
 	| newSpecialObjectsArray |
 	newSpecialObjectsArray := backend arrayClass asClassMirror basicNew: 56.
@@ -266,7 +268,7 @@ EPObjectSpace >> createSpecialObjectsArray [
 	^newSpecialObjectsArray.
 ]
 
-{ #category : #compiler }
+{ #category : 'compiler' }
 EPObjectSpace >> crossCompiler [
 	
 	^ EPCrossCompiler new
@@ -274,57 +276,57 @@ EPObjectSpace >> crossCompiler [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> environment [
 	^environment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> environment: anEnvironment [
 	environment := anEnvironment.
 	"environment objectSpace: self."
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPObjectSpace >> falseObject [
 	
 	^ self backend falseObject
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPObjectSpace >> falseObject: aNilObject [
 	
 	self backend falseObject: aNilObject
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalByteArray: aByteArray [ 
 	
 	"Direct backend transformation"
 	^ self backend fromLocalByteArray: aByteArray
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalByteString: aByteString [
 
 	^ self backend fromLocalByteString: aByteString
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalByteSymbol: aByteSymbol [
 
 	^ self symbolTable at: aByteSymbol ifAbsentPut: [ 
 		backend fromLocalByteSymbol: aByteSymbol ]
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalCharacter: aCharacter [
 	
 	^ self backend fromLocalCharacter: aCharacter
 
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalCompiledCode: localCompiledCode alreadyTransformed: alreadyTransformed [
 
 	| methodSize methodMirror header |
@@ -353,55 +355,55 @@ EPObjectSpace >> fromLocalCompiledCode: localCompiledCode alreadyTransformed: al
 	^methodMirror
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalCompiledMethod: aCompiledMethod [
 	
 	^compiledMethodMapping fromLocal: aCompiledMethod inEnvironment: self environment
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalCompiledMethod: aCompiledMethod inEnvironment: anEnvironment [
 	
 	^compiledMethodMapping fromLocal: aCompiledMethod inEnvironment: anEnvironment
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalFloat: aLocalFloat [
 
 	^ self backend fromLocalFloat: aLocalFloat.
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalInteger: anInteger [
 
 	^backend fromLocalInteger: anInteger
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalMethodProperties: aMethodPropertiesObject [
 
 	^methodPropertiesMapping fromLocal: aMethodPropertiesObject
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalNegativeInteger: aNegativeInteger [
 
 	^backend fromLocalNegativeInteger: aNegativeInteger
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalPositiveInteger: aPositiveInteger [
 
 	^ backend fromLocalPositiveInteger: aPositiveInteger
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromLocalWideString: aWideString [
 
 	^wideStringMapping fromLocal: aWideString
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromRemoteBoolean: aBooleanMirror [
 	(aBooleanMirror pointsToSameObject: self trueObject)
 		ifTrue: [ ^true ].
@@ -410,34 +412,34 @@ EPObjectSpace >> fromRemoteBoolean: aBooleanMirror [
 	self error: 'non a boolean remote object'.
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromRemoteByteArray: aByteArray [ 
 	
 	^byteArrayMapping fromRemote: aByteArray.
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromRemoteByteString: aRemoteByteString [
 	^byteStringMapping fromRemote: aRemoteByteString
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromRemoteByteSymbol: aRemoteByteSymbol [
 	^byteSymbolMapping fromRemote: aRemoteByteSymbol
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromRemoteCharacter: aRemoteCharacter [
 	^Character value: (aRemoteCharacter instanceVariableAtIndex: 1) target asSmallInteger.
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromRemoteCompiledMethod: aRemoteCompiledMethod [
 	
 	^compiledMethodMapping fromRemote: aRemoteCompiledMethod
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromRemoteFloat: aRemoteFloat [
 
 	| newFloat |
@@ -446,79 +448,79 @@ EPObjectSpace >> fromRemoteFloat: aRemoteFloat [
 	^newFloat
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromRemoteLargeNegativeInteger: aNegativeInteger [
 
 	^largeNegativeIntegerMapping fromRemote: aNegativeInteger
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromRemoteLargePositiveInteger: aPositiveInteger [
 
 	^largePositiveIntegerMapping fromRemote: aPositiveInteger
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> fromRemoteWideString: aWideString [
 
 	^wideStringMapping fromRemote: aWideString
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPObjectSpace >> fromSmallInteger: anInteger [ 
 	
 	"Direct backend conversion"
 	^ self backend fromSmallInteger: anInteger
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPObjectSpace >> giveChanceToRun [
 
 	self rebuildSpecialObjectsArray.
 	backend giveChanceToRun.
 ]
 
-{ #category : #environment }
+{ #category : 'environment' }
 EPObjectSpace >> globalNamed: aGlobalName [
 	
 	^ self systemDictionary at: aGlobalName
 ]
 
-{ #category : #globals }
+{ #category : 'globals' }
 EPObjectSpace >> globalObjects [
 	
 	^ self systemDictionary globalObjects
 ]
 
-{ #category : #interfaces }
+{ #category : 'interfaces' }
 EPObjectSpace >> hasInterpreter [
 
 	^ evaluator notNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> imageFile [
 
 	^ imageFile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> imageFile: aFileReference [
 
 	imageFile := aFileReference
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPObjectSpace >> includesClassNamed: aClassName [
 	^self environment includesClassNamed: aClassName
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPObjectSpace >> includesGlobalNamed: aClassName [
 	^self environment includesGlobalNamed: aClassName
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPObjectSpace >> initialize [
 	super initialize.
 	
@@ -533,7 +535,7 @@ EPObjectSpace >> initialize [
 	self initializeBuilders.
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPObjectSpace >> initializeBuilders [
 	"self halt."
 	methodBuilder := EPVMCompiledMethodMirror.
@@ -542,7 +544,7 @@ EPObjectSpace >> initializeBuilders [
 	processBuilder := EPProcessMirror.
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPObjectSpace >> initializeMappings [
 	self methodMapping: (EPMethodMapping new objectSpace: self; yourself).
 
@@ -555,7 +557,7 @@ EPObjectSpace >> initializeMappings [
 	self wideStringMapping: (OzWideStringMapping new objectSpace: self; yourself)."
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPObjectSpace >> installAsActiveProcess: aProcessMirror [
 	| activeProcess theProcessor |
 	theProcessor := (self environment at: #Processor) asSchedulerMirror.
@@ -573,20 +575,20 @@ EPObjectSpace >> installAsActiveProcess: aProcessMirror [
 	theProcessor activeProcess: aProcessMirror.
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPObjectSpace >> interpreter [
 	evaluator ifNil: [ self error: 'interpreter not initialized for this object space' ].
 	^evaluator
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPObjectSpace >> interpreter: anEvaluator [
 	evaluator := anEvaluator.
 	evaluator objectSpace: self.
 	backend interpreter: anEvaluator
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPObjectSpace >> isMethodProperties: anObjectMirror [
 	(self worldConfiguration hasClass: #methodProperties)
 		ifFalse: [ ^false ].
@@ -594,31 +596,31 @@ EPObjectSpace >> isMethodProperties: anObjectMirror [
 							self environment methodPropertiesClass
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> largeNegativeIntegerMapping [
 	
 	^ largeNegativeIntegerMapping
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> largeNegativeIntegerMapping: anObject [
 	
 	largeNegativeIntegerMapping := anObject
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> largePositiveIntegerMapping [
 	
 	^ largePositiveIntegerMapping
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> largePositiveIntegerMapping: anObject [
 	
 	largePositiveIntegerMapping := anObject
 ]
 
-{ #category : #loading }
+{ #category : 'loading' }
 EPObjectSpace >> loadImage: anImageFile [
 	
 	backend loadImage: anImageFile asFileReference.
@@ -631,68 +633,68 @@ EPObjectSpace >> loadImage: anImageFile [
 		objectSpace: self)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 EPObjectSpace >> longPrintOn: aStream limitedTo: sizeLimit indent: indent [
 	aStream cr
 ]
 
-{ #category : #builders }
+{ #category : 'builders' }
 EPObjectSpace >> methodBuilder [
 
 	^methodBuilder
 ]
 
-{ #category : #builders }
+{ #category : 'builders' }
 EPObjectSpace >> methodBuilder: aMethodBuilder [ 
 
 	methodBuilder := aMethodBuilder
 ]
 
-{ #category : #builders }
+{ #category : 'builders' }
 EPObjectSpace >> methodDictionaryBuilder: aBuilder [
 
 	methodDictionaryBuilder := aBuilder
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> methodMapping [
 	^compiledMethodMapping
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> methodMapping: aMethodMapping [ 
 	compiledMethodMapping := aMethodMapping
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> methodPropertiesMapping [
 	^methodPropertiesMapping
 ]
 
-{ #category : #mappings }
+{ #category : 'mappings' }
 EPObjectSpace >> methodPropertiesMapping: aMapping [
 	methodPropertiesMapping := aMapping
 ]
 
-{ #category : #'special objects array' }
+{ #category : 'special objects array' }
 EPObjectSpace >> mustNotRebuildSpecialObjectsArray [
 	
 	mustRebuildSpecialObjectsArray := false.
 ]
 
-{ #category : #'special objects array' }
+{ #category : 'special objects array' }
 EPObjectSpace >> mustRebuildSpecialObjectsArray [
 	
 	mustRebuildSpecialObjectsArray := true.
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPObjectSpace >> newArrayOf: size [
 
 	^ self arrayClass basicNew: size
 ]
 
-{ #category : #builders }
+{ #category : 'builders' }
 EPObjectSpace >> newArrayWithAll: elements [
 
 	| array |
@@ -701,13 +703,13 @@ EPObjectSpace >> newArrayWithAll: elements [
 	^ array
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPObjectSpace >> newAssociation [
 
 	^ self environment associationClass basicNew
 ]
 
-{ #category : #builders }
+{ #category : 'builders' }
 EPObjectSpace >> newAssociationWithKey: aKey [
 
 	| association |
@@ -716,7 +718,7 @@ EPObjectSpace >> newAssociationWithKey: aKey [
 	^ association
 ]
 
-{ #category : #builders }
+{ #category : 'builders' }
 EPObjectSpace >> newAssociationWithKey: aKey andValue: aValue [
 
 	| association |
@@ -726,7 +728,7 @@ EPObjectSpace >> newAssociationWithKey: aKey andValue: aValue [
 	^ association
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPObjectSpace >> newCompactClassesArray [
 
 	| array |
@@ -736,7 +738,7 @@ EPObjectSpace >> newCompactClassesArray [
 	^ array
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPObjectSpace >> newMessageWithSelector: selector arguments: args andLookupClass: lookupClass [
 
 	| message |
@@ -747,7 +749,7 @@ EPObjectSpace >> newMessageWithSelector: selector arguments: args andLookupClass
 	^ message
 ]
 
-{ #category : #builders }
+{ #category : 'builders' }
 EPObjectSpace >> newMethodWithBytecodeSize: bytecodeSize withHeader: aMethodHeader [
 
 	^ (backend 
@@ -756,7 +758,7 @@ EPObjectSpace >> newMethodWithBytecodeSize: bytecodeSize withHeader: aMethodHead
 					withHeader: (aMethodHeader asLiteralInObjectSpace: self) target)
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPObjectSpace >> newSemaphore [
 
 	| semaphore |
@@ -765,61 +767,61 @@ EPObjectSpace >> newSemaphore [
 	^ semaphore
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPObjectSpace >> nilObject [
 	
 	^ self backend nilObject
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPObjectSpace >> nilObject: aNilObject [
 	
 	self backend nilObject: aNilObject
 ]
 
-{ #category : #'mirror handling' }
+{ #category : 'mirror handling' }
 EPObjectSpace >> objectMirrorOn: anObject [
 	
 	^ EPMirror on: anObject from: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> objectSpace [
 
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> primitives [
 
 	^ backend primitives
 ]
 
-{ #category : #builders }
+{ #category : 'builders' }
 EPObjectSpace >> processBuilder [
 
 	^processBuilder
 ]
 
-{ #category : #builders }
+{ #category : 'builders' }
 EPObjectSpace >> processBuilder: aProcessBuilder [
 
 	processBuilder := aProcessBuilder.
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPObjectSpace >> processor [
 
 	^ processor
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPObjectSpace >> processor: aProcessor [
 
 	^ processor := aProcessor
 ]
 
-{ #category : #'special objects array' }
+{ #category : 'special objects array' }
 EPObjectSpace >> rebuildSpecialObjectsArray [
 
 	mustRebuildSpecialObjectsArray ifFalse: [ ^ self ].
@@ -831,7 +833,7 @@ EPObjectSpace >> rebuildSpecialObjectsArray [
 		]
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 EPObjectSpace >> serializeInFileNamed: fileName [
 	self halt.
 	"OzImageSerializer new
@@ -839,32 +841,32 @@ EPObjectSpace >> serializeInFileNamed: fileName [
 		serialize: (OzGraphTracer new objectSpace: self;yourself)"
 ]
 
-{ #category : #'well known objects' }
+{ #category : 'well known objects' }
 EPObjectSpace >> setBasicSpecialObjectsArray: aRemoteSpecialObjectsArray [
 
 	self specialObjectsArray: (self objectMirrorOn: aRemoteSpecialObjectsArray)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> smalltalkInstance [
 
 	^ smalltalkInstance ifNil: [ self nilObject ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> smalltalkInstance: aSmalltalkInstance [
 
 	smalltalkInstance := aSmalltalkInstance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> sourceCodeManager [
 
 	sourceCodeManager ifNil: [ self error: 'no source code manager installed in this object space' ].
 	^ sourceCodeManager
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> sourceCodeManager: aSourceCodeManager [
 
 	sourceCodeManager := aSourceCodeManager.
@@ -873,59 +875,59 @@ EPObjectSpace >> sourceCodeManager: aSourceCodeManager [
 		loadCode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> specialObjectsArray: aSpecialObjectsArray [
 
 	backend specialObjectsArray: aSpecialObjectsArray
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPObjectSpace >> startEmptyImage [
 	
 	backend startEmptyImage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> symbolTable [
 	^symbolTransformationTable
 ]
 
-{ #category : #'symbol-table' }
+{ #category : 'symbol-table' }
 EPObjectSpace >> symbolTable: aSymbolTable [
 
 	symbolTransformationTable := aSymbolTable
 ]
 
-{ #category : #globals }
+{ #category : 'globals' }
 EPObjectSpace >> systemDictionary [
 	
 	^ environment
 ]
 
-{ #category : #'lookup by name' }
+{ #category : 'lookup by name' }
 EPObjectSpace >> traitNamed: aTraitName [ 
 	
 	^self traitMirrorOn: (self environment globalNamed: aTraitName)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> traitNamed: aTraitName ifAbsent: aBlock [
 
 	^ self traitMirrorOn: (self environment globalNamed: aTraitName ifAbsent: [ ^ aBlock value ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> traits [
 	^self environment traits collect: [ :c | self traitMirrorOn: c ] 
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPObjectSpace >> transferExecutionTo: aProcess [
 
 	self backend transferExecutionTo: aProcess
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPObjectSpace >> transformLiteral: aLiteral alreadyTransformed: aDictionary [
 	
 	aDictionary at: aLiteral ifPresent: [ :x | ^ x ].
@@ -937,57 +939,57 @@ EPObjectSpace >> transformLiteral: aLiteral alreadyTransformed: aDictionary [
 	^ aLiteral asLiteralInObjectSpace: self alreadyTransformed: aDictionary
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPObjectSpace >> trueObject [
 	
 	^ self backend trueObject
 ]
 
-{ #category : #'special objects' }
+{ #category : 'special objects' }
 EPObjectSpace >> trueObject: aNilObject [
 	
 	self backend trueObject: aNilObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> vmInterface [
 	
 	^ vmInterface
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> wideStringMapping [
 	^ wideStringMapping
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> wideStringMapping: anObject [
 	wideStringMapping := anObject
 ]
 
-{ #category : #'symbol-table' }
+{ #category : 'symbol-table' }
 EPObjectSpace >> withInternalCharacterTable [
 
 	"characterTable := OzInternalCharacterTable new objectSpace: self; yourself."
 ]
 
-{ #category : #'symbol-table' }
+{ #category : 'symbol-table' }
 EPObjectSpace >> withInternalSymbolTable [
 
 	self symbolTable: (EPInternalSymbolTable new objectSpace: self; yourself).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> wordSize [
 	^4
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> worldConfiguration [
 	^worldConfiguration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPObjectSpace >> worldConfiguration: configuration [
 	worldConfiguration := configuration
 ]

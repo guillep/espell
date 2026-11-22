@@ -21,24 +21,26 @@ primitiveFailed
 
 "
 Class {
-	#name : #ASTInterpreter,
-	#superclass : #Object,
+	#name : 'ASTInterpreter',
+	#superclass : 'Object',
 	#instVars : [
 		'context',
 		'gotoContext',
 		'currentNode'
 	],
-	#category : 'AST-Interpreter-Core-Base'
+	#category : 'AST-Interpreter-Core-Base',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Base'
 }
 
-{ #category : #interpreting }
+{ #category : 'interpreting' }
 ASTInterpreter class >> interpretMethod: anASTNode [
 	^ self new
 		resetContext: AIRootContext new;
 		interpretMethod: anASTNode
 ]
 
-{ #category : #interpreting }
+{ #category : 'interpreting' }
 ASTInterpreter class >> interpretVMContext: aContext [
 	| interpreter |
 	self flag: #TODO. "not implemented yet"
@@ -48,12 +50,12 @@ ASTInterpreter class >> interpretVMContext: aContext [
 	
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptArgumentNode: aRBArgumentNode [ 
 	^ self acceptVariableNode: aRBArgumentNode
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptArrayNode: anArrayNode [
 	| array |
 	
@@ -66,7 +68,7 @@ ASTInterpreter >> acceptArrayNode: anArrayNode [
 	^ array
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptAssignmentNode: anAssignmentNode [
 	| value variable |
 	
@@ -77,25 +79,25 @@ ASTInterpreter >> acceptAssignmentNode: anAssignmentNode [
 	^ value
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptBlockNode: aBlockNode [
 	^ ASTBlockClosure new 
 		homeContext: self context;
 		code: aBlockNode
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptLiteralArrayNode: aNode [
 	^ aNode value
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptLiteralNode: aLiteralNode [
 	^ aLiteralNode value
 	
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptReturnNode: aReturnNode [
 	| returnValue |
 	
@@ -109,12 +111,12 @@ ASTInterpreter >> acceptReturnNode: aReturnNode [
 	^ returnValue
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptSelfNode: aSelf [
 	^ self currentSelf
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptSequenceNode: aSequenceNode [
 	| lastResult |
 	
@@ -127,27 +129,27 @@ ASTInterpreter >> acceptSequenceNode: aSequenceNode [
 	^ lastResult
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptSuperNode: aSelf [
 	^ self currentSelf
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptTemporaryNode: aRBTemporaryNode [ 
 	^ self acceptVariableNode: aRBTemporaryNode
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptThisContextNode: thisContextNode [
 	^ self context
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 ASTInterpreter >> acceptVariableNode: aVariableNode [
 	^ aVariableNode binding readWith: self 
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 ASTInterpreter >> blockClosureEnsure: aBlockClosure message: aMessage [
 	| result ensureBlockReturnValue firstGotoContext |
 	
@@ -165,7 +167,7 @@ ASTInterpreter >> blockClosureEnsure: aBlockClosure message: aMessage [
 	^ result
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 ASTInterpreter >> blockClosureOnDo: aBlockClosure message: aMessage [
 	| block result |
 	
@@ -182,19 +184,19 @@ ASTInterpreter >> blockClosureOnDo: aBlockClosure message: aMessage [
 	^ result
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 ASTInterpreter >> blockClosureValue: aBlockClosure [
 	^ self blockClosureValue: aBlockClosure message: (Message selector: #value)
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 ASTInterpreter >> blockClosureValue: aBlockClosure message: aMessage [
 	|newMessage|
 	newMessage := Message selector: #valueWithArguments: arguments: (Array with: aMessage arguments).
 	^self blockClosureValueWithArguments: aBlockClosure message: newMessage
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 ASTInterpreter >> blockClosureValueWithArguments: aBlockClosure message: aMessage [
 	| block result arguments|
 	
@@ -217,7 +219,7 @@ ASTInterpreter >> blockClosureValueWithArguments: aBlockClosure message: aMessag
 	^ result
 ]
 
-{ #category : #context }
+{ #category : 'context' }
 ASTInterpreter >> blockContextFor: aBlockClosure message: aMessage [
 	| block |
 	
@@ -231,12 +233,12 @@ ASTInterpreter >> blockContextFor: aBlockClosure message: aMessage [
 		temporaries: block temporaryNames.
 ]
 
-{ #category : #slots }
+{ #category : 'slots' }
 ASTInterpreter >> classOf: anObject [
 	^ anObject class
 ]
 
-{ #category : #interpretation }
+{ #category : 'interpretation' }
 ASTInterpreter >> compile: aString [
 	| ast |
 	ast := RBParser parseExpression: aString.
@@ -245,17 +247,17 @@ ASTInterpreter >> compile: aString [
 	^ ast
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTInterpreter >> context [
 	^ context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTInterpreter >> context: aContext [
 	context := aContext
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 ASTInterpreter >> contextTerminateTo: aContext message: aMessage [
 	
 	gotoContext := aMessage arguments first.
@@ -263,22 +265,22 @@ ASTInterpreter >> contextTerminateTo: aContext message: aMessage [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTInterpreter >> currentMethodClass [
 	^ context methodClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTInterpreter >> currentNode [
 	^currentNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTInterpreter >> currentSelf [
 	^ self context receiver
 ]
 
-{ #category : #'method evaluation' }
+{ #category : 'method evaluation' }
 ASTInterpreter >> hasPrimitiveFailed: result [
 	"A primitive that fails doesn't always return Context primitiveFailToken but returns Context primitiveFailTokenFor: errorCode.
 	A possible errorCode is nil, which corresponds to Context primitiveFailToken.
@@ -296,19 +298,19 @@ ASTInterpreter >> hasPrimitiveFailed: result [
 	^false
 ]
 
-{ #category : #interpretation }
+{ #category : 'interpretation' }
 ASTInterpreter >> ifSkip: aReturnBlock [
 	gotoContext == false ifTrue: [ ^ self ].
 	aReturnBlock value.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ASTInterpreter >> initialize [
 	super initialize.
 	gotoContext := false.
 ]
 
-{ #category : #interpretation }
+{ #category : 'interpretation' }
 ASTInterpreter >> interpret: anASTNode [
 
 	currentNode := anASTNode.
@@ -316,12 +318,12 @@ ASTInterpreter >> interpret: anASTNode [
 	^ anASTNode acceptVisitor: self.
 ]
 
-{ #category : #interpretation }
+{ #category : 'interpretation' }
 ASTInterpreter >> interpretBlock: block [
 	^  self interpret: block body
 ]
 
-{ #category : #interpretation }
+{ #category : 'interpretation' }
 ASTInterpreter >> interpretDoIt: ast [
 	| result |
 
@@ -337,12 +339,12 @@ ASTInterpreter >> interpretDoIt: ast [
 	^ result
 ]
 
-{ #category : #interpretation }
+{ #category : 'interpretation' }
 ASTInterpreter >> interpretMethod: method [
 	^ self interpret: method body
 ]
 
-{ #category : #'method evaluation' }
+{ #category : 'method evaluation' }
 ASTInterpreter >> invokeMethod: aClosure on: receiver message: aMessage [
 	| result |
 
@@ -363,7 +365,7 @@ ASTInterpreter >> invokeMethod: aClosure on: receiver message: aMessage [
 	^ result
 ]
 
-{ #category : #'method evaluation' }
+{ #category : 'method evaluation' }
 ASTInterpreter >> invokePrimitiveMethod: aCompiledMethod on: receiver message: aMessage [
 	| result |
 	
@@ -377,7 +379,7 @@ ASTInterpreter >> invokePrimitiveMethod: aCompiledMethod on: receiver message: a
 		message: aMessage
 ]
 
-{ #category : #'method evaluation' }
+{ #category : 'method evaluation' }
 ASTInterpreter >> invokeReflectiveMethod: aClosure on: receiver message: aMessage [
 	| annotation selector result |
 	
@@ -398,12 +400,12 @@ ASTInterpreter >> invokeReflectiveMethod: aClosure on: receiver message: aMessag
 		message: aMessage
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ASTInterpreter >> isExplicitelyReturning [
 	^ gotoContext ~= false
 ]
 
-{ #category : #'message - sending' }
+{ #category : 'message - sending' }
 ASTInterpreter >> lookupSelector: selector in: class [
 	| currentClass |
 	currentClass := class.
@@ -413,7 +415,7 @@ ASTInterpreter >> lookupSelector: selector in: class [
 	^ nil
 ]
 
-{ #category : #context }
+{ #category : 'context' }
 ASTInterpreter >> methodContextFor: aCompiledMethod receiver: receiver message: aMessage [
 
 	context := AIMethodContext new
@@ -425,7 +427,7 @@ ASTInterpreter >> methodContextFor: aCompiledMethod receiver: receiver message: 
 					yourself.
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 ASTInterpreter >> object: receiver performMessageInSuperclass: aMessage [	
 	"Check if the message to perform is valid and if so, execute it"
 	
@@ -448,7 +450,7 @@ ASTInterpreter >> object: receiver performMessageInSuperclass: aMessage [
 	
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 ASTInterpreter >> object: receiver performMessageWith: aMessage [	
 	"transform the perform:[with:with:with:] methods in perform:withArguments: understood by ast-interpreter"
 	
@@ -460,7 +462,7 @@ ASTInterpreter >> object: receiver performMessageWith: aMessage [
 	
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 ASTInterpreter >> object: receiver performMessageWithArgs: aMessage [	
 	"transform the perform:withArguments: method in perform:withArguments:inSuperclass: understood by ast-interpreter"
 	
@@ -477,7 +479,7 @@ ASTInterpreter >> object: receiver performMessageWithArgs: aMessage [
 	
 ]
 
-{ #category : #context }
+{ #category : 'context' }
 ASTInterpreter >> popContext [
 	context die.
 	context := context outerContext.
@@ -485,44 +487,44 @@ ASTInterpreter >> popContext [
 	self updateGotoContext.
 ]
 
-{ #category : #slots }
+{ #category : 'slots' }
 ASTInterpreter >> readArgumentAt: index named: aName [
 	^ self context arguments at: index
 ]
 
-{ #category : #slots }
+{ #category : 'slots' }
 ASTInterpreter >> readArgumentAt: index node: aVariableNode [
 	
 	^ self context variableNamed: aVariableNode name
 ]
 
-{ #category : #slots }
+{ #category : 'slots' }
 ASTInterpreter >> readArgumentNamed: aName [
 	^ self context tempNamed: aName
 ]
 
-{ #category : #slots }
+{ #category : 'slots' }
 ASTInterpreter >> readInstVarAt: index named: name [
 	^ self currentSelf instVarAt: index
 ]
 
-{ #category : #slots }
+{ #category : 'slots' }
 ASTInterpreter >> readTemporaryAt: index named: name [
 	^ context variableNamed: name
 ]
 
-{ #category : #interpretation }
+{ #category : 'interpretation' }
 ASTInterpreter >> reflectiveFailedToken [
 	^#primitiveFailedASTInterpreterToken
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ASTInterpreter >> resetContext: aContext [
 	context := aContext.
 	gotoContext :=  false.
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 ASTInterpreter >> rootContextHandleSignal: aRootContext  message: aMessage [
 	| exception |
 	
@@ -538,7 +540,7 @@ ASTInterpreter >> rootContextHandleSignal: aRootContext  message: aMessage [
 		message: aMessage
 ]
 
-{ #category : #'message - sending' }
+{ #category : 'message - sending' }
 ASTInterpreter >> send: aMessage to: receiver [
 	^ self
 		send: aMessage
@@ -546,7 +548,7 @@ ASTInterpreter >> send: aMessage to: receiver [
 		class: (self classOf: receiver)
 ]
 
-{ #category : #'message - sending' }
+{ #category : 'message - sending' }
 ASTInterpreter >> send: aMessage to: receiver class: class [
 	| method |
 	
@@ -559,7 +561,7 @@ ASTInterpreter >> send: aMessage to: receiver class: class [
 		message: aMessage
 ]
 
-{ #category : #'message - sending' }
+{ #category : 'message - sending' }
 ASTInterpreter >> send: aMessage to: receiver class: class inNode: aNode [
 	| method |
 	
@@ -572,7 +574,7 @@ ASTInterpreter >> send: aMessage to: receiver class: class inNode: aNode [
 		message: aMessage
 ]
 
-{ #category : #'message - sending' }
+{ #category : 'message - sending' }
 ASTInterpreter >> sendCannotReturn: result from: returnContext [
 	| cannotReturn |
 	gotoContext := false.
@@ -581,38 +583,38 @@ ASTInterpreter >> sendCannotReturn: result from: returnContext [
 	^ self send: cannotReturn to: returnContext
 ]
 
-{ #category : #'message - sending' }
+{ #category : 'message - sending' }
 ASTInterpreter >> sendDoesNotUnderstandFor: aMessage to: receiver [
 	| dnu |
 	dnu := Message selector: #doesNotUnderstand: argument: aMessage.
 	^ self send: dnu to: receiver
 ]
 
-{ #category : #reflective }
+{ #category : 'reflective' }
 ASTInterpreter >> unhandledErrorDefaultAction: anUnhandledError  message: aMessage [
 
 	^ InterpretationError signalFor: anUnhandledError exception.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> updateGotoContext [
 
 	gotoContext == context
 		ifTrue: [ gotoContext := false ].
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitArgumentNode: aRBArgumentNode [ 
 	^ self visitVariableNode: aRBArgumentNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitArgumentVariableNode: aRBVariableNode [ 
 	
 	^ self visitVariableNode: aRBVariableNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitArrayNode: anArrayNode [
 	| array |
 	
@@ -625,7 +627,7 @@ ASTInterpreter >> visitArrayNode: anArrayNode [
 	^ array
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitAssignmentNode: anAssignmentNode [
 	| value variable |
 	
@@ -636,14 +638,14 @@ ASTInterpreter >> visitAssignmentNode: anAssignmentNode [
 	^ value
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitBlockNode: aBlockNode [
 	^ ASTBlockClosure new
 		homeContext: self context;
 		code: aBlockNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitCascadeNode: aCascadeNode [
 	| receiver lastResult |
 	
@@ -656,31 +658,31 @@ ASTInterpreter >> visitCascadeNode: aCascadeNode [
 	^ lastResult
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitClassVariableNode: aRBVariableNode [ 
 
 	^ self visitGlobalVariableNode: aRBVariableNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitLiteralArrayNode: aNode [
 	^ aNode value
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitLiteralNode: aLiteralNode [
 	^ aLiteralNode value
 	
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitLiteralValueNode: aLiteralNode [
 
 	^ self visitLiteralNode: aLiteralNode
 	
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitMessageNode: aMessageNode [
 	| receiver |
 
@@ -691,7 +693,7 @@ ASTInterpreter >> visitMessageNode: aMessageNode [
 	^ self visitMessageNode: aMessageNode receiver: receiver.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitMessageNode: aMessageNode receiver: receiver [
 	| arguments message lookUpClass|
 	
@@ -716,7 +718,7 @@ ASTInterpreter >> visitMessageNode: aMessageNode receiver: receiver [
 		inNode: aMessageNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitReturnNode: aReturnNode [
 	| returnValue |
 	
@@ -730,12 +732,12 @@ ASTInterpreter >> visitReturnNode: aReturnNode [
 	^ returnValue
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitSelfNode: aSelf [
 	^ self currentSelf
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitSequenceNode: aSequenceNode [
 	| lastResult |
 	
@@ -748,38 +750,38 @@ ASTInterpreter >> visitSequenceNode: aSequenceNode [
 	^ lastResult
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitSuperNode: aSelf [
 	^ self currentSelf
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitTemporaryNode: aRBTemporaryNode [ 
 	^ self visitVariableNode: aRBTemporaryNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitTemporaryVariableNode: aRBVariableNode [ 
 	
 	^ self visitTemporaryNode: aRBVariableNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitThisContextNode: thisContextNode [
 	^ self context
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 ASTInterpreter >> visitVariableNode: aVariableNode [
 	^ aVariableNode binding readWith: self inNode: aVariableNode
 ]
 
-{ #category : #slots }
+{ #category : 'slots' }
 ASTInterpreter >> write: aValue at: index named: name [
 	^ self currentSelf instVarAt: index put: aValue
 ]
 
-{ #category : #slots }
+{ #category : 'slots' }
 ASTInterpreter >> write: aValue temporaryAt: index named: name [
 	^ context tempNamed: name put: aValue
 ]

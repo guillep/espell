@@ -2,23 +2,25 @@
 I represent a named primitive that comes from a module.
 "
 Class {
-	#name : #EPNamedPrimitive,
-	#superclass : #EPPrimitive,
+	#name : 'EPNamedPrimitive',
+	#superclass : 'EPPrimitive',
 	#instVars : [
 		'name',
 		'module'
 	],
-	#category : 'Espell-LowLevel-Primitives'
+	#category : 'Espell-LowLevel-Primitives',
+	#package : 'Espell',
+	#tag : 'LowLevel-Primitives'
 }
 
-{ #category : #installing }
+{ #category : 'installing' }
 EPNamedPrimitive >> basicInstall: aPrimitive inResolver: aPrimitiveResolver [
 
 	self resolver: aPrimitiveResolver.
 	module installOn: aPrimitiveResolver
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 EPNamedPrimitive >> execute: anExecution [
 
 	| result |
@@ -28,19 +30,19 @@ EPNamedPrimitive >> execute: anExecution [
 	^self objectSpace objectMirrorOn: result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPNamedPrimitive >> module: aModule [ 
 
 	module := aModule
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPNamedPrimitive >> name [
 	
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPNamedPrimitive >> name: anObject [
 	
 	name := anObject

@@ -17,23 +17,25 @@ exception
 
 "
 Class {
-	#name : #ExceptionHandler,
-	#superclass : #Object,
+	#name : 'ExceptionHandler',
+	#superclass : 'Object',
 	#instVars : [
 		'block',
 		'exception'
 	],
-	#category : 'AST-Interpreter-Core-Base'
+	#category : 'AST-Interpreter-Core-Base',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'instance-creation' }
+{ #category : 'instance-creation' }
 ExceptionHandler class >> forMessage: aMessage [
 	^ self 
 		on: aMessage arguments first
 		do: aMessage arguments second
 ]
 
-{ #category : #'instance-creation' }
+{ #category : 'instance-creation' }
 ExceptionHandler class >> on: anException do: aBlock [
 	^ self new
 		exception: anException;
@@ -41,31 +43,31 @@ ExceptionHandler class >> on: anException do: aBlock [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ExceptionHandler >> block [
 
 	^ block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ExceptionHandler >> block: aBlock [
 	
 	block := aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ExceptionHandler >> exception [
 
 	^ exception
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ExceptionHandler >> exception: anException [
 
 	exception := anException
 ]
 
-{ #category : #'exception-handling' }
+{ #category : 'exception-handling' }
 ExceptionHandler >> handle: anError [
 
 	self flag: 'TODO:do the ensure magic here..
@@ -74,7 +76,7 @@ ExceptionHandler >> handle: anError [
 	^self block cull: anError
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ExceptionHandler >> handles: anError [
 
 	^self exception handles: anError

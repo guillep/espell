@@ -1,10 +1,12 @@
 Class {
-	#name : #EPMethodTrailer,
-	#superclass : #CompiledMethodTrailer,
-	#category : 'Espell-HighLevel'
+	#name : 'EPMethodTrailer',
+	#superclass : 'CompiledMethodTrailer',
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #decoding }
+{ #category : 'decoding' }
 EPMethodTrailer >> decodeNativeCodeTrailer [
 	| bytes platformId msz pos shift srcPtr |
 	
@@ -30,7 +32,7 @@ EPMethodTrailer >> decodeNativeCodeTrailer [
 	
 ]
 
-{ #category : #decoding }
+{ #category : 'decoding' }
 EPMethodTrailer >> decodeSourcePointer [
 
 	"Trailer is a source pointer"
@@ -44,7 +46,7 @@ EPMethodTrailer >> decodeSourcePointer [
 
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPMethodTrailer >> method: aMethod [
 
 	| flagByte |

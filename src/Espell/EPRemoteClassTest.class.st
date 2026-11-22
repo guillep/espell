@@ -1,20 +1,22 @@
 Class {
-	#name : #EPRemoteClassTest,
-	#superclass : #EPBaseTest,
+	#name : 'EPRemoteClassTest',
+	#superclass : 'EPBaseTest',
 	#instVars : [
 		'environment'
 	],
-	#category : 'Espell-Tests'
+	#category : 'Espell-Tests',
+	#package : 'Espell',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 EPRemoteClassTest >> setUp [
 
 	super setUp.
 	environment := EPRemoteEnvironment on: objectSpace backend systemDictionary.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPRemoteClassTest >> testBindingOfClassVariableReturnsClassVariableBinding [
 
 	| object binding |
@@ -26,7 +28,7 @@ EPRemoteClassTest >> testBindingOfClassVariableReturnsClassVariableBinding [
 	self assert: binding ownerName equals: #Character.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPRemoteClassTest >> testBindingOfGlobalReturnsGlobalBinding [
 
 	| object binding |
@@ -38,7 +40,7 @@ EPRemoteClassTest >> testBindingOfGlobalReturnsGlobalBinding [
 	self assert: binding name equals: #Object.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPRemoteClassTest >> testBindingOfInstanceVariableReturnsNil [
 
 	| object |
@@ -46,7 +48,7 @@ EPRemoteClassTest >> testBindingOfInstanceVariableReturnsNil [
 	self assert: (object bindingOf: 'tally') isNil.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPRemoteClassTest >> testBindingOfSharedPoolReturnsClassVariableBinding [
 
 	| object binding |
@@ -59,7 +61,7 @@ EPRemoteClassTest >> testBindingOfSharedPoolReturnsClassVariableBinding [
 	self assert: binding ownerName equals: #ChronologyConstants.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPRemoteClassTest >> testBindingisLookedUpInSuperclass [
 
 	| object binding |
@@ -72,7 +74,7 @@ EPRemoteClassTest >> testBindingisLookedUpInSuperclass [
 	self assert: binding ownerName equals: #Object.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPRemoteClassTest >> testClassName [
 
 	| remoteClass |
@@ -80,7 +82,7 @@ EPRemoteClassTest >> testClassName [
 	self assert: remoteClass name equals: HashedCollection name.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPRemoteClassTest >> testClassVariableNames [
 
 	| remoteClass |
@@ -88,7 +90,7 @@ EPRemoteClassTest >> testClassVariableNames [
 	self assert: remoteClass classVariableNames equals: Object classVarNames.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPRemoteClassTest >> testEmptyClassVariableNames [
 
 	| remoteClass |
@@ -96,7 +98,7 @@ EPRemoteClassTest >> testEmptyClassVariableNames [
 	self assert: remoteClass classVariableNames equals: ProtoObject classVarNames.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPRemoteClassTest >> testEmptyInstanceVariableNames [
 
 	| remoteClass |
@@ -104,7 +106,7 @@ EPRemoteClassTest >> testEmptyInstanceVariableNames [
 	self assert: remoteClass instanceVariableNames isEmpty.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 EPRemoteClassTest >> testInstanceVariableNames [
 
 	| remoteClass |

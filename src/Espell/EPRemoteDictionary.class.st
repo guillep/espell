@@ -1,10 +1,12 @@
 Class {
-	#name : #EPRemoteDictionary,
-	#superclass : #EPRemoteObject,
-	#category : 'Espell-HighLevel'
+	#name : 'EPRemoteDictionary',
+	#superclass : 'EPRemoteObject',
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteDictionary >> associationsDo: aBlock [
 
 	| array |
@@ -16,7 +18,7 @@ EPRemoteDictionary >> associationsDo: aBlock [
 			aBlock value: association  ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteDictionary >> at: aName [
 
 	self associationsDo: [ :association | 
@@ -25,7 +27,7 @@ EPRemoteDictionary >> at: aName [
 	^ KeyNotFound signalFor: aName in: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteDictionary >> at: aName put: aValue [
 
 	self associationsDo: [ :association | 
@@ -34,7 +36,7 @@ EPRemoteDictionary >> at: aName put: aValue [
 	^ KeyNotFound signalFor: aName in: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteDictionary >> bindingOf: aName [
 
 	self associationsDo: [ :association | 
@@ -43,7 +45,7 @@ EPRemoteDictionary >> bindingOf: aName [
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteDictionary >> includesKey: aName [
 
 	self associationsDo: [ :association | 
@@ -52,7 +54,7 @@ EPRemoteDictionary >> includesKey: aName [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteDictionary >> keys [
 
 	| keys |
@@ -62,7 +64,7 @@ EPRemoteDictionary >> keys [
 	^ keys
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteDictionary >> size [
 
 	^ (mirror instanceVariableAtIndex: 1) asSmallInteger

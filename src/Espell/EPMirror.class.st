@@ -2,22 +2,24 @@
 I am a mirror object providing basic operations to work on objects inside an object space.
 "
 Class {
-	#name : #EPMirror,
-	#superclass : #Object,
+	#name : 'EPMirror',
+	#superclass : 'Object',
 	#instVars : [
 		'target',
 		'backend'
 	],
-	#category : 'Espell-LowLevel-Mirrors'
+	#category : 'Espell-LowLevel-Mirrors',
+	#package : 'Espell',
+	#tag : 'LowLevel-Mirrors'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPMirror class >> on: aTargetObject [
 	self error: 'specify object space.'.
 	^self new target: aTargetObject; yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPMirror class >> on: aTargetObject from: aBackend [
 	^self new
 		target: aTargetObject;
@@ -25,7 +27,7 @@ EPMirror class >> on: aTargetObject from: aBackend [
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 EPMirror >> = anotherMirror [
 	
 	(anotherMirror isKindOf: self class) ifFalse: [ ^ false ].
@@ -35,31 +37,31 @@ EPMirror >> = anotherMirror [
 	^ self pointsToSameObject: anotherMirror
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asBoolean [
 
 	^ backend fromRemoteBoolean: self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asClassMirror [
 
 	^backend classMirrorOn: self target
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asContextMirror [
 	
 	^backend contextMirrorOn: self target
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asFloatMirror [
 
 	^backend floatMirrorOn: self target
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asLocalLiteral [
 	(self basicClass pointsToSameObject: (self backend byteStringClass))
 		ifTrue: [ ^self asLocalString ].
@@ -90,25 +92,25 @@ EPMirror >> asLocalLiteral [
 	^'not a translateable literal'
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asLocalString [
 	
 	^ backend fromRemoteByteString: self.
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asMethodMirror [
 
 	^backend methodMirrorOn: self target
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asProcessMirror [
 
 	^backend processMirrorOn: self target
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asRemoteClassOrTraitFromEnvironment: anEPRemoteEnvironment [
 	^ EPRemoteClass 
 		on: self
@@ -116,89 +118,89 @@ EPMirror >> asRemoteClassOrTraitFromEnvironment: anEPRemoteEnvironment [
 		
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asSchedulerMirror [
 	
 	^ backend processSchedulerMirrorOn: self target
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asSmallInteger [
 	"Use carefully"
 	^ backend integerValueOf: self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 EPMirror >> asTraitMirror [
 	
 	^backend traitMirrorOn: self target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMirror >> at: anIndex [
 
 	^ backend object: target at: anIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMirror >> at: anIndex put: aMirror [
 
 	backend object: target address at: anIndex put: aMirror target address
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPMirror >> backend [
 
 	^ backend
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPMirror >> backend: aBackend [
 
 	backend := aBackend
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMirror >> basicAt: anIndex [
 	^self at: anIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMirror >> basicAt: anIndex put: anObject [
 	self at: anIndex put: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMirror >> basicClass [
 	
 	^ backend classMirrorOn: self target basicClass
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 EPMirror >> basicIdentityHash [
 
 	^ backend basicIdentityHashOf: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMirror >> basicSize [
 	
 	^ backend basicSizeOf: self
 ]
 
-{ #category : #special }
+{ #category : 'special' }
 EPMirror >> becomeInto: anObjectMirror [
 
 	backend become: self into: anObjectMirror
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMirror >> byteAt: anIndex [
 
 	^ backend object: target byteAt: anIndex - 1
 ]
 
-{ #category : #special }
+{ #category : 'special' }
 EPMirror >> copy [
 
 	"If we put everything in one line it sends the #mirrorOn: message to self O_o... bug?"
@@ -207,19 +209,19 @@ EPMirror >> copy [
 	^ backend mirrorOn: copy
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPMirror >> copy: handle [
 	
 	<primitive: 148>
 ]
 
-{ #category : #special }
+{ #category : 'special' }
 EPMirror >> executePrimitive: number [
 
 	^ self executePrimitive: number withArgs: #()
 ]
 
-{ #category : #special }
+{ #category : 'special' }
 EPMirror >> executePrimitive: number withArgs: args [
 
 	| result |
@@ -230,7 +232,7 @@ EPMirror >> executePrimitive: number withArgs: args [
 	^ backend mirrorOn: result
 ]
 
-{ #category : #special }
+{ #category : 'special' }
 EPMirror >> executePrimitiveMethod: aCompiledMethod withArguments: arguments [
 
 	| result |
@@ -243,12 +245,12 @@ EPMirror >> executePrimitiveMethod: aCompiledMethod withArguments: arguments [
 	^ result.
 ]
 
-{ #category : #'public api' }
+{ #category : 'public api' }
 EPMirror >> fixedSize [
 	^self basicClass instanceFixedSize
 ]
 
-{ #category : #'public api' }
+{ #category : 'public api' }
 EPMirror >> getClass [
 	
 	| mirror |
@@ -259,13 +261,13 @@ EPMirror >> getClass [
 			ifFalse: [ mirror ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 EPMirror >> hash [
 
 	^ self identityHash
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 EPMirror >> identityHash [
 
 	^ self isSmallInteger
@@ -273,78 +275,78 @@ EPMirror >> identityHash [
 		ifFalse: [ self basicIdentityHash bitShift: 18 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMirror >> instanceVariableAtIndex: index [
 
 	^ target instanceVariableAtIndex: index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMirror >> instanceVariableAtIndex: index put: aReference [
 	
 	backend object: target address instVarAt: index put: aReference target address
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMirror >> instanceVariableMapping [
 	^ self backend instanceVariableMapping
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPMirror >> isMethodContextClass [
 	
 	^ backend contextClass pointsToSameObject: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPMirror >> isMethodProperties [
 
 	self halt.
 	^ self objectSpace isMethodProperties: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPMirror >> isNilObject [
 	
 	^ backend nilObject pointsToSameObject: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPMirror >> isOzMirror [
 
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 EPMirror >> isSelfEvaluating [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPMirror >> isSmallInteger [
 	
 	^ target isSmallInteger
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 EPMirror >> longPrintOn: aStream limitedTo: sizeLimit indent: indent [
 
 	^ self printOn: aStream
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPMirror >> markExperimentalBit: aBoolean [
 	
 	self executePrimitive: 96 withArgs: { aBoolean }.
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 EPMirror >> pointsToSameObject: aMirror [
 	^self target = aMirror target
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 EPMirror >> primitiveClass [
 
 	"this method is very special. You should not call it if you don't know exactly what you are doing.
@@ -356,7 +358,7 @@ EPMirror >> primitiveClass [
 	^ (self executePrimitive: 111) target
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 EPMirror >> printOn: aStream [
 	aStream
 		nextPutAll: self class name;
@@ -365,7 +367,7 @@ EPMirror >> printOn: aStream [
 		nextPutAll: ')'
 ]
 
-{ #category : #'public api' }
+{ #category : 'public api' }
 EPMirror >> setClass: aClassMirror [
 	[
 		backend classHandle: aClassMirror target setTo: self target
@@ -377,43 +379,43 @@ EPMirror >> setClass: aClassMirror [
 	]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 EPMirror >> shouldBePrintedAsLiteral [
 
 	^ false
 ]
 
-{ #category : #'public api' }
+{ #category : 'public api' }
 EPMirror >> size [
 	
 	^ self basicSize
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPMirror >> target [
 
 	^target
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPMirror >> target: aTargetObject [
 
 	target := aTargetObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPMirror >> uncheckedAt: anIndex [
 
 	^ backend object: target uncheckedAt: anIndex - 1
 ]
 
-{ #category : #'public api' }
+{ #category : 'public api' }
 EPMirror >> value [
 	self deprecated: 'This was meant for associations'.
 	^self instanceVariableAtIndex: 2
 ]
 
-{ #category : #'public api' }
+{ #category : 'public api' }
 EPMirror >> variableSize [
 
 	self deprecated: 'Use #basicSize'.

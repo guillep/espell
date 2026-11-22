@@ -1,16 +1,17 @@
 Class {
-	#name : #BaselineOfEspell,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfEspell
+	#name : 'BaselineOfEspell',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfEspell',
+	#package : 'BaselineOfEspell'
 }
 
-{ #category : #'development support' }
+{ #category : 'development support' }
 BaselineOfEspell class >> DevelopmentSupport [
 	<apiDocumentation>
 	^ self
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BaselineOfEspell class >> baseConfigurationClassIfAbsent: t1 [
 	^ Smalltalk
 		at: #MetacelloBaseConfiguration
@@ -19,13 +20,13 @@ BaselineOfEspell class >> baseConfigurationClassIfAbsent: t1 [
 			Smalltalk at: #MetacelloBaseConfiguration ifAbsent: t1 ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BaselineOfEspell class >> ensureMetacello [
 	(self baseConfigurationClassIfAbsent: [ nil ]) ensureMetacello.
 	^ self
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BaselineOfEspell class >> ensureMetacelloBaseConfiguration [
 	Smalltalk
 		at: #MetacelloBaseConfiguration
@@ -41,42 +42,42 @@ BaselineOfEspell class >> ensureMetacelloBaseConfiguration [
 	^ self
 ]
 
-{ #category : #'metacello tool support' }
+{ #category : 'metacello tool support' }
 BaselineOfEspell class >> isMetacelloConfig [
 	^ true
 ]
 
-{ #category : #loading }
+{ #category : 'loading' }
 BaselineOfEspell class >> load [
 	<apiDocumentation>
 	^ (self project version: #stable) load
 ]
 
-{ #category : #loading }
+{ #category : 'loading' }
 BaselineOfEspell class >> loadBleedingEdge [
 	<apiDocumentation>
 	^ (self project version: #bleedingEdge) load
 ]
 
-{ #category : #loading }
+{ #category : 'loading' }
 BaselineOfEspell class >> loadDevelopment [
 	<apiDocumentation>
 	^ (self project version: #development) load
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaselineOfEspell class >> project [
 	^ self new project
 ]
 
-{ #category : #'development support' }
+{ #category : 'development support' }
 BaselineOfEspell class >> validate [
 	<apiDocumentation>
 	self ensureMetacello.
 	^ ((Smalltalk at: #MetacelloToolBox) validateConfiguration: self debug: #() recurse: false) explore
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfEspell >> baseline: spec [
 	<baseline>
 	spec

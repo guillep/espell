@@ -1,36 +1,38 @@
 Class {
-	#name : #EPDebugSession,
-	#superclass : #Object,
+	#name : 'EPDebugSession',
+	#superclass : 'Object',
 	#instVars : [
 		'interruptedContext'
 	],
-	#category : 'Espell-Debug'
+	#category : 'Espell-Debug',
+	#package : 'Espell',
+	#tag : 'Debug'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPDebugSession class >> debuggingActionsForPragmas: aCollection for: aSpecDebugger [ 
 	
 	^ #()
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 EPDebugSession class >> process: aProcess context: aContext [
 	^ self new
 		process: aProcess context: aContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPDebugSession >> interruptedContext [
 	^ interruptedContext
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 EPDebugSession >> isContextPostMortem: anAIMethodContext [ 
 	
 	^ false
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPDebugSession >> process: aProcess context: aContext [
 
 	"aProcess stepToSendOrReturn ."
@@ -41,7 +43,7 @@ EPDebugSession >> process: aProcess context: aContext [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPDebugSession >> selectedCodeRangeForContext: aContext [
 	
 	aContext isDead ifTrue:
@@ -49,7 +51,7 @@ EPDebugSession >> selectedCodeRangeForContext: aContext [
 	^ aContext currentExecutedNode debugHighlightRange
 ]
 
-{ #category : #stack }
+{ #category : 'stack' }
 EPDebugSession >> stackOfSize: limit [
 	| stack context |
 	stack := OrderedCollection new.
@@ -58,7 +60,7 @@ EPDebugSession >> stackOfSize: limit [
 	^ stack
 ]
 
-{ #category : #'changing process state' }
+{ #category : 'changing process state' }
 EPDebugSession >> terminate [
 	"Nothing for the moment"
 ]

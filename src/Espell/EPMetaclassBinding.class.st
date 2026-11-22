@@ -1,10 +1,12 @@
 Class {
-	#name : #EPMetaclassBinding,
-	#superclass : #EPLiteralBinding,
-	#category : 'Espell-HighLevel'
+	#name : 'EPMetaclassBinding',
+	#superclass : 'EPLiteralBinding',
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 EPMetaclassBinding >> asLiteralInObjectSpace: anObjectSpace [
 
 	| theClass |

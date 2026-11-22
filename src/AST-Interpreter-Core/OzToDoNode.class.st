@@ -1,30 +1,32 @@
 Class {
-	#name : #OzToDoNode,
-	#superclass : #OzOptimizedMessageNode,
+	#name : 'OzToDoNode',
+	#superclass : 'OzOptimizedMessageNode',
 	#instVars : [
 		'fromNode',
 		'toNode',
 		'blockNode'
 	],
-	#category : 'AST-Interpreter-Core-Optimized'
+	#category : 'AST-Interpreter-Core-Optimized',
+	#package : 'AST-Interpreter-Core',
+	#tag : 'Optimized'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 OzToDoNode >> acceptVisitor: aVisitor [
 	^ aVisitor visitToDoNode: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OzToDoNode >> blockNode [
 	^ blockNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OzToDoNode >> fromNode [
 	^ fromNode
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OzToDoNode >> replace: aMessageNode [
 
 	fromNode := aMessageNode receiver.
@@ -34,7 +36,7 @@ OzToDoNode >> replace: aMessageNode [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OzToDoNode >> toNode [
 	^ toNode
 ]

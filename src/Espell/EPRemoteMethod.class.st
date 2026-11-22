@@ -1,41 +1,43 @@
 Class {
-	#name : #EPRemoteMethod,
-	#superclass : #EPRemoteObject,
-	#category : 'Espell-HighLevel'
+	#name : 'EPRemoteMethod',
+	#superclass : 'EPRemoteObject',
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #'source code' }
+{ #category : 'source code' }
 EPRemoteMethod >> ast [
 	
 	^ RBExplicitVariableParser parseMethod: self sourceCode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteMethod >> byteAt: anInteger [ 
 	
 	^ mirror byteAt: anInteger
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 EPRemoteMethod >> initializeWithMirror: aMirror environment: anEnvironment [
 	^ super
 		initializeWithMirror: aMirror asMethodMirror
 		environment: anEnvironment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteMethod >> selector [
 	
 	^ mirror selector
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteMethod >> size [
 	
 	^ mirror size
 ]
 
-{ #category : #'source code' }
+{ #category : 'source code' }
 EPRemoteMethod >> sourceCode [
 
 	^ environment sourceCodeForMethod: self

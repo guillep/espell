@@ -1,20 +1,22 @@
 Class {
-	#name : #EPRemoteTrait,
-	#superclass : #EPRemoteObject,
-	#category : 'Espell-HighLevel'
+	#name : 'EPRemoteTrait',
+	#superclass : 'EPRemoteObject',
+	#category : 'Espell-HighLevel',
+	#package : 'Espell',
+	#tag : 'HighLevel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteTrait >> allSlots [
 	^ #()
 ]
 
-{ #category : #binding }
+{ #category : 'binding' }
 EPRemoteTrait >> binding [
 	^ self bindingOf: self name
 ]
 
-{ #category : #binding }
+{ #category : 'binding' }
 EPRemoteTrait >> bindingOf: aString [
 	(environment includesClassNamed: aString) ifTrue: [
 		^ EPGlobalBinding new
@@ -25,7 +27,7 @@ EPRemoteTrait >> bindingOf: aString [
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteTrait >> classSide [
 
 	^  (EPRemoteClassTrait 
@@ -34,7 +36,7 @@ EPRemoteTrait >> classSide [
 			instanceSide:  self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteTrait >> methodDictionary [
 
 	^ EPRemoteMethodDictionary 
@@ -42,7 +44,7 @@ EPRemoteTrait >> methodDictionary [
 		environment: environment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 EPRemoteTrait >> name [
 
 	^ mirror  backend fromRemoteByteSymbol: (mirror instanceVariableAtIndex: (self instanceVariableMapping traitNameIndex))

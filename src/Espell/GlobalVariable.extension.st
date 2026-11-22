@@ -1,6 +1,6 @@
-Extension { #name : #GlobalVariable }
+Extension { #name : 'GlobalVariable' }
 
-{ #category : #'*Espell' }
+{ #category : '*Espell' }
 GlobalVariable >> asLiteralInObjectSpace: anObjectSpace [
 
 	| espellGlobal |
