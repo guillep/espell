@@ -1,7 +1,7 @@
 Class {
 	#name : #EPRemoteClass,
 	#superclass : #EPRemoteObject,
-	#category : 'Espell-HighLevel'
+	#category : #'Espell-HighLevel'
 }
 
 { #category : #'class variables' }
@@ -52,7 +52,7 @@ EPRemoteClass >> bindingOf: aString [
 				yourself ].
 	self sharedPools
 		do:
-			[ :pool | (pool bindingOf: aString) ifNotNilDo: [ :binding | ^ binding ] ].
+			[ :pool | (pool bindingOf: aString) ifNotNil: [ :binding | ^ binding ] ].
 	(self superclass bindingOf: aString)
 		ifNotNil: [ :binding | ^ binding ].
 	(environment includesClassNamed: aString)
