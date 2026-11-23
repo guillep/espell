@@ -1,3 +1,12 @@
+"
+I build the `EPTestKernel` shared by the tests of Espell, once for all the test classes that use me.
+
+## Variables
+
+### Instance variables
+
+- **kernel** (`EPTestKernel`): the kernel built in `#setUp`.
+"
 Class {
 	#name : #EPTestResource,
 	#superclass : #TestResource,

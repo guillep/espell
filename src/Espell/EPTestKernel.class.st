@@ -1,18 +1,35 @@
 "
-I build a small kernel in an object space simulated by VMMaker, for the tests of Espell.
+I build a small kernel in an object space simulated by VMMaker, so the tests of Espell run without a bootstrapped image. `EPTestResource` creates me once for all the tests.
 
-I create the objects the VM needs (nil, false, true, the free lists, the class table and the special objects array) as the bootstrap does, then the classes described in `#classDefinitions` with their metaclasses, names, instance variables, class pools and shared pools, and a system dictionary holding them.
+I follow the first steps of the bootstrap: I create the objects the VM needs (nil, false, true, the free lists, the class table and the special objects array), then the classes of `#classSpecifications` with their metaclasses, and a system dictionary holding them. Then I prepare the simulator to execute primitives.
 
-The classes use the class shape that `EPInstanceVariableMapping` expects. Metaclasses have the same slots plus `thisClass`.
+I also play the role of the image builder of the bootstrap for the AST interpreter: I am its code provider and its environment. I describe the kernel in a Ring model with the methods of `#methodSpecifications`, map the class mirrors to their Ring definitions (`#classForClassMirror:`) and answer the globals.
 
-    EPTestKernel new build objectSpace
+## Design Rationale
+
+- The classes use the class shape that `EPInstanceVariableMapping` expects. Metaclass is a subclass of Class, so that metaclasses have the same slots, plus `thisClass`.
+- The dictionaries are not hashed, since Espell reads them with a linear search.
+- I find the Ring definition of a class mirror by the name of the class, not by its address, since preparing the simulator moves the objects.
+
+## Variables
+
+### Instance variables
+
+- **objectSpace** (`EPObjectSpace`): the object space of the kernel, on an `EPSimulatorBackend`.
+- **classes** (`Dictionary` of `Symbol` -> `EPClassMirror`): the classes of the kernel by name.
+- **systemDefinition** (`RGEnvironment`): the Ring model of the kernel, where the AST interpreter reads the methods.
+- **interpreter** (`EPASTEvaluator`): the AST interpreter running code in the kernel.
+- **globals** (`Dictionary`): the globals that interpreted code assigns, which are not classes.
 "
 Class {
 	#name : #EPTestKernel,
 	#superclass : #Object,
 	#instVars : [
 		'objectSpace',
-		'classes'
+		'classes',
+		'systemDefinition',
+		'interpreter',
+		'globals'
 	],
 	#category : #'Espell-Tests'
 }
@@ -21,7 +38,7 @@ Class {
 EPTestKernel >> allInstanceVariableNamesOf: aName [
 
 	| superclassName |
-	superclassName := (self definitionNamed: aName) second.
+	superclassName := (self specificationOf: aName) second.
 	^ (superclassName
 		   ifNil: [ #(  ) ]
 		   ifNotNil: [ self allInstanceVariableNamesOf: superclassName ]) , (self instanceVariableNamesOf: aName)
@@ -36,7 +53,7 @@ EPTestKernel >> allocateClassTable [
 	memory := self objectMemory.
 	tableRoot := memory allocateSlots: memory classTableRootSlots + memory hiddenRootSlots format: memory arrayFormat classIndex: memory arrayClassIndexPun.
 	memory nilFieldsOf: tableRoot.
-	numberOfPages := (memory classTablePageSize + (self classDefinitions size * 2) + memory classTableMinorIndexMask / memory classTablePageSize) truncated.
+	numberOfPages := (memory classTablePageSize + (self classSpecifications size * 2) + memory classTableMinorIndexMask / memory classTablePageSize) truncated.
 	1 to: numberOfPages do: [ :index | 
 		| page |
 		page := memory allocateSlots: memory classTablePageSize format: memory arrayFormat classIndex: memory arrayClassIndexPun.
@@ -61,6 +78,15 @@ EPTestKernel >> backend [
 	^ objectSpace backend
 ]
 
+{ #category : #'code provider' }
+EPTestKernel >> bindingOf: aName [
+
+	(self includesClassNamed: aName) ifFalse: [ ^ nil ].
+	^ EPGlobalBinding new
+		  name: aName objectSpace: self;
+		  yourself
+]
+
 { #category : #building }
 EPTestKernel >> build [
 
@@ -71,11 +97,42 @@ EPTestKernel >> build [
 		installSpecialClasses;
 		initializeClasses;
 		createSystemDictionary;
-		prepareForExecution
+		prepareForExecution;
+		createSystemDefinition;
+		createInterpreter
+]
+
+{ #category : #'code provider' }
+EPTestKernel >> classForClassMirror: aClassMirror [
+
+	"Answer the Ring definition of a class or a metaclass of the kernel."
+
+	(self isMeta: aClassMirror) ifTrue: [ ^ (self definitionNamed: (self instanceSideOf: aClassMirror) className) classSide ].
+	^ self definitionNamed: aClassMirror className
+]
+
+{ #category : #'code provider' }
+EPTestKernel >> classLoader [
+
+	"The AST evaluator asks the class loader whether a do-it is a class definition. The kernel has no class loader."
+
+	^ self
+]
+
+{ #category : #accessing }
+EPTestKernel >> classMirrorNamed: aName [
+
+	^ classes at: aName
+]
+
+{ #category : #'code provider' }
+EPTestKernel >> classNamed: aName [
+
+	^ (self classMirrorNamed: aName) asRemoteClassOrTraitFromEnvironment: self
 ]
 
 { #category : #definitions }
-EPTestKernel >> classDefinitions [
+EPTestKernel >> classSpecifications [
 
 	"Name, superclass, layout, instance variables, class variables and shared pools of the classes of the kernel, superclasses first.
 	Metaclass is a subclass of Class so that metaclasses have the slots of the classes that EPInstanceVariableMapping expects, plus thisClass."
@@ -96,17 +153,11 @@ EPTestKernel >> classDefinitions [
 	     #( #SmalltalkImage #Object #fixed 'globals' '' '' ) )
 ]
 
-{ #category : #accessing }
-EPTestKernel >> classNamed: aName [
-
-	^ classes at: aName
-]
-
 { #category : #building }
 EPTestKernel >> createClassNamed: aName [
 
 	| metaclass class |
-	metaclass := (self classNamed: #Metaclass) basicNew asClassMirror.
+	metaclass := (self classMirrorNamed: #Metaclass) basicNew asClassMirror.
 	metaclass format: (self formatOf: #Class).
 	class := metaclass basicNew asClassMirror.
 	class format: (self formatOf: aName).
@@ -117,7 +168,19 @@ EPTestKernel >> createClassNamed: aName [
 EPTestKernel >> createClasses [
 
 	self createMetaclass.
-	self classDefinitions do: [ :definition | definition first = #Metaclass ifFalse: [ self createClassNamed: definition first ] ]
+	self classSpecifications do: [ :definition | definition first = #Metaclass ifFalse: [ self createClassNamed: definition first ] ]
+]
+
+{ #category : #building }
+EPTestKernel >> createInterpreter [
+
+	interpreter := EPASTEvaluator new
+		               codeProvider: self;
+		               environment: self;
+		               objectSpace: objectSpace;
+		               interpreterClass: EPTestASTInterpreter;
+		               yourself.
+	objectSpace interpreter: interpreter
 ]
 
 { #category : #building }
@@ -145,14 +208,41 @@ EPTestKernel >> createObjectSpace [
 ]
 
 { #category : #building }
+EPTestKernel >> createSystemDefinition [
+
+	"Describe the classes and the methods of the kernel in a Ring model. The AST interpreter reads the methods there, as it reads the sources of the bootstrapped kernel in the bootstrap."
+
+	systemDefinition := RGEnvironment new.
+	globals := Dictionary new.
+	self classSpecifications do: [ :specification | 
+		| class |
+		class := systemDefinition ensureClassNamed: specification first.
+		specification second ifNotNil: [ :superclassName | class superclass: (systemDefinition ensureClassNamed: superclassName) ].
+		class
+			instanceVariables: (self instanceVariableNamesOf: specification first);
+			classVariables: (specification at: 5) substrings;
+			sharedPools: (specification at: 6) substrings ].
+	systemDefinition
+		clean;
+		fixProtoObjectClassSuperclass.
+	"Ring leaves the superclass of ProtoObject unresolved, and an unresolved class is its own superclass, so looking up a missing selector would never end."
+	(self definitionNamed: #ProtoObject) superclass: nil.
+	self methodSpecifications do: [ :specification | 
+		| behavior |
+		behavior := self definitionNamed: specification first.
+		specification second = #class ifTrue: [ behavior := behavior classSide ].
+		behavior compile: specification third classified: 'kernel' ]
+]
+
+{ #category : #building }
 EPTestKernel >> createSystemDictionary [
 
 	| systemDictionary smalltalk |
 	systemDictionary := self
 		                    newDictionaryOf: #SystemDictionary
-		                    withAll: (self classDefinitions collect: [ :definition | objectSpace newAssociationWithKey: (self symbol: definition first) andValue: (self classNamed: definition first) ]).
+		                    withAll: (self classSpecifications collect: [ :definition | objectSpace newAssociationWithKey: (self symbol: definition first) andValue: (self classMirrorNamed: definition first) ]).
 	classes do: [ :class | class instanceVariableAtIndex: (self slotIndexOf: #environment in: #Class) put: systemDictionary ].
-	smalltalk := (self classNamed: #SmalltalkImage) basicNew.
+	smalltalk := (self classMirrorNamed: #SmalltalkImage) basicNew.
 	smalltalk instanceVariableAtIndex: self backend instanceVariableMapping smalltalkImageGlobalsIndex put: systemDictionary.
 	self backend smalltalkInstance: smalltalk.
 	objectSpace environment: ((EPSystemDictionary withSystemDictionary: systemDictionary)
@@ -180,10 +270,10 @@ EPTestKernel >> createVMObjects [
 		trueObject: objectSpace trueObject
 ]
 
-{ #category : #definitions }
+{ #category : #'code provider' }
 EPTestKernel >> definitionNamed: aName [
 
-	^ self classDefinitions detect: [ :definition | definition first = aName ]
+	^ systemDefinition ask behaviorNamed: aName
 ]
 
 { #category : #definitions }
@@ -192,7 +282,7 @@ EPTestKernel >> formatOf: aName [
 	"The format of the instances of the class: the instance specification shifted by 16 bits plus the number of instance variables."
 
 	| layout size |
-	layout := (self definitionNamed: aName) third.
+	layout := (self specificationOf: aName) third.
 	size := self instanceSizeOf: aName.
 	layout = #immediate ifTrue: [ ^ 7 << 16 ].
 	layout = #bytes ifTrue: [ ^ 16 << 16 + size ].
@@ -206,18 +296,37 @@ EPTestKernel >> formatOf: aName [
 		   ifFalse: [ 1 ]) << 16 + size
 ]
 
+{ #category : #'code provider' }
+EPTestKernel >> globalNamed: aName [
+
+	(self includesClassNamed: aName) ifTrue: [ ^ self classMirrorNamed: aName asSymbol ].
+	^ globals at: aName
+]
+
+{ #category : #'code provider' }
+EPTestKernel >> globalNamed: aName put: aValue [
+
+	globals at: aName put: aValue
+]
+
+{ #category : #'code provider' }
+EPTestKernel >> includesClassNamed: aName [
+
+	^ classes includesKey: aName asSymbol
+]
+
 { #category : #building }
 EPTestKernel >> initializeClassNamed: aName [
 
 	| definition class metaclass mapping |
-	definition := self definitionNamed: aName.
-	class := self classNamed: aName.
+	definition := self specificationOf: aName.
+	class := self classMirrorNamed: aName.
 	metaclass := class basicClass asClassMirror.
 	mapping := self backend instanceVariableMapping.
 	class
 		instanceVariableAtIndex: mapping classSuperclassIndex put: (definition second
 				 ifNil: [ objectSpace nilObject ]
-				 ifNotNil: [ :superclassName | self classNamed: superclassName ]);
+				 ifNotNil: [ :superclassName | self classMirrorNamed: superclassName ]);
 		methodDictionary: self newMethodDictionary;
 		instanceVariableAtIndex: mapping classInstanceVariableNamesIndex put: (self newArrayWithAll: ((self instanceVariableNamesOf: aName) collect: [ :each | self symbol: each ]));
 		basicSetClassName: (self symbol: aName);
@@ -225,8 +334,8 @@ EPTestKernel >> initializeClassNamed: aName [
 		instanceVariableAtIndex: mapping classSharedPoolsIndex put: (self newSharedPoolsFor: aName).
 	metaclass
 		instanceVariableAtIndex: mapping classSuperclassIndex put: (definition second
-				 ifNil: [ self classNamed: #Class ]
-				 ifNotNil: [ :superclassName | (self classNamed: superclassName) basicClass ]);
+				 ifNil: [ self classMirrorNamed: #Class ]
+				 ifNotNil: [ :superclassName | (self classMirrorNamed: superclassName) basicClass ]);
 		methodDictionary: self newMethodDictionary;
 		instanceVariableAtIndex: mapping classInstanceVariableNamesIndex put: (self newArrayWithAll: #(  ));
 		instanceVariableAtIndex: (self slotIndexOf: #thisClass in: #Metaclass) put: class
@@ -235,7 +344,7 @@ EPTestKernel >> initializeClassNamed: aName [
 { #category : #building }
 EPTestKernel >> initializeClasses [
 
-	self classDefinitions do: [ :definition | self initializeClassNamed: definition first ]
+	self classSpecifications do: [ :definition | self initializeClassNamed: definition first ]
 ]
 
 { #category : #building }
@@ -244,22 +353,28 @@ EPTestKernel >> installSpecialClasses [
 	"Tell the backend which classes the VM knows. This also puts the classes of the immediate objects and Array at their fixed indexes in the class table."
 
 	self backend
-		smallIntegerClass: (self classNamed: #SmallInteger);
-		characterClass: (self classNamed: #Character);
-		arrayClass: (self classNamed: #Array);
-		byteStringClass: (self classNamed: #ByteString);
-		byteSymbolClass: (self classNamed: #ByteSymbol);
-		symbolTableClass: (self classNamed: #Symbol);
-		byteArrayClass: (self classNamed: #ByteArray);
-		associationClass: (self classNamed: #Association);
-		largePositiveIntegerClass: (self classNamed: #LargePositiveInteger);
-		largeNegativeIntegerClass: (self classNamed: #LargeNegativeInteger);
-		methodClass: (self classNamed: #CompiledMethod);
-		compiledBlockClass: (self classNamed: #CompiledBlock);
-		contextClass: (self classNamed: #Context).
-	objectSpace nilObject setClass: (self classNamed: #UndefinedObject).
-	objectSpace falseObject setClass: (self classNamed: #False).
-	objectSpace trueObject setClass: (self classNamed: #True)
+		smallIntegerClass: (self classMirrorNamed: #SmallInteger);
+		characterClass: (self classMirrorNamed: #Character);
+		arrayClass: (self classMirrorNamed: #Array);
+		byteStringClass: (self classMirrorNamed: #ByteString);
+		byteSymbolClass: (self classMirrorNamed: #ByteSymbol);
+		symbolTableClass: (self classMirrorNamed: #Symbol);
+		byteArrayClass: (self classMirrorNamed: #ByteArray);
+		associationClass: (self classMirrorNamed: #Association);
+		largePositiveIntegerClass: (self classMirrorNamed: #LargePositiveInteger);
+		largeNegativeIntegerClass: (self classMirrorNamed: #LargeNegativeInteger);
+		methodClass: (self classMirrorNamed: #CompiledMethod);
+		compiledBlockClass: (self classMirrorNamed: #CompiledBlock);
+		contextClass: (self classMirrorNamed: #Context).
+	objectSpace nilObject setClass: (self classMirrorNamed: #UndefinedObject).
+	objectSpace falseObject setClass: (self classMirrorNamed: #False).
+	objectSpace trueObject setClass: (self classMirrorNamed: #True)
+]
+
+{ #category : #'code provider' }
+EPTestKernel >> instanceSideOf: aMetaclassMirror [
+
+	^ (aMetaclassMirror instanceVariableAtIndex: (self slotIndexOf: #thisClass in: #Metaclass)) asClassMirror
 ]
 
 { #category : #definitions }
@@ -271,7 +386,69 @@ EPTestKernel >> instanceSizeOf: aName [
 { #category : #definitions }
 EPTestKernel >> instanceVariableNamesOf: aName [
 
-	^ ((self definitionNamed: aName) at: 4) substrings collect: [ :each | each asSymbol ]
+	^ ((self specificationOf: aName) at: 4) substrings collect: [ :each | each asSymbol ]
+]
+
+{ #category : #accessing }
+EPTestKernel >> interpreter [
+
+	^ interpreter
+]
+
+{ #category : #'code provider' }
+EPTestKernel >> isClassDefinition: aString [
+
+	^ false
+]
+
+{ #category : #'code provider' }
+EPTestKernel >> isMeta: aClassMirror [
+
+	^ aClassMirror basicClass target address = (self classMirrorNamed: #Metaclass) target address
+]
+
+{ #category : #'code provider' }
+EPTestKernel >> metaclassForClassMirror: aClassMirror [
+
+	^ EPRemoteMetaClass on: aClassMirror environment: self
+]
+
+{ #category : #definitions }
+EPTestKernel >> methodSpecifications [
+
+	"Class, side and source of the methods that the tests interpret."
+
+	^ #( #( #Object #instance 'yourself
+	^ self' ) #( #Object #instance 'initialize
+	^ self' ) #( #Object #class 'dependentsFields
+	^ DependentsFields' ) #( #Object #class 'dependentsFields: anObject
+	DependentsFields := anObject' ) #( #Behavior #instance 'basicNew
+	<primitive: 70>
+	^ nil' ) #( #Behavior #instance 'basicNew: anInteger
+	<primitive: 71>
+	^ nil' ) #( #Behavior #instance 'new
+	^ self basicNew initialize' ) #( #Behavior #instance 'new: anInteger
+	^ (self basicNew: anInteger) initialize' ) #( #SmallInteger #instance '+ aNumber
+	<primitive: 1>
+	^ nil' ) #( #SmallInteger #instance '< aNumber
+	<primitive: 3>
+	^ nil' ) #( #Integer #instance 'answer
+	^ 41' ) #( #SmallInteger #instance 'answer
+	^ super answer + 1' ) #( #HashedCollection #class 'new
+	^ self basicNew initialize: 5' ) #( #HashedCollection #instance 'initialize: anInteger
+	tally := 0.
+	array := Array new: anInteger' ) #( #HashedCollection #instance 'size
+	^ tally' ) #( #LookupKey #instance 'key
+	^ key' ) #( #LookupKey #instance 'key: anObject
+	key := anObject' ) #( #Association #instance 'value
+	^ value' ) #( #Association #instance 'value: anObject
+	value := anObject' ) #( #Association #class 'key: aKey value: aValue
+	^ self new
+		key: aKey;
+		value: aValue;
+		yourself' ) #( #ChronologyConstants #class 'initialize
+	SecondsInMinute := 60' ) #( #Time #class 'secondsInMinute
+	^ SecondsInMinute' ) )
 ]
 
 { #category : #private }
@@ -284,7 +461,7 @@ EPTestKernel >> newArrayWithAll: aCollection [
 EPTestKernel >> newClassPoolFor: aName [
 
 	| classVariableNames |
-	classVariableNames := ((self definitionNamed: aName) at: 5) substrings.
+	classVariableNames := ((self specificationOf: aName) at: 5) substrings.
 	classVariableNames ifEmpty: [ ^ objectSpace nilObject ].
 	^ self newDictionaryOf: #Dictionary withAll: (classVariableNames collect: [ :each | objectSpace newAssociationWithKey: (self symbol: each asSymbol) andValue: objectSpace nilObject ])
 ]
@@ -306,7 +483,7 @@ EPTestKernel >> newDictionaryOf: aClassName withAll: someAssociations [
 	"The dictionaries of Espell are read by a linear search on their array, so we do not hash the associations."
 
 	| dictionary |
-	dictionary := (self classNamed: aClassName) basicNew.
+	dictionary := (self classMirrorNamed: aClassName) basicNew.
 	dictionary
 		instanceVariableAtIndex: 1 put: (self backend smallIntegerMirrorOn: someAssociations size);
 		instanceVariableAtIndex: 2 put: (self newArrayWithAll: someAssociations).
@@ -317,10 +494,10 @@ EPTestKernel >> newDictionaryOf: aClassName withAll: someAssociations [
 EPTestKernel >> newMethodDictionary [
 
 	| methodDictionary |
-	methodDictionary := (self classNamed: #MethodDictionary) basicNew: 32.
+	methodDictionary := (self classMirrorNamed: #MethodDictionary) basicNew: 32.
 	methodDictionary
 		instanceVariableAtIndex: 1 put: (self backend smallIntegerMirrorOn: 0);
-		instanceVariableAtIndex: 2 put: ((self classNamed: #Array) basicNew: 32).
+		instanceVariableAtIndex: 2 put: ((self classMirrorNamed: #Array) basicNew: 32).
 	^ methodDictionary
 ]
 
@@ -328,9 +505,9 @@ EPTestKernel >> newMethodDictionary [
 EPTestKernel >> newSharedPoolsFor: aName [
 
 	| pools sharedPools |
-	pools := ((self definitionNamed: aName) at: 6) substrings collect: [ :each | self classNamed: each asSymbol ].
+	pools := ((self specificationOf: aName) at: 6) substrings collect: [ :each | self classMirrorNamed: each asSymbol ].
 	pools ifEmpty: [ ^ objectSpace nilObject ].
-	sharedPools := (self classNamed: #OrderedCollection) basicNew.
+	sharedPools := (self classMirrorNamed: #OrderedCollection) basicNew.
 	sharedPools
 		instanceVariableAtIndex: 1 put: (self newArrayWithAll: pools);
 		instanceVariableAtIndex: 2 put: (self backend smallIntegerMirrorOn: 1);
@@ -375,8 +552,20 @@ EPTestKernel >> slotIndexOf: aSlotName in: aClassName [
 	^ (self allInstanceVariableNamesOf: aClassName) indexOf: aSlotName
 ]
 
+{ #category : #definitions }
+EPTestKernel >> specificationOf: aName [
+
+	^ self classSpecifications detect: [ :definition | definition first = aName ]
+]
+
 { #category : #private }
 EPTestKernel >> symbol: aSymbol [
 
 	^ aSymbol asLiteralInObjectSpace: objectSpace
+]
+
+{ #category : #accessing }
+EPTestKernel >> systemDefinition [
+
+	^ systemDefinition
 ]
