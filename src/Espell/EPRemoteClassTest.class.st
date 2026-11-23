@@ -4,14 +4,14 @@ Class {
 	#instVars : [
 		'environment'
 	],
-	#category : 'Espell-Tests'
+	#category : #'Espell-Tests'
 }
 
 { #category : #running }
 EPRemoteClassTest >> setUp [
 
 	super setUp.
-	environment := EPRemoteEnvironment on: objectSpace backend systemDictionary.
+	environment := EPRemoteEnvironment on: self backend systemDictionary
 ]
 
 { #category : #tests }

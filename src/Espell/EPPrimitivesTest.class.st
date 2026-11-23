@@ -1,131 +1,75 @@
 Class {
 	#name : #EPPrimitivesTest,
 	#superclass : #EPBaseTest,
-	#instVars : [
-		'primitiveResolver'
-	],
-	#category : 'Espell-Tests'
+	#category : #'Espell-Tests'
 }
 
-{ #category : #accessing }
-EPPrimitivesTest class >> resources [
-
-	^{ EPTestResource }
-]
-
-{ #category : #running }
-EPPrimitivesTest >> setUp [
-
-	super setUp.
-	objectSpace := EPTestResource current objectSpace.
-	primitiveResolver := EPVMPrimitiveResolver new backend: objectSpace backend; yourself
-]
-
 { #category : #tests }
-EPPrimitivesTest >> testExecutePrimitive [
-
-	objectSpace backend nilObject markExperimentalBit: true
-]
-
-{ #category : #tests }
-EPPrimitivesTest >> testPrimitiveClassOfReturnsClassForImmediateObjects [
-
-	"(SmallInteger >> #>) primitive"
-	
-	| primitive result |
-	primitive := ((EPNumberedPrimitive new number: 111)
-		resolver: primitiveResolver)
-			transformResultToRemoteClass
-			resolver: primitiveResolver;
-			yourself.
-	result := (primitive executionWithReceiver: (objectSpace backend mirrorOn:1) andArguments: #()) execute.
-
-	self assert: result equals: objectSpace backend smallIntegerClass
-]
-
-{ #category : #tests }
-EPPrimitivesTest >> testPrimitiveResolverBasicNewObject [
+EPPrimitivesTest >> testPrimitiveAdd [
 
 	| result |
-	result := primitiveResolver
-		invokePrimitiveNumber: 71
-		on: (objectSpace backend arrayClass)
-		arguments: { objectSpace backend mirrorOn: 2 }.
-	
-	self assert: result basicClass equals: objectSpace backend arrayClass.
-	self assert: (result at: 1) isNilObject.
-	self assert: (result at: 2) isNilObject
+	result := (self mirrorOn: 1) executePrimitiveMethod: SmallInteger >> #+ withArguments: { (self mirrorOn: 2) }.
+	self deny: result hasFailed.
+	self assert: result value asSmallInteger equals: 3
 ]
 
 { #category : #tests }
-EPPrimitivesTest >> testPrimitiveResolverPrimitiveGetClass [
+EPPrimitivesTest >> testPrimitiveBasicNewWithSize [
 
 	| result |
-	result := primitiveResolver
-		invokePrimitiveNumber: 111
-		on: (objectSpace backend mirrorOn:1)
-		arguments: #().
-	self assert: result equals: objectSpace backend smallIntegerClass
+	result := self backend arrayClass executePrimitiveMethod: Behavior >> #basicNew: withArguments: { (self mirrorOn: 2) }.
+	self assert: result value size equals: 2.
+	self assert: (result value at: 1) isNilObject.
+	self assert: (result value at: 2) isNilObject
 ]
 
-{ #category : #'as yet unclassified' }
-EPPrimitivesTest >> testPrimitiveResolverStringAt [
+{ #category : #tests }
+EPPrimitivesTest >> testPrimitiveClassOfImmediateObject [
 
 	| result |
-	result := primitiveResolver
-		invokePrimitiveNumber: 63
-		on: (objectSpace backend arrayClass instanceVariableAtIndex: 8)
-		arguments: { objectSpace backend mirrorOn: 1 }.
-	
-	self assert: result basicClass equals: objectSpace backend characterClass.
-	self assert: result asLocalLiteral equals: $A.
+	result := (self mirrorOn: 1) executePrimitiveMethod: ProtoObject >> #class withArguments: #(  ).
+	self assert: result value target address equals: self backend smallIntegerClass target address
 ]
 
-{ #category : #'as yet unclassified' }
-EPPrimitivesTest >> testPrimitiveResolverStringAtPut [
+{ #category : #tests }
+EPPrimitivesTest >> testPrimitiveFailsWithWrongArgument [
+
+	| result |
+	result := (self mirrorOn: 1) executePrimitiveMethod: SmallInteger >> #+ withArguments: { objectSpace nilObject }.
+	self assert: result hasFailed
+]
+
+{ #category : #tests }
+EPPrimitivesTest >> testPrimitiveGreaterThanAnswersFalse [
+
+	| result |
+	result := (self mirrorOn: 1) executePrimitiveMethod: SmallInteger >> #> withArguments: { (self mirrorOn: 2) }.
+	self assert: (result value pointsToSameObject: self backend falseObject)
+]
+
+{ #category : #tests }
+EPPrimitivesTest >> testPrimitiveLessThanAnswersTrue [
+
+	| result |
+	result := (self mirrorOn: 1) executePrimitiveMethod: SmallInteger >> #< withArguments: { (self mirrorOn: 2) }.
+	self assert: (result value pointsToSameObject: self backend trueObject)
+]
+
+{ #category : #tests }
+EPPrimitivesTest >> testPrimitiveStringAt [
+
+	| result |
+	result := ('abc' asLiteralInObjectSpace: objectSpace) executePrimitiveMethod: ByteString >> #at: withArguments: { (self mirrorOn: 2) }.
+	self assert: result value asLocalLiteral equals: $b
+]
+
+{ #category : #tests }
+EPPrimitivesTest >> testPrimitiveStringAtPut [
 
 	| string |
-	string := 'a' asLiteralInObjectSpace: objectSpace backend.
-	primitiveResolver
-		invokePrimitiveNumber: 64
-		on: string
-		arguments: { objectSpace backend mirrorOn: 1 . $A asLiteralInObjectSpace: objectSpace backend }.
-	
-	self assert: string asLocalLiteral equals: 'A'.
-]
-
-{ #category : #tests }
-EPPrimitivesTest >> testPrimitiveWithFalseBooleanReturn [
-
-	"(SmallInteger >> #>) primitive"
-	
-	| primitive result |
-	primitive := ((EPNumberedPrimitive new number: 4)
-		resolver: primitiveResolver)
-			transformResultToRemoteLiteral
-			resolver: primitiveResolver;
-			yourself.
-	result := (primitive
-		executionWithReceiver: (objectSpace backend mirrorOn:1)
-		andArguments: {(objectSpace backend mirrorOn:2)}) execute.
-		
-	self assert: result equals: objectSpace backend falseObject.
-]
-
-{ #category : #tests }
-EPPrimitivesTest >> testPrimitiveWithTrueBooleanReturn [
-
-	"(SmallInteger >> #<) primitive"
-	
-	| primitive result |
-	primitive := ((EPNumberedPrimitive new number: 3)
-		resolver: primitiveResolver)
-			transformResultToRemoteLiteral
-			resolver: primitiveResolver;
-			yourself.
-	result := (primitive
-		executionWithReceiver: (objectSpace backend mirrorOn:1)
-		andArguments: {(objectSpace backend mirrorOn:2)}) execute.
-		
-	self assert: result equals: objectSpace backend trueObject.
+	string := 'abc' asLiteralInObjectSpace: objectSpace.
+	string executePrimitiveMethod: ByteString >> #at:put: withArguments: { 
+			(self mirrorOn: 1).
+			($A asLiteralInObjectSpace: objectSpace) }.
+	self assert: string asLocalLiteral equals: 'Abc'
 ]

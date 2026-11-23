@@ -1,45 +1,22 @@
 Class {
 	#name : #EPSpecialObjectsTest,
 	#superclass : #EPBaseTest,
-	#category : 'Espell-Tests'
+	#category : #'Espell-Tests'
 }
 
-{ #category : #accessing }
-EPSpecialObjectsTest class >> resources [
+{ #category : #tests }
+EPSpecialObjectsTest >> testArrayClassIsInTheClassTable [
 
-	^{ EPTestResource }
-]
-
-{ #category : #running }
-EPSpecialObjectsTest >> setUp [
-
-	super setUp.
-	objectSpace := EPTestResource current objectSpace
+	| memory |
+	memory := self backend objectMemory.
+	self assert: (memory classAtIndex: 51) equals: self backend arrayClass target address.
+	self assert: (memory classAtIndex: memory arrayClassIndexPun) equals: self backend arrayClass target address
 ]
 
 { #category : #tests }
-EPSpecialObjectsTest >> testArrayClassCompactIndexIsThree [
+EPSpecialObjectsTest >> testCharacterClassIsAtIndexTwoOfTheClassTable [
 
-	self assert: objectSpace backend arrayClass asClassMirror compactClassIndex equals: 3
-]
-
-{ #category : #tests }
-EPSpecialObjectsTest >> testArrayClassLooksLikeAClass [
-
-	self assert: (objectSpace backend looksLikeClass: objectSpace backend arrayClass)
-]
-
-{ #category : #tests }
-EPSpecialObjectsTest >> testCompactClassAtArrayIndexIsArrayClass [
-
-	self assert: ((objectSpace backend compactClassAt: Array indexIfCompact ifNone: [ nil ])
-		pointsToSameObject: objectSpace backend arrayClass)
-]
-
-{ #category : #tests }
-EPSpecialObjectsTest >> testCompactClassesNotEmpty [
-
-	self assert: objectSpace backend compactClasses notEmpty
+	self assert: (self backend objectMemory classAtIndex: 2) equals: self backend characterClass target address
 ]
 
 { #category : #tests }
@@ -49,15 +26,28 @@ EPSpecialObjectsTest >> testFalseObjectIsFalse [
 ]
 
 { #category : #tests }
+EPSpecialObjectsTest >> testImmediateObjectsHaveTheirSpecialClass [
+
+	self assert: ((self mirrorOn: 2) basicClass pointsToSameObject: self backend smallIntegerClass).
+	self assert: (($a asLiteralInObjectSpace: objectSpace) basicClass pointsToSameObject: self backend characterClass)
+]
+
+{ #category : #tests }
 EPSpecialObjectsTest >> testNilObjectIsNil [
 
 	self assert: objectSpace backend nilObject isNilObject.
 ]
 
 { #category : #tests }
+EPSpecialObjectsTest >> testSmallIntegerClassIsAtIndexOneOfTheClassTable [
+
+	self assert: (self backend objectMemory classAtIndex: 1) equals: self backend smallIntegerClass target address
+]
+
+{ #category : #tests }
 EPSpecialObjectsTest >> testSmallIntegerIsSmallInteger [
 
-	self assert: (objectSpace backend mirrorOn: 2) isSmallInteger.
+	self assert: (self mirrorOn: 2) isSmallInteger
 ]
 
 { #category : #tests }
@@ -78,9 +68,9 @@ EPSpecialObjectsTest >> testSystemDictionaryIsSystemDictionary [
 EPSpecialObjectsTest >> testSystemDictionaryNotEmpty [
 
 	| tally |
-	tally := objectSpace backend systemDictionary instanceVariableAtIndex: 1.
+	tally := self backend systemDictionary instanceVariableAtIndex: 1.
 	self assert: tally isSmallInteger.
-	self assert: tally target > 0
+	self assert: tally asSmallInteger > 0
 ]
 
 { #category : #tests }
