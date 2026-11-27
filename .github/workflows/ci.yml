@@ -1,0 +1,18 @@
+name: CI
+
+on: [ push, pull_request, workflow_dispatch ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Pharo64-10
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup smalltalkCI
+        uses: hpi-swa/setup-smalltalkCI@v1
+        with:
+          smalltalk-image: Pharo64-10
+      - name: Load in New Image and Run Tests
+        run: smalltalkci -s Pharo64-10 .pharo.ston
+        shell: bash
+        timeout-minutes: 30

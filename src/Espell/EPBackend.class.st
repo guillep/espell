@@ -17,7 +17,7 @@ Class {
 		'instanceVariableMapping',
 		'compiledBlockClass'
 	],
-	#category : 'Espell-LowLevel-Mirrors'
+	#category : #'Espell-LowLevel-Mirrors'
 }
 
 { #category : #'special objects' }
@@ -324,6 +324,14 @@ EPBackend >> fromLocalPositiveInteger: aPositiveInteger [
 	integerMirror := (integerClassMirror basicNew: aPositiveInteger basicSize).
 	1 to: aPositiveInteger basicSize do: [ :i | integerMirror at: i put: ((aPositiveInteger at: i) asLiteralInObjectSpace: self) ].
 	^integerMirror
+]
+
+{ #category : #converting }
+EPBackend >> fromRemoteBoolean: aBooleanMirror [
+
+	(aBooleanMirror pointsToSameObject: self trueObject) ifTrue: [ ^ true ].
+	(aBooleanMirror pointsToSameObject: self falseObject) ifTrue: [ ^ false ].
+	self error: 'not a boolean remote object'
 ]
 
 { #category : #'as yet unclassified' }

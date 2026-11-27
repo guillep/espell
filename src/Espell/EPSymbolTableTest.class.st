@@ -1,24 +1,26 @@
 Class {
 	#name : #EPSymbolTableTest,
 	#superclass : #EPBaseTest,
-	#category : 'Espell-Tests'
+	#category : #'Espell-Tests'
 }
 
-{ #category : #accessing }
-EPSymbolTableTest class >> resources [
+{ #category : #tests }
+EPSymbolTableTest >> testRemoteSymbolIsAByteSymbol [
 
-	^{ EPTestResource }
-]
-
-{ #category : #running }
-EPSymbolTableTest >> setUp [
-
-	super setUp.
-	objectSpace := EPTestResource current objectSpace
+	| symbol |
+	symbol := #foo asLiteralInObjectSpace: objectSpace.
+	self assert: (symbol basicClass pointsToSameObject: self backend byteSymbolClass).
+	self assert: symbol asLocalLiteral equals: #foo
 ]
 
 { #category : #tests }
-EPSymbolTableTest >> testAtSymbolIsCachedFromLoadTime [
+EPSymbolTableTest >> testSymbolIsCreatedOnce [
 
-	self assert: (objectSpace backend symbolTable includesCachedKey: #at:).
+	self assert: ((#foo asLiteralInObjectSpace: objectSpace) pointsToSameObject: (#foo asLiteralInObjectSpace: objectSpace))
+]
+
+{ #category : #tests }
+EPSymbolTableTest >> testSymbolsOfTheKernelAreInTheSymbolTable [
+
+	self assert: (objectSpace symbolTable includesKey: #Object)
 ]

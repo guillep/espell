@@ -1,0 +1,11 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'Espell',
+      #directory : 'src'
+    }
+  ],
+  #testing : {
+    #packages : [ 'Espell.*', 'AST-Interpreter.*' ]
+  }
+}

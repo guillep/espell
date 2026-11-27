@@ -5,7 +5,7 @@ Class {
 		'simulator',
 		'extraRoots'
 	],
-	#category : 'EspellSimulator'
+	#category : #EspellSimulator
 }
 
 { #category : #'instance-creation' }
@@ -520,6 +520,12 @@ EPSimulatorBackend >> fromRemoteByteSymbol: anEPMirror [
 	
 	
 	^ Symbol intern: (self fromRemoteByteString: anEPMirror)
+]
+
+{ #category : #converting }
+EPSimulatorBackend >> fromRemoteCharacter: aCharacterMirror [
+
+	^ Character value: (self objectMemory characterValueOf: aCharacterMirror target address)
 ]
 
 { #category : #'as yet unclassified' }

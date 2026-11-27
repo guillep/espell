@@ -5,7 +5,7 @@ Class {
 		'evaluator',
 		'astCache'
 	],
-	#category : 'Espell-HighLevel'
+	#category : #'Espell-HighLevel'
 }
 
 { #category : #'initialize-release' }
@@ -37,6 +37,13 @@ EPASTInterpreter >> blockClosureValueWithArguments: aBlockClosure message: aMess
 	^ super blockClosureValueWithArguments: (self unwrapBlockClosure: aBlockClosure) message: aMessage
 ]
 
+{ #category : #'method evaluation' }
+EPASTInterpreter >> classDefinitionOn: aClassDefinition [
+	"Answer the class that the compiler uses to look up the variables of the methods of aClassDefinition"
+
+	^ PBClassDefinition on: aClassDefinition environment: evaluator environment
+]
+
 { #category : #private }
 EPASTInterpreter >> classOf: anObject [
 
@@ -51,7 +58,7 @@ EPASTInterpreter >> closureAST: aClosure forReceiver: aReceiver [
 	
 	astToBind := aClosure parseTree copyInContext: Dictionary new.
 	compilationContext := self class compiler compilationContext.
-	compilationContext class: (PBClassDefinition on: aClosure methodClass environment: evaluator environment).
+	compilationContext class: (self classDefinitionOn: aClosure methodClass).
 	compilationContext environment: self environment.
 	
 	^ astCache at: aClosure put: (astToBind
